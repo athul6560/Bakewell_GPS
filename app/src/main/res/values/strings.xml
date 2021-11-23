@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bakewell GPS</string>
+    <string name="camera_and_location_rationale">Please Accept the location Permission to use this app</string>
 </resources>
