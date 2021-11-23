@@ -20,7 +20,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             app:tint="@android:color/white"
-            app:srcCompat="@drawable/ic_cloud_off" />
+            app:srcCompat="@drawable/ic_baseline_done_outline_24" />
 
         <TextView
             android:id="@+id/title"

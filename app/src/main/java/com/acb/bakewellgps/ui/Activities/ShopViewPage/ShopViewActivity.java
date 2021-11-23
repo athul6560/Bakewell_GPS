@@ -12,8 +12,11 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.Html;
 import android.view.View;
 import android.widget.Toast;
@@ -21,8 +24,13 @@ import android.widget.Toast;
 import com.acb.bakewellgps.R;
 
 import com.acb.bakewellgps.Utils.Dialogues;
+import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityShopViewBinding;
+import com.acb.bakewellgps.ui.Activities.EditPage.EditActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,45 +41,45 @@ import java.util.Locale;
 
 
 public class ShopViewActivity extends AppCompatActivity implements IShopViewLogic.view {
+
     private ActivityShopViewBinding binding;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private Address addressGlobal;
+
     private ShopViewLogic shopViewLogic;
+    private LocationRequest locationRequest;
+    private double globallong, globalLang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shop_view);
         binding = ActivityShopViewBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
         initComponents();
-
-        initToolbar();
+        getCurrentLocation();
+        setData();
         setLocation();
+        binding.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShopViewActivity.this, EditActivity.class));
+            }
+        });
         binding.updateGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (addressGlobal == null) {
-                    Dialogues.showWarning(ShopViewActivity.this, "No Location Fount", "Please try to refresh te location.");
-                } else {
-                    shopViewLogic.updateGpsApi(addressGlobal.getLongitude(), addressGlobal.getLatitude(), getShopId());
-                }
-            }
-        });
-        binding.refreshBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri gmmIntentUri = Uri.parse("geo:37.7749,-122.4194");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(mapIntent);
-                }
+
+                    shopViewLogic.updateGpsApi(globallong, globalLang, getShopId());
+
             }
         });
 
 
+    }
+
+    private void setData() {
+        binding.shopName.setText(getShopName());
     }
 
     private int getShopId() {
@@ -104,47 +112,75 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
             return;
         }
 
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                Location location = task.getResult();
 
-                try {
-                    if (location != null) {
+    }
 
-                        Geocoder geocoder = new Geocoder(ShopViewActivity.this, Locale.getDefault());
-                        List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
-                        setTextAddress(addresses.get(0));
 
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
+    private void setTextAddress(double lang, double longitude) {
+        globalLang = lang;
+        globallong = longitude;
+        //  binding.address.setText(address.getFeatureName() + "\n" + "Pin: " + address.getPostalCode() + ", " + address.getLocality() + ", " + address.getCountryName());
+         binding.location.setText(lang + "," + longitude);
+    }
+
+    private void getCurrentLocation() {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(ShopViewActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                if (isGPSEnabled()) {
+
+                    LocationServices.getFusedLocationProviderClient(ShopViewActivity.this)
+                            .requestLocationUpdates(locationRequest, new LocationCallback() {
+                                @Override
+                                public void onLocationResult(@NonNull LocationResult locationResult) {
+                                    super.onLocationResult(locationResult);
+
+                                    LocationServices.getFusedLocationProviderClient(ShopViewActivity.this)
+                                            .removeLocationUpdates(this);
+
+                                    if (locationResult != null && locationResult.getLocations().size() > 0) {
+
+                                        int index = locationResult.getLocations().size() - 1;
+                                        double latitude = locationResult.getLocations().get(index).getLatitude();
+                                        double longitude = locationResult.getLocations().get(index).getLongitude();
+
+                                        setTextAddress(latitude, longitude);
+                                    }
+                                }
+                            }, Looper.getMainLooper());
+
+                } else {
+                    Toast.makeText(ShopViewActivity.this, "Please turn on GPS", Toast.LENGTH_SHORT).show();
                 }
+
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
-
-        });
+        }
     }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setTitle(Html.fromHtml(getShopName()));
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-    }
-
-    private void setTextAddress(Address address) {
-        addressGlobal = address;
-        binding.address.setText(address.getFeatureName() + "\n" + "Pin: " + address.getPostalCode() + ", " + address.getLocality() + ", " + address.getCountryName());
-        binding.location.setText(address.getLatitude() + "," + address.getLongitude());
-    }
-
 
     private void initComponents() {
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         shopViewLogic = new ShopViewLogic(this, this);
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+
+    }
+
+    private boolean isGPSEnabled() {
+        LocationManager locationManager = null;
+        boolean isEnabled = false;
+
+        if (locationManager == null) {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        }
+
+        isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return isEnabled;
 
     }
 
@@ -153,6 +189,6 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         if (status)
             Dialogues.showSuccessDialogue(ShopViewActivity.this, "Success", "Location Updated Successfully");
         else
-            Dialogues.showWarning(ShopViewActivity.this,"Failed","Updation Failed");
+            Dialogues.showWarning(ShopViewActivity.this, "Failed", "Updation Failed");
     }
 }

@@ -52,5 +52,6 @@ dependencies {
     //permissions
     implementation 'pub.devrel:easypermissions:3.0.0'
 //location
+
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 }
