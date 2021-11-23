@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/drawable-v24/btn_rounded_red.xml" value="0.14814814814814814" />
         <entry key="..\:/Projects/BakewellGPS/app/src/main/res/drawable-v24/gold_circle.xml" value="0.14322916666666666" />
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/drawable-v24/ic_cloud_off.xml" value="0.14814814814814814" />
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/drawable-v24/login_btn.xml" value="0.14322916666666666" />
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/layout/activity_dashboard.xml" value="0.1793478260869565" />
         <entry key="..\:/Projects/BakewellGPS/app/src/main/res/layout/activity_login.xml" value="0.1793478260869565" />
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/layout/activity_shop_list.xml" value="0.17552083333333332" />
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/layout/custom_dialogue_warning.xml" value="0.1793478260869565" />
+        <entry key="..\:/Projects/BakewellGPS/app/src/main/res/layout/routes_inflator.xml" value="0.1793478260869565" />
       </map>
     </option>
   </component>
