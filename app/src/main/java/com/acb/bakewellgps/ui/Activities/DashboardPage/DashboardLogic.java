@@ -10,7 +10,6 @@ import com.acb.bakewellgps.modell.Root;
 import com.acb.bakewellgps.modell.RoutesData;
 
 
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,6 +18,7 @@ public class DashboardLogic implements IDashboardLogic.logic {
     private IDashboardLogic.view view;
     private Context context;
     private static final String TAG = "Dashboad Logic";
+
     public DashboardLogic(IDashboardLogic.view view, Context context) {
         this.view = view;
         this.context = context;
@@ -37,7 +37,7 @@ public class DashboardLogic implements IDashboardLogic.logic {
                 if (response.isSuccessful()) {
                     if (response.body().isStatus()) {
                         view.routeListApiCompleted(response.body().status, response.body().data, response.body().message);
-                    }else{
+                    } else {
                         view.routeListApiCompleted(response.body().status, null, response.body().message);
 
                     }
@@ -51,6 +51,27 @@ public class DashboardLogic implements IDashboardLogic.logic {
             public void onFailure(Call<Root<RoutesData>> call, Throwable t) {
                 Dialogues.dismiss();
                 view.routeListApiCompleted(false, null, "No Network");
+
+            }
+        });
+    }
+
+    @Override
+    public void callLogoutApi(String username) {
+        Dialogues.show(context);
+        APIInterface service = APIClient.getClient().create(APIInterface.class);
+        Call<Void> call = service.logOutApi(username);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Dialogues.dismiss();
+                view.logoutCallback(true, "");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Dialogues.dismiss();
+                view.logoutCallback(false, "");
 
             }
         });

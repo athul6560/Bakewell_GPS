@@ -87,7 +87,7 @@
 
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="saravana"
+                android:text="locuser"
                 android:textColor="@color/dark_grey"
                 android:theme="@style/EditText.Grey" />
 
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_semibold"
-                android:text="Password"
+                android:text="locuser"
                 android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@color/dark_grey"
@@ -116,7 +116,7 @@
 
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="saravana123"
+                android:text="locuser"
                 android:textColor="@color/dark_grey"
                 android:theme="@style/EditText.Grey" />
 

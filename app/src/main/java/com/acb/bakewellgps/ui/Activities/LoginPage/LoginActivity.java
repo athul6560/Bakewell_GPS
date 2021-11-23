@@ -10,6 +10,8 @@ import android.view.View;
 
 
 import com.acb.bakewellgps.R;
+import com.acb.bakewellgps.SharedPref.SharedData;
+import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.databinding.ActivityLoginBinding;
 import com.acb.bakewellgps.ui.Activities.DashboardPage.Dashboard;
 
@@ -23,22 +25,34 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class LoginActivity extends AppCompatActivity implements ILoginLogic.view, EasyPermissions.PermissionCallbacks {
     private ActivityLoginBinding binding;
     private static final int LOCATION_PERMISSION_CODE = 100;
+    private LoginLogic loginLogic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(SharedData.LoginCheck(this)){
+            startActivity(new Intent(this,Dashboard.class));
+            finish();
+        }
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
         requestPermissions();
 
+        initComponents();
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, Dashboard.class));
+                loginLogic.loginFunction(binding.usernameEdittext.getText().toString(), binding.passwordEdittext.getText().toString());
+
             }
         });
     }
+
+    private void initComponents() {
+        loginLogic = new LoginLogic(this, this);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -46,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginLogic.view
         // Forward results to EasyPermissions
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
+
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
 
@@ -61,7 +76,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginLogic.view
 
     @Override
     public void loginResponse(String message, Boolean status) {
-
+        if (status) {
+            SharedData.LogedStatusUpdate(LoginActivity.this,true);
+            startActivity(new Intent(LoginActivity.this, Dashboard.class));
+            finish();
+        } else
+            Dialogues.showWarning(LoginActivity.this, "Login Failed", message);
     }
 
     @Override
