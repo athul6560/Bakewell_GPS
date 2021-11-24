@@ -67,8 +67,13 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             RoutesData p = items.get(position);
 
-            view.name.setText(p.getRoute_name());
 
+            if(position==1)
+            view.name.setText("Trivandrum - Ayoor");
+            else if(position==2)
+                view.name.setText("Trivandrum - Kottarakara");
+            else
+                view.name.setText(p.getRoute_name());
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

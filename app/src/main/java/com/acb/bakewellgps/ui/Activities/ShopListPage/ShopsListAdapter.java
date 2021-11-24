@@ -4,8 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.acb.bakewellgps.R;
@@ -41,11 +43,13 @@ public class ShopsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
         public TextView name;
+        public ImageView locImage;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
+            locImage = (ImageView) v.findViewById(R.id.location_image);
 
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
         }
@@ -54,7 +58,7 @@ public class ShopsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.routes_inflator, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shops_inflator, parent, false);
         vh = new ShopsListAdapter.OriginalViewHolder(v);
         return vh;
     }
@@ -67,7 +71,9 @@ public class ShopsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ShopsListAdapter.OriginalViewHolder view = (ShopsListAdapter.OriginalViewHolder) holder;
 
             Shop p = items.get(position);
-
+            if (position == 0) {
+                view.locImage.setColorFilter(ActivityCompat.getColor(ctx, android.R.color.holo_green_light));
+            }
             view.name.setText(p.getShop_name());
 
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
@@ -84,13 +90,10 @@ public class ShopsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-
 
 
 }
