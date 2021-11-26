@@ -39,12 +39,14 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name;
+        public TextView name,subtitle,routeId;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
             super(v);
             name = (TextView) v.findViewById(R.id.name);
+            subtitle = (TextView) v.findViewById(R.id.subtitle);
+            routeId = (TextView) v.findViewById(R.id.route_id);
 
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
         }
@@ -66,14 +68,11 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             RoutesAdapter.OriginalViewHolder view = (RoutesAdapter.OriginalViewHolder) holder;
 
             RoutesData p = items.get(position);
+            view.routeId.setText(p.getRoute_id()+"");
+            view.name.setText(p.getRoute_name());
+view.subtitle.setText(""+p.getVehicle_number()+" | "+p.getSalesman());
 
-
-            if(position==1)
-            view.name.setText("Trivandrum - Ayoor");
-            else if(position==2)
-                view.name.setText("Trivandrum - Kottarakara");
-            else
-                view.name.setText(p.getRoute_name());
+            view.name.setText(p.getRoute_name());
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

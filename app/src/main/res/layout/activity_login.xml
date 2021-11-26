@@ -87,7 +87,7 @@
 
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="locuser"
+
                 android:textColor="@color/dark_grey"
                 android:theme="@style/EditText.Grey" />
 
@@ -116,7 +116,7 @@
 
                 android:maxLines="1"
                 android:singleLine="true"
-                android:text="locuser"
+
                 android:textColor="@color/dark_grey"
                 android:theme="@style/EditText.Grey" />
 
