@@ -2,10 +2,10 @@ package com.acb.bakewellgps.modell;
 
 import java.util.List;
 
-public class Root<T> {
+public class RootList<T> {
     public boolean status;
     public String message;
-    public T data;
+    public List<T> data;
 
     public boolean isStatus() {
         return status;
@@ -23,11 +23,11 @@ public class Root<T> {
         this.message = message;
     }
 
-    public T getData() {
+    public List<T> getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(List<T> data) {
         this.data = data;
     }
 }

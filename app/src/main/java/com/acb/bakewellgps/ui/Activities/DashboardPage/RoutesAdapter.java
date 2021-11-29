@@ -39,7 +39,7 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name,subtitle,routeId;
+        public TextView name, subtitle, routeId;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
@@ -68,9 +68,9 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             RoutesAdapter.OriginalViewHolder view = (RoutesAdapter.OriginalViewHolder) holder;
 
             RoutesData p = items.get(position);
-            view.routeId.setText(p.getRoute_id()+"");
+            view.routeId.setText(p.getRoute_id() + "");
             view.name.setText(p.getRoute_name());
-view.subtitle.setText(""+p.getVehicle_number()+" | "+p.getSalesman());
+            view.subtitle.setText("" + p.getVehicle_number() + " | " + p.getSalesman());
 
             view.name.setText(p.getRoute_name());
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +87,10 @@ view.subtitle.setText(""+p.getVehicle_number()+" | "+p.getSalesman());
     }
 
 
-
     @Override
     public int getItemCount() {
         return items.size();
     }
-
-
 
 
 }

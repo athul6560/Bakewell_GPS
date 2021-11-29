@@ -1,14 +1,14 @@
 package com.acb.bakewellgps.ui.Activities.ShopViewPage;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.acb.bakewellgps.API.APIClient;
 import com.acb.bakewellgps.API.APIInterface;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.modell.Root;
-import com.acb.bakewellgps.modell.RoutesData;
+import com.acb.bakewellgps.modell.RootList;
 import com.acb.bakewellgps.modell.baseResponse;
+import com.acb.bakewellgps.modell.shopDetails;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +50,38 @@ public class ShopViewLogic implements IShopViewLogic.logic{
             public void onFailure(Call<baseResponse> call, Throwable t) {
                 Dialogues.dismiss();
                 view.updateGpsCallback(false);
+
+            }
+        });
+    }
+
+    @Override
+    public void getShopDetailsAPI(int shopId) {
+        Dialogues.show(context);
+        APIInterface service = APIClient.getClient().create(APIInterface.class);
+        Call<Root<shopDetails>> call = service.getShopDetails(shopId);
+        call.enqueue(new Callback<Root<shopDetails>>() {
+            @Override
+            public void onResponse(Call<Root<shopDetails>> call, Response<Root<shopDetails>> response) {
+                Dialogues.dismiss();
+
+                if (response.isSuccessful()) {
+                    if (response.body().isStatus()) {
+                        view.shopDetailsCallback(response.body().status,response.body().getData());
+                    }else{
+                        view.shopDetailsCallback(response.body().status,response.body().getData());
+
+                    }
+                } else {
+                    view.shopDetailsCallback(false,null);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Root<shopDetails>> call, Throwable t) {
+                Dialogues.dismiss();
+                view.shopDetailsCallback(false,null);
 
             }
         });

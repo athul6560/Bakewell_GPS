@@ -26,6 +26,7 @@ import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityShopViewBinding;
+import com.acb.bakewellgps.modell.shopDetails;
 import com.acb.bakewellgps.ui.Activities.EditPage.EditActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -58,8 +59,9 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
         initComponents();
         getCurrentLocation();
-        setData();
+
         setLocation();
+        shopViewLogic.getShopDetailsAPI(getShopId());
         binding.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +72,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
             @Override
             public void onClick(View view) {
 
-                    shopViewLogic.updateGpsApi(globallong, globalLang, getShopId());
+                shopViewLogic.updateGpsApi(globallong, globalLang, getShopId());
 
             }
         });
@@ -78,9 +80,6 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
     }
 
-    private void setData() {
-        binding.shopName.setText(getShopName());
-    }
 
     private int getShopId() {
         Bundle extras = getIntent().getExtras();
@@ -120,7 +119,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         globalLang = lang;
         globallong = longitude;
         //  binding.address.setText(address.getFeatureName() + "\n" + "Pin: " + address.getPostalCode() + ", " + address.getLocality() + ", " + address.getCountryName());
-         binding.location.setText(lang + "," + longitude);
+        binding.location.setText(lang + "," + longitude);
     }
 
     private void getCurrentLocation() {
@@ -190,5 +189,24 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
             Dialogues.showSuccessDialogue(ShopViewActivity.this, "Success", "Location Updated Successfully");
         else
             Dialogues.showWarning(ShopViewActivity.this, "Failed", "Updation Failed");
+    }
+
+    @Override
+    public void shopDetailsCallback(boolean status, shopDetails shopDetails) {
+        if (status)
+            setShopData(shopDetails);
+    }
+
+    private void setShopData(shopDetails shopDetails) {
+        binding.shopName.setText(shopDetails.getOrganisation_name());
+        binding.subTitle.setText(shopDetails.getShop_category_name() + " | " + shopDetails.getTransaction_type());
+        binding.address.setText(shopDetails.getAddress_line1() + "\n" + shopDetails.getAddress_line2() + " " + shopDetails.getAddress_line3() + " " + shopDetails.getProvince_name());
+        binding.taxId.setText("Tax : "+shopDetails.getTax_number());
+        binding.ownerName.setText(shopDetails.getOwner_name());
+        binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
+        binding.ownerEmail.setText(shopDetails.getOwner_email_id());
+        binding.contactName.setText(shopDetails.getShop_contact_name());
+        binding.contactMail.setText(shopDetails.getShop_contact_email_id());
+        binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
     }
 }

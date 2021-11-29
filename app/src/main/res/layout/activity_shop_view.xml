@@ -94,6 +94,7 @@
                         android:layout_height="0dp" />
 
                     <TextView
+                        android:id="@+id/sub_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Veg Res"
@@ -129,6 +130,7 @@
 
 
                 <TextView
+                    android:id="@+id/address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/spacing_smlarge"
@@ -151,33 +153,35 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="GPS coordinates"
+                            android:drawableLeft="@drawable/ic_baseline_location_on_24"
+                            android:drawableTint="@color/green_600"
+                            android:text="0,0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_80"
-                            app:fontFamily="sans-serif-medium" />
+                            android:textColor="@color/grey_40" />
 
                         <TextView
                             android:id="@+id/update_gps"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="Update GPS"
+                            android:text="@string/update_gps"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/green_600"
+                            android:textColor="#75aec8"
                             app:fontFamily="sans-serif-medium" />
                     </LinearLayout>
 
-
                     <TextView
-                        android:id="@+id/location"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tax_id"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:text="0,0"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/grey_40" />
+
+                        android:text="Tax ID"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_40"
+                        app:fontFamily="sans-serif-medium" />
 
                 </LinearLayout>
 
@@ -213,6 +217,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/owner_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Laura Michelle"
@@ -227,9 +232,18 @@
                                 android:textColor="@color/grey_40" />
 
                             <TextView
+                                android:id="@+id/owner_number"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="+91 9526920286"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40" />
+
+                            <TextView
+                                android:id="@+id/owner_email"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="xyz@gmail.com"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/grey_40" />
 
@@ -265,6 +279,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/contact_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Michelle"
@@ -279,6 +294,15 @@
                                 android:textColor="@color/grey_40" />
 
                             <TextView
+                                android:id="@+id/contact_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="+91 9526920286"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/grey_40" />
+
+                            <TextView
+                                android:id="@+id/contact_mail"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="+91 9526920286"

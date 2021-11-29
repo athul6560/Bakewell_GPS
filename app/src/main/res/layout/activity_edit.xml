@@ -34,25 +34,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
+                android:id="@+id/addimage_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:background="@drawable/edit_text_round_bg_outline"
                 android:gravity="center_vertical"
-                android:id="@+id/addimage_btn"
                 android:orientation="horizontal"
                 android:padding="@dimen/spacing_large">
 
                 <ImageView
+                    android:id="@+id/shop_image"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@color/grey_3"
                     android:layout_centerInParent="true"
 
-                    android:id="@+id/shop_image"
+                    android:background="@color/grey_3"
                     app:srcCompat="@drawable/ic_photo">
-
 
 
                 </ImageView>
@@ -66,6 +66,7 @@
                     android:textColor="@color/grey_40" />
 
             </LinearLayout>
+
             <EditText
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
@@ -75,9 +76,6 @@
                 android:minHeight="45dp"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
-
-
-
 
 
             <EditText
@@ -106,10 +104,48 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Owner Name"
+                android:hint="Address Line 3"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
+            <EditText
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/edit_text_round_bg_white"
+                android:hint="Owner Name"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle" />
+            <EditText
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/edit_text_round_bg_white"
+                android:hint="Owner Number"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle" />
+            <EditText
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/edit_text_round_bg_white"
+                android:hint="Owner Email"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle" />
+
+
+            <EditText
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/edit_text_round_bg_white"
+                android:hint="Contact Name"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle" />
 
             <EditText
                 style="@style/EditText.Flat.Grey"
@@ -121,9 +157,15 @@
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
-
-
-
+            <EditText
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/edit_text_round_bg_white"
+                android:hint="Contact Email"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle" />
 
 
 
@@ -147,8 +189,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginLeft="-4dp"
-                android:layout_marginRight="-4dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginRight="-4dp"
                 android:background="@drawable/btn_rect_green"
                 android:text="SUBMIT"
                 android:textAllCaps="false"

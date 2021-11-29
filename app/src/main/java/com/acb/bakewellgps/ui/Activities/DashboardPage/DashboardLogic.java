@@ -6,7 +6,7 @@ import android.util.Log;
 import com.acb.bakewellgps.API.APIClient;
 import com.acb.bakewellgps.API.APIInterface;
 import com.acb.bakewellgps.Utils.Dialogues;
-import com.acb.bakewellgps.modell.Root;
+import com.acb.bakewellgps.modell.RootList;
 import com.acb.bakewellgps.modell.RoutesData;
 
 
@@ -28,10 +28,10 @@ public class DashboardLogic implements IDashboardLogic.logic {
     public void callRoutesApi(int EmployeeId) {
         Dialogues.show(context);
         APIInterface service = APIClient.getClient().create(APIInterface.class);
-        Call<Root<RoutesData>> call = service.routesList(EmployeeId);
-        call.enqueue(new Callback<Root<RoutesData>>() {
+        Call<RootList<RoutesData>> call = service.routesList(EmployeeId);
+        call.enqueue(new Callback<RootList<RoutesData>>() {
             @Override
-            public void onResponse(Call<Root<RoutesData>> call, Response<Root<RoutesData>> response) {
+            public void onResponse(Call<RootList<RoutesData>> call, Response<RootList<RoutesData>> response) {
                 Dialogues.dismiss();
                 Log.d(TAG, response.body().message);
                 if (response.isSuccessful()) {
@@ -48,7 +48,7 @@ public class DashboardLogic implements IDashboardLogic.logic {
             }
 
             @Override
-            public void onFailure(Call<Root<RoutesData>> call, Throwable t) {
+            public void onFailure(Call<RootList<RoutesData>> call, Throwable t) {
                 Dialogues.dismiss();
                 view.routeListApiCompleted(false, null, "No Network");
 
