@@ -24,10 +24,12 @@ import android.widget.Toast;
 import com.acb.bakewellgps.R;
 
 import com.acb.bakewellgps.Utils.Dialogues;
+import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityShopViewBinding;
 import com.acb.bakewellgps.modell.shopDetails;
 import com.acb.bakewellgps.ui.Activities.EditPage.EditActivity;
+import com.acb.bakewellgps.ui.Activities.ShopListPage.ShopListActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -65,7 +67,12 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ShopViewActivity.this, EditActivity.class));
+                Intent i = new Intent(ShopViewActivity.this, EditActivity.class);
+
+
+                i.putExtra("shopId",getShopId());
+                startActivity(i);
+
             }
         });
         binding.updateGps.setOnClickListener(new View.OnClickListener() {
@@ -208,5 +215,8 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.contactName.setText(shopDetails.getShop_contact_name());
         binding.contactMail.setText(shopDetails.getShop_contact_email_id());
         binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
+        if(shopDetails.getShop_image()!=null)
+        binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));
+
     }
 }

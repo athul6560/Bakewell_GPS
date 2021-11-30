@@ -17,12 +17,14 @@ import android.widget.Toast;
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityEditBinding;
+import com.acb.bakewellgps.modell.sentShopUpdateDetails;
 
-public class EditActivity extends AppCompatActivity {
-private ActivityEditBinding binding;
+public class EditActivity extends AppCompatActivity implements IEditLogic.view {
+    private ActivityEditBinding binding;
     private static final int CAMERA_REQUEST = 1888;
-
+private EditLogic logic;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,39 +32,59 @@ private ActivityEditBinding binding;
         View view = binding.getRoot();
         setContentView(view);
         initToolsbar();
+        initComponents();
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
-                {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
-                }
-                else
-                {
+                } else {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
                 }
             }
         });
+        binding.btSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logic.updateShopDetails(getUpdateData());
+
+            }
+        });
+    }
+
+    private sentShopUpdateDetails getUpdateData() {
+        sentShopUpdateDetails shopUpdateDetails=new sentShopUpdateDetails();
+        shopUpdateDetails.setId(getShopId());
+        shopUpdateDetails.setOrganisation_name(  binding.organizationName.getText().toString());
+      return shopUpdateDetails;
+    }
+
+    private void initComponents() {
+        logic=new EditLogic(this,this);
+    }
+    private int getShopId() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            int value = extras.getInt("shopId");
+            return value;
+        }
+        return 0;
     }
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
-    {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == MY_CAMERA_PERMISSION_CODE)
-        {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
-            {
+        if (requestCode == MY_CAMERA_PERMISSION_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
-            }
-            else
-            {
+            } else {
                 Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -71,6 +93,7 @@ private ActivityEditBinding binding;
             binding.shopImage.setImageBitmap(photo);
         }
     }
+
     private void initToolsbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -79,5 +102,10 @@ private ActivityEditBinding binding;
         getSupportActionBar().setTitle(Html.fromHtml("Edit Shop"));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
+    public void updateSuccessCallback(Boolean status, String Message) {
+
     }
 }

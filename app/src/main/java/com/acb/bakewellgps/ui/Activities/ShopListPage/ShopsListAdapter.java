@@ -42,7 +42,7 @@ public class ShopsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name,subTitle,shopId;
+        public TextView name, subTitle, shopId;
         public ImageView locImage;
         public View lyt_parent;
 
@@ -73,13 +73,15 @@ public class ShopsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ShopsListAdapter.OriginalViewHolder view = (ShopsListAdapter.OriginalViewHolder) holder;
 
             Shop p = items.get(position);
-
+            if (p.is_lat_long) {
                 view.locImage.setColorFilter(ActivityCompat.getColor(ctx, android.R.color.holo_green_light));
-
+            } else {
+                view.locImage.setColorFilter(ActivityCompat.getColor(ctx, android.R.color.darker_gray));
+            }
             view.name.setText(p.getShop_name());
-            view.subTitle.setText(p.getArea()+" | "+p.getOutlet_type()+" | "+p.getBilling_type());
+            view.subTitle.setText(p.getArea() + " | " + p.getOutlet_type() + " | " + p.getBilling_type());
 
-            view.shopId.setText(p.getShop_id()+"");
+            view.shopId.setText(p.getShop_id() + "");
 
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override

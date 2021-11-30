@@ -68,6 +68,7 @@
             </LinearLayout>
 
             <EditText
+                android:id="@+id/organization_name"
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -117,6 +118,7 @@
                 android:hint="Owner Name"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
+
             <EditText
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
@@ -126,6 +128,7 @@
                 android:hint="Owner Number"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
+
             <EditText
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
@@ -166,8 +169,6 @@
                 android:hint="Contact Email"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
-
-
 
 
             <EditText
