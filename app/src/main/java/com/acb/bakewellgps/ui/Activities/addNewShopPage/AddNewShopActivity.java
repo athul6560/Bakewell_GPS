@@ -3,15 +3,21 @@ package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.Html;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -27,6 +33,11 @@ import com.acb.bakewellgps.modell.countryList;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
+import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +52,10 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     List<allCurrencies> allCurrencies = new ArrayList<>();
     List<areaList> areaLists = new ArrayList<>();
     List<categoryName> shopCategories;
-    String[] transactionTypes = { "Cash", "Credit",
-            "Cheque", "Transfer" };
+    private LocationRequest locationRequest;
+    private double globallong, globalLang;
+    String[] transactionTypes = {"Cash", "Credit",
+            "Cheque", "Transfer"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +67,17 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         initComponents();
         Dialogues.show(this);
         logic.getAllCountries();
+        getCurrentLocation();
 
+        setLocation();
+        binding.reload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCurrentLocation();
+
+                setLocation();
+            }
+        });
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,59 +92,121 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         binding.btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validation().isStatus())
-                logic.addNewShop(getnewShopDetails());
+
+
+                if (validation().isStatus())
+                    logic.addNewShop(getnewShopDetails());
                 else
-                    Toast.makeText(AddNewShopActivity.this, ""+validation().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddNewShopActivity.this, "" + validation().getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
     }
 
+    private void setLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+
+    }
+
+    private void getCurrentLocation() {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(AddNewShopActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+                if (isGPSEnabled()) {
+
+                    LocationServices.getFusedLocationProviderClient(AddNewShopActivity.this)
+                            .requestLocationUpdates(locationRequest, new LocationCallback() {
+                                @Override
+                                public void onLocationResult(@NonNull LocationResult locationResult) {
+                                    super.onLocationResult(locationResult);
+
+                                    LocationServices.getFusedLocationProviderClient(AddNewShopActivity.this)
+                                            .removeLocationUpdates(this);
+
+                                    if (locationResult != null && locationResult.getLocations().size() > 0) {
+
+                                        int index = locationResult.getLocations().size() - 1;
+                                        double latitude = locationResult.getLocations().get(index).getLatitude();
+                                        double longitude = locationResult.getLocations().get(index).getLongitude();
+
+                                        setTextAddress(latitude, longitude);
+                                    }
+                                }
+                            }, Looper.getMainLooper());
+
+                } else {
+                    Toast.makeText(AddNewShopActivity.this, "Please turn on GPS", Toast.LENGTH_SHORT).show();
+                }
+
+            } else {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+        }
+    }
+
+    private void setTextAddress(double lang, double longitude) {
+        globalLang = lang;
+        globallong = longitude;
+        //  binding.address.setText(address.getFeatureName() + "\n" + "Pin: " + address.getPostalCode() + ", " + address.getLocality() + ", " + address.getCountryName());
+        binding.latlong.setText(lang + "," + longitude);
+    }
+
+    private boolean isGPSEnabled() {
+        LocationManager locationManager = null;
+        boolean isEnabled = false;
+
+        if (locationManager == null) {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        }
+
+        isEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        return isEnabled;
+
+    }
+
     private responseSimple validation() {
-        responseSimple responseSimple=new responseSimple();
-        if(binding.shortName.getText().toString().equals("")){
+        responseSimple responseSimple = new responseSimple();
+        if (binding.shortName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Short Name");
             return responseSimple;
         }
-        if(binding.organisationName.getText().toString().equals("")){
+        if (binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Organisation Name");
             return responseSimple;
-        } if( binding.taxNumber.getText().toString().equals("")){
+        }
+        if (binding.taxNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
-            return responseSimple;
-        } if(binding.shortName.getText().toString().equals("")){
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
-            return responseSimple;
-        } if(binding.shortName.getText().toString().equals("")){
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
-            return responseSimple;
-        } if(binding.shortName.getText().toString().equals("")){
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
-            return responseSimple;
-        } if(binding.shortName.getText().toString().equals("")){
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
-            return responseSimple;
-        } if(binding.shortName.getText().toString().equals("")){
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
+            responseSimple.setMessage("Please Enter Tax Number");
             return responseSimple;
         }
+        if ( binding.postBoxNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Post Box Number");
+            return responseSimple;
+        }
+
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
         return responseSimple;
              /*   ,
                ,
                 23,
-                binding.postBoxNumber.getText().toString(),
+               ,
                 binding.addressOne.getText().toString(),
                 binding.addressTwo.getText().toString(),
                 binding.addressThree.getText().toString(),
@@ -168,6 +253,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         // Spinner which binds data to spinner
         spin.setAdapter(ad);
     }
+
     private void setCountrySpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.country);
@@ -177,6 +263,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
         spin.setAdapter(adapter);
     }
+
     private void setAreaSpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.area);
@@ -185,7 +272,9 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
+
     }
+
     private void setShopCategorySpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.shop_category_id);
@@ -197,46 +286,71 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private sentShopAddDetails getnewShopDetails() {
-              sentShopAddDetails addDetails = new sentShopAddDetails(
-                     binding.shortName.getText().toString(),
-                      binding.organisationName.getText().toString(),
-                      binding.taxNumber.getText().toString(),
-                     23,
-                      binding.postBoxNumber.getText().toString(),
-                      binding.addressOne.getText().toString(),
-                      binding.addressTwo.getText().toString(),
-                      binding.addressThree.getText().toString(),
-                      binding.email.getText().toString(),
-                      binding.website.getText().toString(),
-                      binding.mobileNumber.getText().toString(),
-                      binding.secondNumber.getText().toString(),
-                      binding.whatsappNumber.getText().toString(),
-                      binding.telNumber.getText().toString(),
-                     34,
-                      "cash",
-                      binding.licenseNumber.getText().toString(),
-                      binding.ownerName.getText().toString(),
-                      binding.ownerNumber.getText().toString(),
-                      binding.ownerEmail.getText().toString(),
-                      binding.contactName.getText().toString(),
-                      binding.contactNumber.getText().toString(),
-                      binding.contactEmail.getText().toString(),
-                      4,
-                    "",
-                      "",
-                      Tools.getStringfromBitmap(ImageBitmap),
-                      Tools.getStringfromBitmap(ImageBitmap),
-                      1997,
-                      binding.landMark.getText().toString()
+        int creditDays= Integer.parseInt(binding.creditDays.getText().toString());
+        int year= Integer.parseInt(binding.establishedYear.getText().toString());
+
+        sentShopAddDetails addDetails = new sentShopAddDetails(
+                binding.shortName.getText().toString(),
+                binding.organisationName.getText().toString(),
+                binding.taxNumber.getText().toString(),
+                getProvinceId(binding.area.getSelectedItem().toString() ),
+                binding.postBoxNumber.getText().toString(),
+                binding.addressOne.getText().toString(),
+                binding.addressTwo.getText().toString(),
+                binding.addressThree.getText().toString(),
+                binding.email.getText().toString(),
+                binding.website.getText().toString(),
+                binding.mobileNumber.getText().toString(),
+                binding.secondNumber.getText().toString(),
+                binding.whatsappNumber.getText().toString(),
+                binding.telNumber.getText().toString(),
+                getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()),
+                binding.transactionType.getSelectedItem().toString(),
+                binding.licenseNumber.getText().toString(),
+                binding.ownerName.getText().toString(),
+                binding.ownerNumber.getText().toString(),
+                binding.ownerEmail.getText().toString(),
+                binding.contactName.getText().toString(),
+                binding.contactNumber.getText().toString(),
+                binding.contactEmail.getText().toString(),
+                creditDays,
+
+                globalLang+"",
+                globallong+"",
+                Tools.getStringfromBitmap(ImageBitmap),
+                Tools.getStringfromBitmap(ImageBitmap),
+                year,
+                binding.landMark.getText().toString()
 
 
-
-                      );
+        );
         return addDetails;
+    }
+
+    private int getShopCategoryId(String categoryName) {
+        for(int i=0;i<shopCategories.size();i++){
+            if (shopCategories.get(i).getCategory_name().equals(categoryName)){
+                return shopCategories.get(i).getId();
+            }
+        }
+        return 0;
+    }
+
+    private int getProvinceId(String provinceName) {
+        for(int i=0;i<areaLists.size();i++){
+            if (areaLists.get(i).getArea_name().equals(provinceName)){
+                return areaLists.get(i).getProvince_id();
+            }
+        }
+        return 0;
     }
 
     private void initComponents() {
         logic = new AddLogic(this, this);
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
 
     }
 

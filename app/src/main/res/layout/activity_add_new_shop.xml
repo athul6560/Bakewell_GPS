@@ -278,8 +278,7 @@
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Transaction Type"
                 android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle"
-               />
+                android:paddingRight="@dimen/spacing_middle" />
 
             <EditText
                 android:id="@+id/license_number"
@@ -383,17 +382,33 @@
                 android:paddingRight="@dimen/spacing_middle"
                 android:singleLine="true" />
 
-            <EditText
-                android:id="@+id/update_gps"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Update Gps"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle"
-                android:singleLine="true" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0 , "
+                    android:id="@+id/latlong"/>
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Button
+                        android:id="@+id/reload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                      android:layout_alignParentRight="true"
+                        android:text="reload" />
+                </RelativeLayout>
+            </LinearLayout>
+
 
             <EditText
                 android:id="@+id/established_year"
