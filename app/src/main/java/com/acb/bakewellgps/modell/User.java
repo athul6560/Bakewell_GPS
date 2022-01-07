@@ -1,6 +1,7 @@
 package com.acb.bakewellgps.modell;
 
 public class User {
+    public int id;
     public String username;
     public String userpassword;
     public int employee_id;
@@ -15,6 +16,14 @@ public class User {
     public int login_count;
     public String login_time;
     public String employee_code;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

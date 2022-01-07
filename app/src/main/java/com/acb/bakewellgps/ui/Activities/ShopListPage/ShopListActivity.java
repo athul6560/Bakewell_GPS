@@ -40,12 +40,7 @@ public class ShopListActivity extends AppCompatActivity {
     }
 
     private void onClicks() {
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ShopListActivity.this, AddNewShopActivity.class));
-            }
-        });
+
     }
 
     private List<Shop> getIntentRoutes() {

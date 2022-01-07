@@ -9,6 +9,7 @@ import com.acb.bakewellgps.ui.Activities.DashboardPage.Dashboard;
 public class SharedData {
     private static final String LOGINCHECKKEY = "LoginKeyCheck";
     private static final String USERNAME = "userName";
+    private static final String ID = "id";
 
     public static void LogedStatusUpdate(Context context, boolean loginStatus) {
 
@@ -30,5 +31,13 @@ public class SharedData {
     public static void setUserName(Context context,String username) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Boolean statusLocked = prefs.edit().putString(USERNAME, username).commit();
+    }
+    public static int getId(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getInt(ID, 0);
+    }
+    public static void setId(Context context,int id) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Boolean statusLocked = prefs.edit().putInt(ID, id).commit();
     }
 }

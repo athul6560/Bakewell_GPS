@@ -36,6 +36,7 @@ public class LoginLogic implements ILoginLogic.logic {
                     Dialogues.dismiss();
                     if (response.body().status) {
                         SharedData.setUserName(context,response.body().getData().get(0).getUsername());
+                        SharedData.setId(context,response.body().getData().get(0).getEmployee_id());
                         view.loginResponse(response.body().message, response.body().status);
                     }else
                         view.loginResponse(response.body().message, response.body().status);

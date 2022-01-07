@@ -21,6 +21,7 @@ import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.modell.RoutesData;
 import com.acb.bakewellgps.ui.Activities.LoginPage.LoginActivity;
 import com.acb.bakewellgps.ui.Activities.ShopListPage.ShopListActivity;
+import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -37,7 +38,13 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
         setContentView(view);
         initComponents();
         initToolbar();
-        logic.callRoutesApi(30);
+        logic.callRoutesApi(SharedData.getId(Dashboard.this));
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Dashboard.this, AddNewShopActivity.class));
+            }
+        });
         binding.logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
