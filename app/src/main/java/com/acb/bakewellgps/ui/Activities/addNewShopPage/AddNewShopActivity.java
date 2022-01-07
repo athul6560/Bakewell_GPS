@@ -140,7 +140,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(Html.fromHtml("Edit Shop"));
+        getSupportActionBar().setTitle(Html.fromHtml("Add Shop"));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }

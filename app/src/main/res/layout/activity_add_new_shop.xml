@@ -22,7 +22,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/grey_5"
         android:clipToPadding="false"
         android:padding="@dimen/spacing_mlarge"
@@ -66,7 +66,6 @@
                     android:textColor="@color/grey_40" />
 
 
-
             </LinearLayout>
 
             <EditText
@@ -78,7 +77,9 @@
                 android:hint="Short Name"
                 android:minHeight="45dp"
                 android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle" />
+
+                android:paddingRight="@dimen/spacing_middle"
+                android:singleLine="true" />
 
 
             <EditText
@@ -90,7 +91,8 @@
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Organisation Name"
                 android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle" />
+                android:paddingRight="@dimen/spacing_middle"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/tax_number"
@@ -100,9 +102,11 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Tax Number"
+                android:inputType="number"
                 android:paddingLeft="@dimen/spacing_middle"
-                android:textAllCaps="true"
-                android:paddingRight="@dimen/spacing_middle" />
+                android:paddingRight="@dimen/spacing_middle"
+                android:singleLine="true" />
+
             <Spinner
                 android:id="@+id/country"
 
@@ -113,6 +117,7 @@
                 android:hint="Country"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
+
             <Spinner
                 android:id="@+id/area"
 
@@ -130,9 +135,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
-                android:inputType="number"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Post Box Number"
+                android:inputType="number"
+                android:singleLine="true"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -142,6 +148,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Address Line 1"
                 android:paddingLeft="@dimen/spacing_middle"
@@ -153,6 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Address Line 2"
                 android:paddingLeft="@dimen/spacing_middle"
@@ -164,16 +172,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Address Line 3"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
-
-
-
-
-
-
 
 
             <EditText
@@ -184,6 +187,8 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Email"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -193,8 +198,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Website"
+                android:inputType="textWebEmailAddress"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -203,9 +210,11 @@
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:singleLine="true"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Mobile Number"
+                android:inputType="phone"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -215,8 +224,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Secondary Phone"
+                android:inputType="phone"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -228,6 +239,8 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Whatsapp Number"
+                android:inputType="phone"
+                android:singleLine="true"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -239,6 +252,8 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Telephone Number"
+                android:singleLine="true"
+                android:inputType="phone"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -254,7 +269,6 @@
                 android:paddingRight="@dimen/spacing_middle" />
 
 
-
             <EditText
                 android:id="@+id/transaction_type"
                 style="@style/EditText.Flat.Grey"
@@ -264,6 +278,7 @@
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Transaction Type"
                 android:paddingLeft="@dimen/spacing_middle"
+                android:singleLine="true"
                 android:paddingRight="@dimen/spacing_middle" />
 
             <EditText
@@ -271,9 +286,11 @@
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:singleLine="true"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Licence Number"
+                android:inputType="number"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -283,6 +300,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Owner Name"
                 android:paddingLeft="@dimen/spacing_middle"
@@ -293,9 +311,11 @@
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:singleLine="true"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Owner Number"
+                android:inputType="phone"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -304,9 +324,11 @@
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:singleLine="true"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Owner Email"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -314,6 +336,7 @@
                 android:id="@+id/contact_name"
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
+                android:singleLine="true"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
@@ -326,9 +349,11 @@
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:singleLine="true"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Contact Number"
+                android:inputType="phone"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -338,8 +363,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Contact Email"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -349,8 +376,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Credit Days"
+                android:inputType="number"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
@@ -360,6 +389,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Update Gps"
                 android:paddingLeft="@dimen/spacing_middle"
@@ -371,10 +401,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:singleLine="true"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Establisted Year"
+                android:inputType="number"
+                android:maxLength="4"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
+
             <EditText
                 android:id="@+id/land_mark"
                 style="@style/EditText.Flat.Grey"
@@ -383,6 +417,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Land Mark"
+
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
