@@ -17,7 +17,7 @@ import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.SharedPref.SharedData;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
-import com.acb.bakewellgps.databinding.ActivityLoginBinding;
+
 import com.acb.bakewellgps.modell.RoutesData;
 import com.acb.bakewellgps.ui.Activities.LoginPage.LoginActivity;
 import com.acb.bakewellgps.ui.Activities.ShopListPage.ShopListActivity;

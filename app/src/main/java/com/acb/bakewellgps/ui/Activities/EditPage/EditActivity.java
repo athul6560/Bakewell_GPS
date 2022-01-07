@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
+import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityEditBinding;
 import com.acb.bakewellgps.modell.sentShopUpdateDetails;
@@ -22,8 +23,9 @@ import com.acb.bakewellgps.modell.sentShopUpdateDetails;
 public class EditActivity extends AppCompatActivity implements IEditLogic.view {
     private ActivityEditBinding binding;
     private static final int CAMERA_REQUEST = 1888;
-private EditLogic logic;
+    private EditLogic logic;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
+    private Bitmap ImageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +56,29 @@ private EditLogic logic;
     }
 
     private sentShopUpdateDetails getUpdateData() {
-        sentShopUpdateDetails shopUpdateDetails=new sentShopUpdateDetails();
+        sentShopUpdateDetails shopUpdateDetails = new sentShopUpdateDetails();
         shopUpdateDetails.setId(getShopId());
-        shopUpdateDetails.setOrganisation_name(  binding.organizationName.getText().toString());
-      return shopUpdateDetails;
+        shopUpdateDetails.setOrganisation_name(binding.organizationName.getText().toString());
+        shopUpdateDetails.setShop_image(Tools.getStringfromBitmap(ImageBitmap));
+        shopUpdateDetails.setAddress_line1(binding.addressOne.getText().toString());
+        shopUpdateDetails.setAddress_line2(binding.addressTwo.getText().toString());
+        shopUpdateDetails.setEmail(binding.email.getText().toString());
+        shopUpdateDetails.setAddress_line3(binding.addressThree.getText().toString());
+        shopUpdateDetails.setOwner_email_id(binding.ownerEmail.getText().toString());
+        shopUpdateDetails.setOwner_mobile_no(binding.ownerNumber.getText().toString());
+        shopUpdateDetails.setOwner_name(binding.ownerName.getText().toString());
+        shopUpdateDetails.setShop_contact_email_id(binding.contactEmail.getText().toString());
+        shopUpdateDetails.setShop_contact_name(binding.contactName.getText().toString());
+        shopUpdateDetails.setShop_contact_mobile_no(binding.contactNumber.getText().toString());
+
+
+        return shopUpdateDetails;
     }
 
     private void initComponents() {
-        logic=new EditLogic(this,this);
+        logic = new EditLogic(this, this);
     }
+
     private int getShopId() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -71,6 +87,7 @@ private EditLogic logic;
         }
         return 0;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -90,6 +107,7 @@ private EditLogic logic;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ImageBitmap=photo;
             binding.shopImage.setImageBitmap(photo);
         }
     }
@@ -106,6 +124,11 @@ private EditLogic logic;
 
     @Override
     public void updateSuccessCallback(Boolean status, String Message) {
-
+        if (status) {
+            Toast.makeText(EditActivity.this, Message, Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(EditActivity.this, Message, Toast.LENGTH_SHORT).show();
+        }
     }
 }

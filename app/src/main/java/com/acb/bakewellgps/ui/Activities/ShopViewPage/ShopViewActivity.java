@@ -63,7 +63,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         getCurrentLocation();
 
         setLocation();
-        shopViewLogic.getShopDetailsAPI(getShopId());
+
         binding.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +87,11 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        shopViewLogic.getShopDetailsAPI(getShopId());
+    }
 
     private int getShopId() {
         Bundle extras = getIntent().getExtras();

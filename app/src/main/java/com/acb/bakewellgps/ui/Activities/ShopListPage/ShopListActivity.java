@@ -19,6 +19,7 @@ import com.acb.bakewellgps.ui.Activities.DashboardPage.Dashboard;
 import com.acb.bakewellgps.ui.Activities.DashboardPage.DashboardLogic;
 import com.acb.bakewellgps.ui.Activities.DashboardPage.RoutesAdapter;
 import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
+import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -34,8 +35,17 @@ public class ShopListActivity extends AppCompatActivity {
         setContentView(view);
         initComponents();
         initToolbar();
-
+onClicks();
         setAdapter(getIntentRoutes());
+    }
+
+    private void onClicks() {
+        binding.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShopListActivity.this, AddNewShopActivity.class));
+            }
+        });
     }
 
     private List<Shop> getIntentRoutes() {
