@@ -1,20 +1,15 @@
 package com.acb.bakewellgps.modell;
 
 public class sentShopAddDetails {
-    public String code;
+
     public String short_name;
     public String organisation_name;
     public String tax_number;
-    public int country_id;
     public int province_id;
     public String post_box_number;
     public String address_line1;
     public String address_line2;
     public String address_line3;
-    public String rating_star;
-    public boolean is_active;
-    public int currency_id;
-    public String currency_name;
     public String email;
     public String website;
     public String mobile_no1;
@@ -22,9 +17,8 @@ public class sentShopAddDetails {
     public String whatsapp_no;
     public String phone_no;
     public int shop_category_id;
-    public String shop_category_name;
     public String transaction_type;
-    public String vat_number;
+    public String licence_no;
     public String owner_name;
     public String owner_mobile_no;
     public String owner_email_id;
@@ -39,21 +33,44 @@ public class sentShopAddDetails {
     public int estd_year;
     public String landmark;
 
-    public sentShopAddDetails(String code, String short_name, String organisation_name, String tax_number, int country_id, int province_id, String post_box_number, String address_line1, String address_line2, String address_line3, String rating_star, boolean is_active, int currency_id, String currency_name, String email, String website, String mobile_no1, String mobile_no2, String whatsapp_no, String phone_no, int shop_category_id, String shop_category_name, String transaction_type, String vat_number, String owner_name, String owner_mobile_no, String owner_email_id, String shop_contact_name, String shop_contact_mobile_no, String shop_contact_email_id, int credit_days, String latitude, String longitude, String shop_logo, String shop_image, int estd_year, String landmark) {
-        this.code = code;
+    public sentShopAddDetails(String short_name,
+                              String organisation_name,
+                              String tax_number,
+                              int province_id,
+                              String post_box_number,
+                              String address_line1,
+                              String address_line2,
+                              String address_line3,
+                              String email,
+                              String website,
+                              String mobile_no1,
+                              String mobile_no2,
+                              String whatsapp_no,
+                              String phone_no,
+                              int shop_category_id,
+                              String transaction_type,
+                              String licence_no,
+                              String owner_name,
+                              String owner_mobile_no,
+                              String owner_email_id,
+                              String shop_contact_name,
+                              String shop_contact_mobile_no,
+                              String shop_contact_email_id,
+                              int credit_days,
+                              String latitude,
+                              String longitude,
+                              String shop_logo,
+                              String shop_image,
+                              int estd_year,
+                              String landmark) {
         this.short_name = short_name;
         this.organisation_name = organisation_name;
         this.tax_number = tax_number;
-        this.country_id = country_id;
         this.province_id = province_id;
         this.post_box_number = post_box_number;
         this.address_line1 = address_line1;
         this.address_line2 = address_line2;
         this.address_line3 = address_line3;
-        this.rating_star = rating_star;
-        this.is_active = is_active;
-        this.currency_id = currency_id;
-        this.currency_name = currency_name;
         this.email = email;
         this.website = website;
         this.mobile_no1 = mobile_no1;
@@ -61,9 +78,8 @@ public class sentShopAddDetails {
         this.whatsapp_no = whatsapp_no;
         this.phone_no = phone_no;
         this.shop_category_id = shop_category_id;
-        this.shop_category_name = shop_category_name;
         this.transaction_type = transaction_type;
-        this.vat_number = vat_number;
+        this.licence_no = licence_no;
         this.owner_name = owner_name;
         this.owner_mobile_no = owner_mobile_no;
         this.owner_email_id = owner_email_id;

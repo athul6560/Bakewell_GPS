@@ -18,11 +18,13 @@ import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.Utils.Dialogues;
+import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityAddNewShopBinding;
 import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
 
@@ -39,7 +41,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     List<allCurrencies> allCurrencies = new ArrayList<>();
     List<areaList> areaLists = new ArrayList<>();
     List<categoryName> shopCategories;
-    ArrayList<String> country = new ArrayList<String>();
+    String[] transactionTypes = { "Cash", "Credit",
+            "Cheque", "Transfer" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +69,105 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         binding.btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(validation().isStatus())
                 logic.addNewShop(getnewShopDetails());
+                else
+                    Toast.makeText(AddNewShopActivity.this, ""+validation().getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
     }
 
+    private responseSimple validation() {
+        responseSimple responseSimple=new responseSimple();
+        if(binding.shortName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        }
+        if(binding.organisationName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Organisation Name");
+            return responseSimple;
+        } if( binding.taxNumber.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        } if(binding.shortName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        } if(binding.shortName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        } if(binding.shortName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        } if(binding.shortName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        } if(binding.shortName.getText().toString().equals("")){
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Short Name");
+            return responseSimple;
+        }
+        responseSimple.setStatus(true);
+        responseSimple.setMessage("Success");
+        return responseSimple;
+             /*   ,
+               ,
+                23,
+                binding.postBoxNumber.getText().toString(),
+                binding.addressOne.getText().toString(),
+                binding.addressTwo.getText().toString(),
+                binding.addressThree.getText().toString(),
+                binding.email.getText().toString(),
+                binding.website.getText().toString(),
+                binding.mobileNumber.getText().toString(),
+                binding.secondNumber.getText().toString(),
+                binding.whatsappNumber.getText().toString(),
+                binding.telNumber.getText().toString(),
+                34,
+                "cash",
+                binding.licenseNumber.getText().toString(),
+                binding.ownerName.getText().toString(),
+                binding.ownerNumber.getText().toString(),
+                binding.ownerEmail.getText().toString(),
+                binding.contactName.getText().toString(),
+                binding.contactNumber.getText().toString(),
+                binding.contactEmail.getText().toString(),
+                4,
+                "",
+                "",
+                Tools.getStringfromBitmap(ImageBitmap),
+                Tools.getStringfromBitmap(ImageBitmap),
+                1997,
+                binding.landMark.getText().toString()*/
+    }
+
+    private void setTransactionTypeSpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.transaction_type);
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                transactionTypes);
+
+        // set simple layout resource file
+        // for each item of spinner
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        // Set the ArrayAdapter (ad) data on the
+        // Spinner which binds data to spinner
+        spin.setAdapter(ad);
+    }
     private void setCountrySpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.country);
@@ -102,8 +197,42 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private sentShopAddDetails getnewShopDetails() {
-        //      sentShopAddDetails addDetails = new sentShopAddDetails();
-        return null;
+              sentShopAddDetails addDetails = new sentShopAddDetails(
+                     binding.shortName.getText().toString(),
+                      binding.organisationName.getText().toString(),
+                      binding.taxNumber.getText().toString(),
+                     23,
+                      binding.postBoxNumber.getText().toString(),
+                      binding.addressOne.getText().toString(),
+                      binding.addressTwo.getText().toString(),
+                      binding.addressThree.getText().toString(),
+                      binding.email.getText().toString(),
+                      binding.website.getText().toString(),
+                      binding.mobileNumber.getText().toString(),
+                      binding.secondNumber.getText().toString(),
+                      binding.whatsappNumber.getText().toString(),
+                      binding.telNumber.getText().toString(),
+                     34,
+                      "cash",
+                      binding.licenseNumber.getText().toString(),
+                      binding.ownerName.getText().toString(),
+                      binding.ownerNumber.getText().toString(),
+                      binding.ownerEmail.getText().toString(),
+                      binding.contactName.getText().toString(),
+                      binding.contactNumber.getText().toString(),
+                      binding.contactEmail.getText().toString(),
+                      4,
+                    "",
+                      "",
+                      Tools.getStringfromBitmap(ImageBitmap),
+                      Tools.getStringfromBitmap(ImageBitmap),
+                      1997,
+                      binding.landMark.getText().toString()
+
+
+
+                      );
+        return addDetails;
     }
 
     private void initComponents() {
@@ -187,6 +316,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             setCountrySpinner();
             setAreaSpinner();
             setShopCategorySpinner();
+            setTransactionTypeSpinner();
             Dialogues.dismiss();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();

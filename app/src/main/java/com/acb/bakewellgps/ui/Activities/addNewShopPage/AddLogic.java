@@ -1,6 +1,7 @@
 package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.acb.bakewellgps.API.APIClient;
 import com.acb.bakewellgps.API.APIInterface;
@@ -19,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddLogic implements IAddLogic.logic{
+public class AddLogic implements IAddLogic.logic {
     private Context context;
     private IAddLogic.view view;
 
@@ -30,7 +31,29 @@ public class AddLogic implements IAddLogic.logic{
 
     @Override
     public void addNewShop(sentShopAddDetails sentShopAddDetails) {
+        Dialogues.show(context);
+        APIInterface service = APIClient.getClient().create(APIInterface.class);
+        Call<responseSimple> call = service.createShop(sentShopAddDetails);
+        call.enqueue(new Callback<responseSimple>() {
+            @Override
+            public void onResponse(Call<responseSimple> call, Response<responseSimple> response) {
+                Dialogues.dismiss();
 
+                if (response.isSuccessful()) {
+                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Failed " + response.body().message, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<responseSimple> call, Throwable t) {
+                Dialogues.dismiss();
+                Toast.makeText(context, "Failed " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -44,9 +67,9 @@ public class AddLogic implements IAddLogic.logic{
 
 
                 if (response.isSuccessful()) {
-                    view.countryCallback(true, "Sucess",response.body());
+                    view.countryCallback(true, "Sucess", response.body());
                 } else {
-                    view.countryCallback(false, "Server Error",null);
+                    view.countryCallback(false, "Server Error", null);
                 }
 
             }
@@ -54,7 +77,7 @@ public class AddLogic implements IAddLogic.logic{
             @Override
             public void onFailure(Call<List<countryList>> call, Throwable t) {
 
-                view.countryCallback(false, "No Network",null);
+                view.countryCallback(false, "No Network", null);
 
             }
         });
@@ -71,9 +94,9 @@ public class AddLogic implements IAddLogic.logic{
 
 
                 if (response.isSuccessful()) {
-                    view.areaCallback(true, "Sucess",response.body());
+                    view.areaCallback(true, "Sucess", response.body());
                 } else {
-                    view.areaCallback(false, "Server Error",null);
+                    view.areaCallback(false, "Server Error", null);
                 }
 
             }
@@ -81,7 +104,7 @@ public class AddLogic implements IAddLogic.logic{
             @Override
             public void onFailure(Call<List<areaList>> call, Throwable t) {
 
-                view.areaCallback(false, "No Network",null);
+                view.areaCallback(false, "No Network", null);
 
             }
         });
@@ -99,9 +122,9 @@ public class AddLogic implements IAddLogic.logic{
                 Dialogues.dismiss();
 
                 if (response.isSuccessful()) {
-                    view.currencyCallback(true, "Sucess",response.body());
+                    view.currencyCallback(true, "Sucess", response.body());
                 } else {
-                    view.currencyCallback(false, "Server Error",null);
+                    view.currencyCallback(false, "Server Error", null);
                 }
 
             }
@@ -109,7 +132,7 @@ public class AddLogic implements IAddLogic.logic{
             @Override
             public void onFailure(Call<List<allCurrencies>> call, Throwable t) {
 
-                view.currencyCallback(false, "No Network",null);
+                view.currencyCallback(false, "No Network", null);
 
             }
         });
@@ -126,9 +149,9 @@ public class AddLogic implements IAddLogic.logic{
                 Dialogues.dismiss();
 
                 if (response.isSuccessful()) {
-                    view.shopCategoryCallBack(true, "Sucess",response.body());
+                    view.shopCategoryCallBack(true, "Sucess", response.body());
                 } else {
-                    view.shopCategoryCallBack(false, "Server Error",null);
+                    view.shopCategoryCallBack(false, "Server Error", null);
                 }
 
             }
@@ -136,7 +159,7 @@ public class AddLogic implements IAddLogic.logic{
             @Override
             public void onFailure(Call<shopCategories> call, Throwable t) {
 
-                view.shopCategoryCallBack(false, "No Network",null);
+                view.shopCategoryCallBack(false, "No Network", null);
 
             }
         });
