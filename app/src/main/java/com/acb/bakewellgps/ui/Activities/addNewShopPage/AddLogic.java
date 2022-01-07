@@ -35,13 +35,13 @@ public class AddLogic implements IAddLogic.logic{
 
     @Override
     public void getAllCountries() {
-        Dialogues.show(context);
+
         APIInterface service = APIClient.getClient().create(APIInterface.class);
         Call<List<countryList>> call = service.getAllCountries();
         call.enqueue(new Callback<List<countryList>>() {
             @Override
             public void onResponse(Call<List<countryList>> call, Response<List<countryList>> response) {
-                Dialogues.dismiss();
+
 
                 if (response.isSuccessful()) {
                     view.countryCallback(true, "Sucess",response.body());
@@ -53,7 +53,7 @@ public class AddLogic implements IAddLogic.logic{
 
             @Override
             public void onFailure(Call<List<countryList>> call, Throwable t) {
-                Dialogues.dismiss();
+
                 view.countryCallback(false, "No Network",null);
 
             }
@@ -62,13 +62,13 @@ public class AddLogic implements IAddLogic.logic{
 
     @Override
     public void getAllArea() {
-        Dialogues.show(context);
+
         APIInterface service = APIClient.getClient().create(APIInterface.class);
         Call<List<areaList>> call = service.getAllArea();
         call.enqueue(new Callback<List<areaList>>() {
             @Override
             public void onResponse(Call<List<areaList>> call, Response<List<areaList>> response) {
-                Dialogues.dismiss();
+
 
                 if (response.isSuccessful()) {
                     view.areaCallback(true, "Sucess",response.body());
@@ -80,7 +80,7 @@ public class AddLogic implements IAddLogic.logic{
 
             @Override
             public void onFailure(Call<List<areaList>> call, Throwable t) {
-                Dialogues.dismiss();
+
                 view.areaCallback(false, "No Network",null);
 
             }
@@ -90,7 +90,7 @@ public class AddLogic implements IAddLogic.logic{
 
     @Override
     public void getAllCurrencies() {
-        Dialogues.show(context);
+
         APIInterface service = APIClient.getClient().create(APIInterface.class);
         Call<List<allCurrencies>> call = service.getAllCurrencies();
         call.enqueue(new Callback<List<allCurrencies>>() {
@@ -108,7 +108,7 @@ public class AddLogic implements IAddLogic.logic{
 
             @Override
             public void onFailure(Call<List<allCurrencies>> call, Throwable t) {
-                Dialogues.dismiss();
+
                 view.currencyCallback(false, "No Network",null);
 
             }
@@ -117,7 +117,7 @@ public class AddLogic implements IAddLogic.logic{
 
     @Override
     public void getShopCategory() {
-        Dialogues.show(context);
+
         APIInterface service = APIClient.getClient().create(APIInterface.class);
         Call<shopCategories> call = service.getShopCategories();
         call.enqueue(new Callback<shopCategories>() {
@@ -135,7 +135,7 @@ public class AddLogic implements IAddLogic.logic{
 
             @Override
             public void onFailure(Call<shopCategories> call, Throwable t) {
-                Dialogues.dismiss();
+
                 view.shopCategoryCallBack(false, "No Network",null);
 
             }
