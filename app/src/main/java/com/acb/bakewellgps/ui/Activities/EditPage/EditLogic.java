@@ -15,8 +15,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditLogic implements IEditLogic.logic{
-private Context context;
+public class EditLogic implements IEditLogic.logic {
+    private Context context;
     private IEditLogic.view view;
 
     public EditLogic(Context context, IEditLogic.view view) {
@@ -36,13 +36,13 @@ private Context context;
 
                 if (response.isSuccessful()) {
                     if (response.body().isStatus()) {
-                        view.updateSuccessCallback(response.body().status,response.body().getMessage());
-                    }else{
-                        view.updateSuccessCallback(response.body().status,response.body().getMessage());
+                        view.updateSuccessCallback(response.body().status, response.body().getMessage());
+                    } else {
+                        view.updateSuccessCallback(response.body().status, response.body().getMessage());
 
                     }
                 } else {
-                    view.updateSuccessCallback(false,"Server Error");
+                    view.updateSuccessCallback(false, "Server Error");
                 }
 
             }
@@ -50,7 +50,7 @@ private Context context;
             @Override
             public void onFailure(Call<responseSimple> call, Throwable t) {
                 Dialogues.dismiss();
-                view.updateSuccessCallback(false,"No Network");
+                view.updateSuccessCallback(false, "No Network");
 
             }
         });

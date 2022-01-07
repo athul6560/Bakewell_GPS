@@ -35,7 +35,7 @@ public class ShopListActivity extends AppCompatActivity {
         setContentView(view);
         initComponents();
         initToolbar();
-onClicks();
+        onClicks();
         setAdapter(getIntentRoutes());
     }
 
