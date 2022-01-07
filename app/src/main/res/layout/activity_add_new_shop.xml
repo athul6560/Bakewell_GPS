@@ -65,6 +65,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/grey_40" />
 
+
+
             </LinearLayout>
 
             <EditText
@@ -99,11 +101,11 @@
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Tax Number"
                 android:paddingLeft="@dimen/spacing_middle"
+                android:textAllCaps="true"
                 android:paddingRight="@dimen/spacing_middle" />
-
-            <EditText
+            <Spinner
                 android:id="@+id/country"
-                style="@style/EditText.Flat.Grey"
+
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
@@ -111,10 +113,9 @@
                 android:hint="Country"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
+            <Spinner
+                android:id="@+id/area"
 
-            <EditText
-                android:id="@+id/province"
-                style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
@@ -129,6 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
+                android:inputType="number"
                 android:background="@drawable/edit_text_round_bg_white"
                 android:hint="Post Box Number"
                 android:paddingLeft="@dimen/spacing_middle"
@@ -167,39 +169,12 @@
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
-            <EditText
-                android:id="@+id/rating"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Rating"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle" />
-
-            <EditText
-                android:id="@+id/currency_id"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Currency Id"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle" />
 
 
-            <EditText
-                android:id="@+id/currency_name"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Currency Name"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle" />
+
+
+
+
 
             <EditText
                 android:id="@+id/email"
@@ -267,9 +242,9 @@
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/shop_category_id"
-                style="@style/EditText.Flat.Grey"
+
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
@@ -278,16 +253,7 @@
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 
-            <EditText
-                android:id="@+id/shop_category_name"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Shop Category Name"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle" />
+
 
             <EditText
                 android:id="@+id/transaction_type"
@@ -301,13 +267,13 @@
                 android:paddingRight="@dimen/spacing_middle" />
 
             <EditText
-                android:id="@+id/vat_number"
+                android:id="@+id/license_number"
                 style="@style/EditText.Flat.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Vat Number"
+                android:hint="Licence Number"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle" />
 

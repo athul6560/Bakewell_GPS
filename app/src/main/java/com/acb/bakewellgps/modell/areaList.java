@@ -7,4 +7,31 @@ public class areaList {
     public int province_id;
     public boolean is_active;
     public String identifier;
+
+    public int getId() {
+        return id;
+    }
+    @Override
+    public String toString() {
+        return area_name;
+    }
+    public String getCode() {
+        return code;
+    }
+
+    public String getArea_name() {
+        return area_name;
+    }
+
+    public int getProvince_id() {
+        return province_id;
+    }
+
+    public boolean isIs_active() {
+        return is_active;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
 }

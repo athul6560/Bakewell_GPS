@@ -12,6 +12,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
@@ -19,12 +21,10 @@ import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.databinding.ActivityAddNewShopBinding;
 import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
+import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
-import com.acb.bakewellgps.modell.sentShopUpdateDetails;
 import com.acb.bakewellgps.modell.shopCategories;
-import com.acb.bakewellgps.ui.Activities.EditPage.EditLogic;
-import com.acb.bakewellgps.ui.Activities.EditPage.IEditLogic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     List<countryList> countryList = new ArrayList<>();
     List<allCurrencies> allCurrencies = new ArrayList<>();
     List<areaList> areaLists = new ArrayList<>();
-    shopCategories shopCategories;
+    List<categoryName> shopCategories;
+    ArrayList<String> country = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         initComponents();
         Dialogues.show(this);
         logic.getAllCountries();
+
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +73,34 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     }
 
+    private void setCountrySpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.country);
+        ArrayAdapter<countryList> adapter =
+                new ArrayAdapter<countryList>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, countryList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+    }
+    private void setAreaSpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.area);
+        ArrayAdapter<areaList> adapter =
+                new ArrayAdapter<areaList>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, areaLists);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+    }
+    private void setShopCategorySpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.shop_category_id);
+        ArrayAdapter<categoryName> adapter =
+                new ArrayAdapter<categoryName>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, shopCategories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+    }
+
     private sentShopAddDetails getnewShopDetails() {
         //      sentShopAddDetails addDetails = new sentShopAddDetails();
         return null;
@@ -78,6 +108,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     private void initComponents() {
         logic = new AddLogic(this, this);
+
     }
 
     @Override
@@ -152,7 +183,10 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     @Override
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
         if (status) {
-            this.shopCategories = shopCategories;
+            this.shopCategories = shopCategories.getData();
+            setCountrySpinner();
+            setAreaSpinner();
+            setShopCategorySpinner();
             Dialogues.dismiss();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
