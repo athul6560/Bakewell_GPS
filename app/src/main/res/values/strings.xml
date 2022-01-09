@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bakewell GPS</string>
+    <string name="app_name">New Customer</string>
     <string name="camera_and_location_rationale">Please Accept the location Permission to use this app</string>
     <string name="verify_location">Please verify the given address is correct.If not please click Map button.</string>
     <string name="update_gps"> <u>Update GPS</u></string>

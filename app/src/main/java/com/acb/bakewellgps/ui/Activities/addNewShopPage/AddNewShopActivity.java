@@ -286,8 +286,9 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private sentShopAddDetails getnewShopDetails() {
-        int creditDays= Integer.parseInt(binding.creditDays.getText().toString());
-        int year= Integer.parseInt(binding.establishedYear.getText().toString());
+
+            int creditDays = Integer.parseInt(binding.creditDays.getText().toString());
+            int year = Integer.parseInt(binding.establishedYear.getText().toString());
 
         sentShopAddDetails addDetails = new sentShopAddDetails(
                 binding.shortName.getText().toString(),
