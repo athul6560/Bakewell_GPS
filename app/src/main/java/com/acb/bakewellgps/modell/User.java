@@ -16,9 +16,27 @@ public class User {
     public int login_count;
     public String login_time;
     public String employee_code;
+    public int route_id;
+    public String route_no;
 
     public int getId() {
         return id;
+    }
+
+    public int getRoute_id() {
+        return route_id;
+    }
+
+    public void setRoute_id(int route_id) {
+        this.route_id = route_id;
+    }
+
+    public String getRoute_no() {
+        return route_no;
+    }
+
+    public void setRoute_no(String route_no) {
+        this.route_no = route_no;
     }
 
     public void setId(int id) {

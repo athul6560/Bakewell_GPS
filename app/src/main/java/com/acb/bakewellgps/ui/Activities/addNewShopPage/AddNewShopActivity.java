@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
+import com.acb.bakewellgps.SharedPref.SharedData;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityAddNewShopBinding;
@@ -321,7 +322,9 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 Tools.getStringfromBitmap(ImageBitmap),
                 Tools.getStringfromBitmap(ImageBitmap),
                 year,
-                binding.landMark.getText().toString()
+                binding.landMark.getText().toString(),
+                SharedData.getId(AddNewShopActivity.this),
+                SharedData.getRouteId(AddNewShopActivity.this)
 
 
         );

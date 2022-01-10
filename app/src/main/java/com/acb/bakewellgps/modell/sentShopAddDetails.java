@@ -32,6 +32,9 @@ public class sentShopAddDetails {
     public String shop_image;
     public int estd_year;
     public String landmark;
+    public int salesman_id;
+    public int route_id;
+
 
     public sentShopAddDetails(String short_name,
                               String organisation_name,
@@ -62,7 +65,9 @@ public class sentShopAddDetails {
                               String shop_logo,
                               String shop_image,
                               int estd_year,
-                              String landmark) {
+                              String landmark,
+                              int salesman_id,
+                              int route_id) {
         this.short_name = short_name;
         this.organisation_name = organisation_name;
         this.tax_number = tax_number;
@@ -93,5 +98,7 @@ public class sentShopAddDetails {
         this.shop_image = shop_image;
         this.estd_year = estd_year;
         this.landmark = landmark;
+        this.salesman_id = salesman_id;
+        this.route_id = route_id;
     }
 }
