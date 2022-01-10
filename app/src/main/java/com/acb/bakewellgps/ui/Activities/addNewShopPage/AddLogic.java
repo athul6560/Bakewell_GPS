@@ -40,17 +40,16 @@ public class AddLogic implements IAddLogic.logic {
                 Dialogues.dismiss();
 
                 if (response.isSuccessful()) {
-                    Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                    view.addSuccessCallback(true,"Success");
                 } else {
-                    Toast.makeText(context, "Failed " + response.body().message, Toast.LENGTH_SHORT).show();
-                }
+                    view.addSuccessCallback(false,response.body().getMessage());                }
 
             }
 
             @Override
             public void onFailure(Call<responseSimple> call, Throwable t) {
                 Dialogues.dismiss();
-                Toast.makeText(context, "Failed " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                view.addSuccessCallback(false,"Failed"+t.getMessage());
 
             }
         });

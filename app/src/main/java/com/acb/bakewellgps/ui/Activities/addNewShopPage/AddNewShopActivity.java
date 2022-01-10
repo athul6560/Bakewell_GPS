@@ -195,9 +195,19 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Tax Number");
             return responseSimple;
         }
-        if ( binding.postBoxNumber.getText().toString().equals("")) {
+        if (binding.postBoxNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Post Box Number");
+            return responseSimple;
+        }
+        if (binding.creditDays.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Credit Days ");
+            return responseSimple;
+        }
+        if (binding.establishedYear.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Established Year ");
             return responseSimple;
         }
 
@@ -288,14 +298,14 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     private sentShopAddDetails getnewShopDetails() {
 
-            int creditDays = Integer.parseInt(binding.creditDays.getText().toString());
-            int year = Integer.parseInt(binding.establishedYear.getText().toString());
+        int creditDays = Integer.parseInt(binding.creditDays.getText().toString());
+        int year = Integer.parseInt(binding.establishedYear.getText().toString());
 
         sentShopAddDetails addDetails = new sentShopAddDetails(
                 binding.shortName.getText().toString(),
                 binding.organisationName.getText().toString(),
                 binding.taxNumber.getText().toString(),
-                getProvinceId(binding.area.getSelectedItem().toString() ),
+                getProvinceId(binding.area.getSelectedItem().toString()),
                 binding.postBoxNumber.getText().toString(),
                 binding.addressOne.getText().toString(),
                 binding.addressTwo.getText().toString(),
@@ -317,8 +327,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.contactEmail.getText().toString(),
                 creditDays,
 
-                globalLang+"",
-                globallong+"",
+                globalLang + "",
+                globallong + "",
                 Tools.getStringfromBitmap(ImageBitmap),
                 Tools.getStringfromBitmap(ImageBitmap),
                 year,
@@ -332,8 +342,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private int getShopCategoryId(String categoryName) {
-        for(int i=0;i<shopCategories.size();i++){
-            if (shopCategories.get(i).getCategory_name().equals(categoryName)){
+        for (int i = 0; i < shopCategories.size(); i++) {
+            if (shopCategories.get(i).getCategory_name().equals(categoryName)) {
                 return shopCategories.get(i).getId();
             }
         }
@@ -341,8 +351,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private int getProvinceId(String provinceName) {
-        for(int i=0;i<areaLists.size();i++){
-            if (areaLists.get(i).getArea_name().equals(provinceName)){
+        for (int i = 0; i < areaLists.size(); i++) {
+            if (areaLists.get(i).getArea_name().equals(provinceName)) {
                 return areaLists.get(i).getProvince_id();
             }
         }
@@ -394,7 +404,13 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void addSuccessCallback(Boolean status, String Message) {
+        if (status) {
+            Toast.makeText(AddNewShopActivity.this, Message, Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(AddNewShopActivity.this, Message, Toast.LENGTH_SHORT).show();
 
+        }
     }
 
     @Override
