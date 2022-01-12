@@ -69,7 +69,7 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             allCustomers p = items.get(position);
             view.routeId.setText(p.getId() + "");
-            view.name.setText(p.getShort_name());
+            view.name.setText(p.getName());
           //  view.subtitle.setText("" + p.getEmail() + " | " + p.getAddress_line1());
 
           //  view.name.setText(p.getOwner_name());

@@ -224,32 +224,19 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     private responseSimple validation() {
         responseSimple responseSimple = new responseSimple();
-        if (binding.shortName.getText().toString().equals("")) {
+
+
+        if (binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
+            responseSimple.setMessage("Please Enter Organisation  Name");
+            return responseSimple;
+        }
+        if (binding.tradeLicenseNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Trade License Number");
             return responseSimple;
         }
 
-        if (binding.taxNumber.getText().toString().equals("")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Tax Number");
-            return responseSimple;
-        }
-        if (binding.postBoxNumber.getText().toString().equals("")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Post Box Number");
-            return responseSimple;
-        }
-        if (binding.creditDays.getText().toString().equals("")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Credit Days ");
-            return responseSimple;
-        }
-        if (binding.establishedYear.getText().toString().equals("")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Established Year ");
-            return responseSimple;
-        }
 
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
@@ -350,8 +337,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     private sentShopAddDetails getnewShopDetails() {
 
-        int creditDays = Integer.parseInt(binding.creditDays.getText().toString());
-        int year = Integer.parseInt(binding.establishedYear.getText().toString());
+        int creditDays = 0;
+        int year = 0;
 
         sentShopAddDetails addDetails = new sentShopAddDetails(
                 binding.shortName.getText().toString(),
@@ -368,8 +355,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.secondNumber.getText().toString(),
                 binding.whatsappNumber.getText().toString(),
                 binding.telNumber.getText().toString(),
-                getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()),
-                binding.transactionType.getSelectedItem().toString(),
+                0,
+                "",
                 binding.licenseNumber.getText().toString(),
                 binding.ownerName.getText().toString(),
                 binding.ownerNumber.getText().toString(),
@@ -381,7 +368,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
                 globalLang + "",
                 globallong + "",
-                Tools.getStringfromBitmap(ImageBitmap),
+                Tools.getStringfromBitmap(LogoBitmap),
                 Tools.getStringfromBitmap(ImageBitmap),
                 year,
                 binding.landMark.getText().toString(),

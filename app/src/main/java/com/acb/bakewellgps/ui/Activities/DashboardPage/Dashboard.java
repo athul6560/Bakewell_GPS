@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.SharedPref.SharedData;
@@ -20,6 +21,7 @@ import com.acb.bakewellgps.modell.RoutesData;
 import com.acb.bakewellgps.modell.allCustomerModel.allCustomers;
 import com.acb.bakewellgps.ui.Activities.LoginPage.LoginActivity;
 import com.acb.bakewellgps.ui.Activities.ShopListPage.ShopListActivity;
+import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
 import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
 import com.google.gson.Gson;
 
@@ -38,6 +40,7 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
         initComponents();
         initToolbar();
         logic.callAllCustomerApi(SharedData.getId(Dashboard.this));
+        Dialogues.show(this);
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,6 +54,13 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
 
             }
         });
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        logic.callAllCustomerApi(SharedData.getId(Dashboard.this));
     }
 
     private void showLogoutDialogue() {
@@ -99,6 +109,7 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
 
     @Override
     public void allCustomerApiCallBack(boolean status, List<allCustomers> customersList, String errorMessage) {
+        Dialogues.dismiss();
         if (status)
             setAdapter(customersList);
         else {
@@ -122,10 +133,9 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
             @Override
             public void onItemClick(View view, allCustomers obj, int position) {
 
-                Intent i = new Intent(Dashboard.this, ShopListActivity.class);
-                Gson gson = new Gson();
-                String Routes = gson.toJson(obj);
-                i.putExtra("Routes", Routes);
+                Intent i = new Intent(Dashboard.this, ShopViewActivity.class);
+                i.putExtra("shopName", obj.getName());
+                i.putExtra("shopId", obj.getId());
                 startActivity(i);
             }
         });

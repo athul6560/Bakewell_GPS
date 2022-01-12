@@ -59,13 +59,13 @@ public class DashboardLogic implements IDashboardLogic.logic {
 
     @Override
     public void callAllCustomerApi(int EmployeeId) {
-        Dialogues.show(context);
+
         APIInterface service = APIClient.getClient().create(APIInterface.class);
         Call<allCustomerResponse> call = service.getAllCustomers(EmployeeId);
         call.enqueue(new Callback<allCustomerResponse>() {
             @Override
             public void onResponse(Call<allCustomerResponse> call, Response<allCustomerResponse> response) {
-                Dialogues.dismiss();
+
 
                 if (response.isSuccessful()) {
                     if (response.body().isStatus()) {
@@ -82,7 +82,7 @@ public class DashboardLogic implements IDashboardLogic.logic {
 
             @Override
             public void onFailure(Call<allCustomerResponse> call, Throwable t) {
-                Dialogues.dismiss();
+
                 view.allCustomerApiCallBack(false, null, t.getMessage());
 
             }

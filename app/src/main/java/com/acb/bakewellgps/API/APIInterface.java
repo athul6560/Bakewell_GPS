@@ -59,6 +59,6 @@ public interface APIInterface {
     @POST("shop/shopCategories")
     Call<shopCategories> getShopCategories();
 
-    @GET("Shop/shop_details")
+    @GET("Shop/get_all_shops")
     Call<allCustomerResponse> getAllCustomers(@Query("salesman_id") int EmployeeId);
 }
