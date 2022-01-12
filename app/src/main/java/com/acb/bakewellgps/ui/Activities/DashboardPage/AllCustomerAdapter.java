@@ -1,7 +1,6 @@
 package com.acb.bakewellgps.ui.Activities.DashboardPage;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,28 +9,29 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.acb.bakewellgps.R;
-import com.acb.bakewellgps.modell.RoutesData;
+
+import com.acb.bakewellgps.modell.allCustomerModel.allCustomers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AllCustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<RoutesData> items = new ArrayList<>();
+    private List<allCustomers> items = new ArrayList<>();
 
     private Context ctx;
-    private RoutesAdapter.OnItemClickListener mOnItemClickListener;
+    private AllCustomerAdapter.OnItemClickListener mOnItemClickListener;
 
 
     public interface OnItemClickListener {
-        void onItemClick(View view, RoutesData obj, int position);
+        void onItemClick(View view, allCustomers obj, int position);
     }
 
-    public void setOnItemClickListener(final RoutesAdapter.OnItemClickListener mItemClickListener) {
+    public void setOnItemClickListener(final AllCustomerAdapter.OnItemClickListener mItemClickListener) {
         this.mOnItemClickListener = mItemClickListener;
     }
 
-    public RoutesAdapter(Context context, List<RoutesData> items) {
+    public AllCustomerAdapter(Context context, List<allCustomers> items) {
         this.items = items;
         ctx = context;
 
@@ -55,8 +55,8 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.routes_inflator, parent, false);
-        vh = new RoutesAdapter.OriginalViewHolder(v);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_customer_inflator, parent, false);
+        vh = new AllCustomerAdapter.OriginalViewHolder(v);
         return vh;
     }
 
@@ -64,15 +64,15 @@ public class RoutesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        if (holder instanceof RoutesAdapter.OriginalViewHolder) {
-            RoutesAdapter.OriginalViewHolder view = (RoutesAdapter.OriginalViewHolder) holder;
+        if (holder instanceof AllCustomerAdapter.OriginalViewHolder) {
+            AllCustomerAdapter.OriginalViewHolder view = (AllCustomerAdapter.OriginalViewHolder) holder;
 
-            RoutesData p = items.get(position);
-            view.routeId.setText(p.getRoute_id() + "");
-            view.name.setText(p.getRoute_name());
-            view.subtitle.setText("" + p.getVehicle_number() + " | " + p.getSalesman());
+            allCustomers p = items.get(position);
+            view.routeId.setText(p.getId() + "");
+            view.name.setText(p.getShort_name());
+          //  view.subtitle.setText("" + p.getEmail() + " | " + p.getAddress_line1());
 
-            view.name.setText(p.getRoute_name());
+          //  view.name.setText(p.getOwner_name());
             view.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

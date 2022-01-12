@@ -11,6 +11,7 @@ public class SharedData {
     private static final String USERNAME = "userName";
     private static final String ID = "id";
     private static final String ROUTE_ID = "routeID";
+    private static final String ROUTE_NUMBER = "routeNumber";
 
     public static void LogedStatusUpdate(Context context, boolean loginStatus) {
 
@@ -48,5 +49,13 @@ public class SharedData {
     public static void setRouteId(Context context,int id) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         Boolean statusLocked = prefs.edit().putInt(ROUTE_ID, id).commit();
+    }
+    public static String getRouteNumber(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getString(ROUTE_NUMBER, "");
+    }
+    public static void setRouteNumber(Context context,String id) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        Boolean statusLocked = prefs.edit().putString(ROUTE_NUMBER, id).commit();
     }
 }

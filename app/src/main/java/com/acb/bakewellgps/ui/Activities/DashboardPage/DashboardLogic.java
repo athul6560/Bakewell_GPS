@@ -8,6 +8,7 @@ import com.acb.bakewellgps.API.APIInterface;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.modell.RootList;
 import com.acb.bakewellgps.modell.RoutesData;
+import com.acb.bakewellgps.modell.allCustomerModel.allCustomerResponse;
 
 
 import retrofit2.Call;
@@ -51,6 +52,38 @@ public class DashboardLogic implements IDashboardLogic.logic {
             public void onFailure(Call<RootList<RoutesData>> call, Throwable t) {
                 Dialogues.dismiss();
                 view.routeListApiCompleted(false, null, "No Network");
+
+            }
+        });
+    }
+
+    @Override
+    public void callAllCustomerApi(int EmployeeId) {
+        Dialogues.show(context);
+        APIInterface service = APIClient.getClient().create(APIInterface.class);
+        Call<allCustomerResponse> call = service.getAllCustomers(EmployeeId);
+        call.enqueue(new Callback<allCustomerResponse>() {
+            @Override
+            public void onResponse(Call<allCustomerResponse> call, Response<allCustomerResponse> response) {
+                Dialogues.dismiss();
+
+                if (response.isSuccessful()) {
+                    if (response.body().isStatus()) {
+                        view.allCustomerApiCallBack(response.body().status, response.body().data, response.body().message);
+                    } else {
+                        view.allCustomerApiCallBack(response.body().status, null, response.body().message);
+
+                    }
+                } else {
+                    view.allCustomerApiCallBack(false, null, "Server Error");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<allCustomerResponse> call, Throwable t) {
+                Dialogues.dismiss();
+                view.allCustomerApiCallBack(false, null, "No Network");
 
             }
         });

@@ -4,14 +4,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.SharedPref.SharedData;
@@ -19,6 +17,7 @@ import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 
 import com.acb.bakewellgps.modell.RoutesData;
+import com.acb.bakewellgps.modell.allCustomerModel.allCustomers;
 import com.acb.bakewellgps.ui.Activities.LoginPage.LoginActivity;
 import com.acb.bakewellgps.ui.Activities.ShopListPage.ShopListActivity;
 import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
@@ -38,7 +37,7 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
         setContentView(view);
         initComponents();
         initToolbar();
-        logic.callRoutesApi(SharedData.getId(Dashboard.this));
+        logic.callAllCustomerApi(SharedData.getId(Dashboard.this));
         binding.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +79,7 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
 
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(Html.fromHtml("Route List"));
+        getSupportActionBar().setTitle(Html.fromHtml("Route - "+SharedData.getRouteNumber(Dashboard.this)));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //getSupportActionBar.setTitle(Html.fromHtml("<small>YOUR TITLE</small>"));
@@ -94,12 +93,17 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
 
     @Override
     public void routeListApiCompleted(boolean status, List<RoutesData> routeList, String errorMessage) {
+
+
+    }
+
+    @Override
+    public void allCustomerApiCallBack(boolean status, List<allCustomers> customersList, String errorMessage) {
         if (status)
-            setAdapter(routeList);
+            setAdapter(customersList);
         else {
             Dialogues.showWarning(this, "Error", errorMessage);
         }
-
     }
 
     @Override
@@ -111,12 +115,12 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
         }
     }
 
-    private void setAdapter(List<RoutesData> routeList) {
-        RoutesAdapter mAdapter = new RoutesAdapter(this, routeList);
+    private void setAdapter(List<allCustomers> routeList) {
+        AllCustomerAdapter mAdapter = new AllCustomerAdapter(this, routeList);
         binding.recyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(new RoutesAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new AllCustomerAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, RoutesData obj, int position) {
+            public void onItemClick(View view, allCustomers obj, int position) {
 
                 Intent i = new Intent(Dashboard.this, ShopListActivity.class);
                 Gson gson = new Gson();

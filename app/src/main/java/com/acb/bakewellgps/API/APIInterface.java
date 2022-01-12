@@ -5,6 +5,7 @@ import com.acb.bakewellgps.modell.Root;
 import com.acb.bakewellgps.modell.RootList;
 import com.acb.bakewellgps.modell.RoutesData;
 import com.acb.bakewellgps.modell.allCurrencies;
+import com.acb.bakewellgps.modell.allCustomerModel.allCustomerResponse;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.baseResponse;
 import com.acb.bakewellgps.modell.countryList;
@@ -55,6 +56,9 @@ public interface APIInterface {
     @POST("generalviews/getAllCurrencies")
     Call<List<allCurrencies>> getAllCurrencies();
 
-    @POST("  shop/shopCategories")
+    @POST("shop/shopCategories")
     Call<shopCategories> getShopCategories();
+
+    @GET("Shop/shop_details")
+    Call<allCustomerResponse> getAllCustomers(@Query("salesman_id") int EmployeeId);
 }
