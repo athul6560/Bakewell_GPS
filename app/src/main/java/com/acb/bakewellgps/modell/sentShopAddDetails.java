@@ -34,6 +34,8 @@ public class sentShopAddDetails {
     public String landmark;
     public int salesman_id;
     public int route_id;
+    public long tl_expiry_date;
+
 
 
     public sentShopAddDetails(String short_name,
@@ -67,7 +69,8 @@ public class sentShopAddDetails {
                               int estd_year,
                               String landmark,
                               int salesman_id,
-                              int route_id) {
+                              int route_id,
+                              long tl_expiry_date) {
         this.short_name = short_name;
         this.organisation_name = organisation_name;
         this.tax_number = tax_number;
@@ -100,5 +103,6 @@ public class sentShopAddDetails {
         this.landmark = landmark;
         this.salesman_id = salesman_id;
         this.route_id = route_id;
+        this.tl_expiry_date = tl_expiry_date;
     }
 }

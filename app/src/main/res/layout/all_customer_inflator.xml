@@ -4,14 +4,15 @@
     style="@style/RippleStyleBlack"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="6dp"
-    android:paddingTop="6dp">
+>
 
     <LinearLayout
         android:id="@+id/lyt_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+
+     >
 
 
         <LinearLayout
@@ -19,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="10dp"
             android:orientation="horizontal">
 
 
@@ -52,7 +54,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
+
             android:background="@color/grey_10" />
     </LinearLayout>
 </com.balysv.materialripple.MaterialRippleLayout>

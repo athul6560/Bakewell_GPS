@@ -1,9 +1,11 @@
 package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.app.Activity;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.SharedPref.SharedData;
+import com.acb.bakewellgps.Tools.IntentConstants;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityAddNewShopBinding;
@@ -35,10 +38,15 @@ import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
 import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
+import com.acb.bakewellgps.ui.Fragments.DatePickerFragment;
+import com.acb.bakewellgps.ui.Fragments.TimePickerFragment;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +54,11 @@ import java.util.List;
 public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.view {
     private ActivityAddNewShopBinding binding;
     private static final int CAMERA_REQUEST = 1888;
+    private static final int CAMERA_REQUEST_LOGO = 108;
     private AddLogic logic;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private Bitmap ImageBitmap;
+    private Bitmap LogoBitmap;
     List<countryList> countryList = new ArrayList<>();
     List<allCurrencies> allCurrencies = new ArrayList<>();
     List<areaList> areaLists = new ArrayList<>();
@@ -57,6 +67,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private double globallong, globalLang;
     String[] transactionTypes = {"Cash", "Credit",
             "Cheque", "Transfer"};
+    String[] companyList = {"ACBDU", "AWBDU"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +78,38 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         initToolsbar();
         initComponents();
         Dialogues.show(this);
-        logic.getAllCountries();
+        logic.getAllArea();
         getCurrentLocation();
 
         setLocation();
+        setCompanySpinner();
         binding.reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getCurrentLocation();
 
                 setLocation();
+            }
+        });
+        binding.tlExpiryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DialogFragment newFragment = new DatePickerFragment(binding.tlExpiryDate);
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+        binding.barcodeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanOptions options = new ScanOptions();
+                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+                options.setPrompt("Scan a barcode");
+                options.setCameraId(0);  // Use a specific camera of the device
+                options.setBeepEnabled(false);
+                options.setBarcodeImageEnabled(true);
+
+                barcodeLauncher.launch(options);
             }
         });
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +120,17 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 } else {
                     Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                }
+            }
+        });
+        binding.addlogoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                } else {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST_LOGO);
                 }
             }
         });
@@ -185,11 +229,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Short Name");
             return responseSimple;
         }
-        if (binding.organisationName.getText().toString().equals("")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Organisation Name");
-            return responseSimple;
-        }
+
         if (binding.taxNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Tax Number");
@@ -275,6 +315,18 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         spin.setAdapter(adapter);
     }
 
+    private void setCompanySpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.company);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getApplicationContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        companyList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+    }
+
     private void setAreaSpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.area);
@@ -334,7 +386,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 year,
                 binding.landMark.getText().toString(),
                 SharedData.getId(AddNewShopActivity.this),
-                SharedData.getRouteId(AddNewShopActivity.this)
+                SharedData.getRouteId(AddNewShopActivity.this),
+                IntentConstants.TL_EXPIRY_EPOCH
 
 
         );
@@ -389,6 +442,10 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             ImageBitmap = photo;
             binding.shopImage.setImageBitmap(photo);
+        }else if(requestCode == CAMERA_REQUEST_LOGO && resultCode == Activity.RESULT_OK){
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            LogoBitmap = photo;
+            binding.shopLogo.setImageBitmap(photo);
         }
     }
 
@@ -427,7 +484,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
         if (status) {
             this.areaLists = areaLists;
-            logic.getAllCurrencies();
+
+          logic.getShopCategory();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
         }
@@ -447,14 +505,23 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
         if (status) {
             this.shopCategories = shopCategories.getData();
-            setCountrySpinner();
             setAreaSpinner();
             setShopCategorySpinner();
-            setTransactionTypeSpinner();
             Dialogues.dismiss();
         } else {
+
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
             Dialogues.dismiss();
         }
     }
+
+    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
+            result -> {
+                if (result.getContents() == null) {
+                    Toast.makeText(AddNewShopActivity.this, "Please Enter Manually", Toast.LENGTH_LONG).show();
+                } else {
+                    binding.tradeLicenseNumber.setText(result.getContents() + "");
+                    Toast.makeText(AddNewShopActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            });
 }

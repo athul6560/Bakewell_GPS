@@ -83,7 +83,7 @@ public class DashboardLogic implements IDashboardLogic.logic {
             @Override
             public void onFailure(Call<allCustomerResponse> call, Throwable t) {
                 Dialogues.dismiss();
-                view.allCustomerApiCallBack(false, null, "No Network");
+                view.allCustomerApiCallBack(false, null, t.getMessage());
 
             }
         });
