@@ -89,7 +89,8 @@ public class Dashboard extends AppCompatActivity implements IDashboardLogic.view
 
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle(Html.fromHtml("Route - "+SharedData.getRouteNumber(Dashboard.this)));
+        getSupportActionBar().setTitle("Route - "+SharedData.getRouteNumber(Dashboard.this));
+        getSupportActionBar().setSubtitle(SharedData.getUsername(Dashboard.this));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         //getSupportActionBar.setTitle(Html.fromHtml("<small>YOUR TITLE</small>"));
