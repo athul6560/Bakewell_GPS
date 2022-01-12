@@ -8,6 +8,12 @@ public class areaList {
     public boolean is_active;
     public String identifier;
 
+    public areaList(int id, String area_name) {
+        this.id = id;
+
+        this.area_name = area_name;
+    }
+
     public int getId() {
         return id;
     }

@@ -17,7 +17,9 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -84,7 +86,22 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         getCurrentLocation();
 
         setLocation();
+        binding.mobileNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                binding.whatsappNumber.setText(editable.toString());
+            }
+        });
         binding.reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -441,7 +458,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             ImageBitmap = photo;
             binding.shopImage.setImageBitmap(photo);
-        }else if(requestCode == CAMERA_REQUEST_LOGO && resultCode == Activity.RESULT_OK){
+        } else if (requestCode == CAMERA_REQUEST_LOGO && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             LogoBitmap = photo;
             binding.shopLogo.setImageBitmap(photo);
@@ -483,8 +500,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
         if (status) {
             this.areaLists = areaLists;
-
-          logic.getShopCategory();
+            this.areaLists.add(0, new areaList(0, "Select Area"));
+            logic.getShopCategory();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
         }
@@ -504,6 +521,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
         if (status) {
             this.shopCategories = shopCategories.getData();
+            this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
             logic.getallParentCompanies();
 
         } else {
@@ -517,6 +535,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void parentCompanyCallBack(Boolean status, String Message, List<com.acb.bakewellgps.modell.parentCompany.parentCompany> parentCompany) {
         if (status) {
             this.parentCompany = parentCompany;
+            this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
             setAreaSpinner();
             setShopCategorySpinner();
             setCompanySpinner();

@@ -41,6 +41,13 @@ public class parentCompany {
     public int org_unit_type_id;
     public Object landmark;
     public int estd_year;
+
+    public parentCompany(int id, String short_name) {
+        this.id = id;
+
+        this.short_name = short_name;
+    }
+
     @Override
     public String toString() {
         return short_name;

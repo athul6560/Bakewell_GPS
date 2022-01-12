@@ -128,7 +128,7 @@ android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Organisation Name"
+                android:hint="Customer Name"
                 android:minHeight="45dp"
                 android:paddingLeft="@dimen/spacing_middle"
 
@@ -319,6 +319,18 @@ android:visibility="gone"
                 android:paddingLeft="@dimen/spacing_middle"
                 android:paddingRight="@dimen/spacing_middle"
                 android:singleLine="true" />
+            <EditText
+                android:id="@+id/whatsapp_number"
+                style="@style/EditText.Flat.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:background="@drawable/edit_text_round_bg_white"
+                android:hint="Whatsapp Number"
+                android:inputType="phone"
+                android:paddingLeft="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_middle"
+                android:singleLine="true" />
 
             <EditText
                 android:id="@+id/email"
@@ -373,19 +385,6 @@ android:visibility="gone"
                 android:singleLine="true" />
 
 
-            <EditText
-                android:id="@+id/whatsapp_number"
-                style="@style/EditText.Flat.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginTop="@dimen/spacing_large"
-                android:background="@drawable/edit_text_round_bg_white"
-                android:hint="Whatsapp Number"
-                android:inputType="phone"
-                android:paddingLeft="@dimen/spacing_middle"
-                android:paddingRight="@dimen/spacing_middle"
-                android:singleLine="true"
-                android:visibility="gone" />
 
 
             <Spinner
