@@ -34,6 +34,7 @@ import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
@@ -62,12 +63,13 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     List<countryList> countryList = new ArrayList<>();
     List<allCurrencies> allCurrencies = new ArrayList<>();
     List<areaList> areaLists = new ArrayList<>();
+    List<parentCompany> parentCompany = new ArrayList<>();
     List<categoryName> shopCategories;
     private LocationRequest locationRequest;
     private double globallong, globalLang;
     String[] transactionTypes = {"Cash", "Credit",
             "Cheque", "Transfer"};
-    String[] companyList = {"ACBDU", "AWBDU"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +84,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         getCurrentLocation();
 
         setLocation();
-        setCompanySpinner();
+
         binding.reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -305,10 +307,10 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private void setCompanySpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.company);
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(getApplicationContext(),
+        ArrayAdapter<parentCompany> adapter =
+                new ArrayAdapter<parentCompany>(getApplicationContext(),
                         android.R.layout.simple_spinner_dropdown_item,
-                        companyList);
+                        parentCompany);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
@@ -374,11 +376,21 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.landMark.getText().toString(),
                 SharedData.getId(AddNewShopActivity.this),
                 SharedData.getRouteId(AddNewShopActivity.this),
-                IntentConstants.TL_EXPIRY_EPOCH
+                IntentConstants.TL_EXPIRY_EPOCH,
+                getparentId(binding.company.getSelectedItem().toString())
 
 
         );
         return addDetails;
+    }
+
+    private int getparentId(String toString) {
+        for (int i = 0; i < parentCompany.size(); i++) {
+            if (parentCompany.get(i).getShort_name().equals(toString)) {
+                return parentCompany.get(i).getId();
+            }
+        }
+        return 0;
     }
 
     private int getShopCategoryId(String categoryName) {
@@ -492,15 +504,32 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
         if (status) {
             this.shopCategories = shopCategories.getData();
-            setAreaSpinner();
-            setShopCategorySpinner();
-            Dialogues.dismiss();
+            logic.getallParentCompanies();
+
         } else {
 
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
             Dialogues.dismiss();
         }
     }
+
+    @Override
+    public void parentCompanyCallBack(Boolean status, String Message, List<com.acb.bakewellgps.modell.parentCompany.parentCompany> parentCompany) {
+        if (status) {
+            this.parentCompany = parentCompany;
+            setAreaSpinner();
+            setShopCategorySpinner();
+            setCompanySpinner();
+            Dialogues.dismiss();
+
+        } else {
+
+            Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
+            Dialogues.dismiss();
+        }
+
+    }
+
 
     private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
             result -> {

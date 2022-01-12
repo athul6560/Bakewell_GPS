@@ -9,6 +9,7 @@ import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.parentCompany.basePArent;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
@@ -159,6 +160,32 @@ public class AddLogic implements IAddLogic.logic {
             public void onFailure(Call<shopCategories> call, Throwable t) {
 
                 view.shopCategoryCallBack(false, "No Network", null);
+
+            }
+        });
+    }
+
+    @Override
+    public void getallParentCompanies() {
+        APIInterface service = APIClient.getClient().create(APIInterface.class);
+        Call<basePArent> call = service.getParentCompanies();
+        call.enqueue(new Callback<basePArent>() {
+            @Override
+            public void onResponse(Call<basePArent> call, Response<basePArent> response) {
+                Dialogues.dismiss();
+
+                if (response.isSuccessful()) {
+                    view.parentCompanyCallBack(true, "Sucess", response.body().getData());
+                } else {
+                    view.parentCompanyCallBack(false, "Server Error", null);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<basePArent> call, Throwable t) {
+
+                view.parentCompanyCallBack(false, "No Network", null);
 
             }
         });
