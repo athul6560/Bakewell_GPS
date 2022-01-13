@@ -155,7 +155,7 @@
                         android:layout_weight="80"
                         android:background="@drawable/edit_text_round_bg_white"
                         android:hint="Trade License Number"
-                        android:inputType="number"
+                   android:inputType="textCapCharacters"
                         android:paddingLeft="@dimen/spacing_middle"
                         android:paddingRight="@dimen/spacing_middle"
                         android:singleLine="true" />
