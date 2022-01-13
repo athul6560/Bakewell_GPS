@@ -20,6 +20,7 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -159,7 +160,11 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
 
                 if (validation().isStatus())
-                    logic.addNewShop(getnewShopDetails());
+                    if (Tools.isNetworkConnected(AddNewShopActivity.this))
+                        logic.addNewShop(getnewShopDetails());
+                    else
+                        Toast.makeText(AddNewShopActivity.this, "No Network", Toast.LENGTH_SHORT).show();
+
                 else
                     Toast.makeText(AddNewShopActivity.this, "" + validation().getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -247,7 +252,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
         if (binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Organisation  Name");
+            responseSimple.setMessage("Please Enter Customer  Name");
             return responseSimple;
         }
         if (binding.tradeLicenseNumber.getText().toString().equals("")) {
@@ -255,7 +260,16 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Trade License Number");
             return responseSimple;
         }
-
+        if (binding.email.getText().toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please valid Email ID");
+            return responseSimple;
+        }
+        if (binding.website.getText().toString().equals("") ||  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Valid Website");
+            return responseSimple;
+        }
 
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
