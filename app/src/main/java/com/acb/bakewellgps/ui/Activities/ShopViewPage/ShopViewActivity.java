@@ -211,7 +211,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
     private void setShopData(shopDetails shopDetails) {
         binding.shopName.setText(shopDetails.getOrganisation_name());
-        binding.subTitle.setText(shopDetails.getShop_category_name() + " | " + shopDetails.getTransaction_type());
+        binding.subTitle.setText(shopDetails.getShop_category_name() );
         binding.address.setText(shopDetails.getAddress_line1() + "\n" + shopDetails.getAddress_line2() + " " + shopDetails.getAddress_line3() + " " + shopDetails.getProvince_name());
         binding.taxId.setText("Tax : "+shopDetails.getTax_number());
         binding.ownerName.setText(shopDetails.getOwner_name());

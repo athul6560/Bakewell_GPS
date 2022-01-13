@@ -12,20 +12,40 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
+import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
-import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityEditBinding;
+import com.acb.bakewellgps.modell.allCurrencies;
+import com.acb.bakewellgps.modell.areaList;
+import com.acb.bakewellgps.modell.categoryName;
+import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.sentShopUpdateDetails;
+import com.acb.bakewellgps.modell.shopCategories;
+import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddLogic;
+import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
+import com.acb.bakewellgps.ui.Activities.addNewShopPage.IAddLogic;
 
-public class EditActivity extends AppCompatActivity implements IEditLogic.view {
+import java.util.ArrayList;
+import java.util.List;
+
+public class EditActivity extends AppCompatActivity implements IEditLogic.view, IAddLogic.view {
     private ActivityEditBinding binding;
     private static final int CAMERA_REQUEST = 1888;
-    private EditLogic logic;
+    private static final int CAMERA_REQUEST_LOGO = 108;
+    private AddLogic addLogic;
+    private EditLogic editLogic;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private Bitmap ImageBitmap;
+    List<areaList> areaLists = new ArrayList<>();
+    List<parentCompany> parentCompany = new ArrayList<>();
+    List<categoryName> shopCategories;
+    private Bitmap LogoBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +55,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view {
         setContentView(view);
         initToolsbar();
         initComponents();
+        Dialogues.show(this);
+        addLogic.getAllArea();
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,10 +68,21 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view {
                 }
             }
         });
+        binding.addlogoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                } else {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST_LOGO);
+                }
+            }
+        });
         binding.btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                logic.updateShopDetails(getUpdateData());
+                editLogic.updateShopDetails(getUpdateData());
 
             }
         });
@@ -58,25 +91,57 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view {
     private sentShopUpdateDetails getUpdateData() {
         sentShopUpdateDetails shopUpdateDetails = new sentShopUpdateDetails();
         shopUpdateDetails.setId(getShopId());
-        shopUpdateDetails.setOrganisation_name(binding.organizationName.getText().toString());
+        shopUpdateDetails.setShop_logo(Tools.getStringfromBitmap(LogoBitmap));
         shopUpdateDetails.setShop_image(Tools.getStringfromBitmap(ImageBitmap));
-        shopUpdateDetails.setAddress_line1(binding.addressOne.getText().toString());
+        shopUpdateDetails.setOrganisation_name(binding.organisationName.getText().toString());
+        shopUpdateDetails.setTax_number(binding.taxNumber.getText().toString());
+        shopUpdateDetails.setParent_id(getparentId(binding.company.getSelectedItem().toString()));
+        shopUpdateDetails.setProvince_id(getProvinceId(binding.area.getSelectedItem().toString()));
+        shopUpdateDetails.setAddress_line1(  binding.addressOne.getText().toString());
         shopUpdateDetails.setAddress_line2(binding.addressTwo.getText().toString());
+        shopUpdateDetails.setPost_box_number(binding.postBoxNumber.getText().toString());
+        shopUpdateDetails.setWebsite(binding.website.getText().toString());
+        shopUpdateDetails.setPhone_no(binding.telNumber.getText().toString());
+        shopUpdateDetails.setMobile_no1(binding.mobileNumber.getText().toString());
+        shopUpdateDetails.setWhatsapp_no(binding.whatsappNumber.getText().toString());
         shopUpdateDetails.setEmail(binding.email.getText().toString());
-        shopUpdateDetails.setAddress_line3(binding.addressThree.getText().toString());
-        shopUpdateDetails.setOwner_email_id(binding.ownerEmail.getText().toString());
-        shopUpdateDetails.setOwner_mobile_no(binding.ownerNumber.getText().toString());
+        shopUpdateDetails.setMobile_no2(binding.secondNumber.getText().toString());
         shopUpdateDetails.setOwner_name(binding.ownerName.getText().toString());
-        shopUpdateDetails.setShop_contact_email_id(binding.contactEmail.getText().toString());
-        shopUpdateDetails.setShop_contact_name(binding.contactName.getText().toString());
-        shopUpdateDetails.setShop_contact_mobile_no(binding.contactNumber.getText().toString());
+        shopUpdateDetails.setOwner_mobile_no(binding.ownerName.getText().toString());
+        shopUpdateDetails.setShop_category_id( getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
 
 
         return shopUpdateDetails;
     }
+    private int getShopCategoryId(String categoryName) {
+        for (int i = 0; i < shopCategories.size(); i++) {
+            if (shopCategories.get(i).getCategory_name().equals(categoryName)) {
+                return shopCategories.get(i).getId();
+            }
+        }
+        return 0;
+    }
+    private int getProvinceId(String provinceName) {
+        for (int i = 0; i < areaLists.size(); i++) {
+            if (areaLists.get(i).getArea_name().equals(provinceName)) {
+                return areaLists.get(i).getProvince_id();
+            }
+        }
+        return 0;
+    }
+
+    private int getparentId(String toString) {
+        for (int i = 0; i < parentCompany.size(); i++) {
+            if (parentCompany.get(i).getShort_name().equals(toString)) {
+                return parentCompany.get(i).getId();
+            }
+        }
+        return 0;
+    }
 
     private void initComponents() {
-        logic = new EditLogic(this, this);
+        addLogic = new AddLogic(this, this);
+        editLogic = new EditLogic(this, this);
     }
 
     private int getShopId() {
@@ -107,8 +172,12 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
-            ImageBitmap=photo;
+            ImageBitmap = photo;
             binding.shopImage.setImageBitmap(photo);
+        } else if (requestCode == CAMERA_REQUEST_LOGO && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            LogoBitmap = photo;
+            binding.shopLogo.setImageBitmap(photo);
         }
     }
 
@@ -130,5 +199,95 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view {
         } else {
             Toast.makeText(EditActivity.this, Message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void addSuccessCallback(Boolean status, String Message) {
+
+    }
+
+    @Override
+    public void countryCallback(Boolean status, String Message, List<countryList> countryList) {
+
+    }
+
+    @Override
+    public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
+        if (status) {
+            this.areaLists = areaLists;
+            this.areaLists.add(0, new areaList(0, "Select Area"));
+            addLogic.getShopCategory();
+        } else {
+            Toast.makeText(EditActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void currencyCallback(Boolean status, String Message, List<allCurrencies> allCurrencies) {
+
+    }
+
+    @Override
+    public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
+        if (status) {
+            this.shopCategories = shopCategories.getData();
+            this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
+            addLogic.getallParentCompanies();
+
+        } else {
+
+            Toast.makeText(EditActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
+            Dialogues.dismiss();
+        }
+    }
+
+    @Override
+    public void parentCompanyCallBack(Boolean status, String Message, List<parentCompany> parentCompany) {
+        if (status) {
+            this.parentCompany = parentCompany;
+            this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
+            setAreaSpinner();
+            setShopCategorySpinner();
+            setCompanySpinner();
+            Dialogues.dismiss();
+
+        } else {
+
+            Toast.makeText(EditActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
+            Dialogues.dismiss();
+        }
+    }
+
+    private void setAreaSpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.area);
+        ArrayAdapter<areaList> adapter =
+                new ArrayAdapter<areaList>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, areaLists);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+
+    }
+
+    private void setShopCategorySpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.shop_category_id);
+        ArrayAdapter<categoryName> adapter =
+                new ArrayAdapter<categoryName>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, shopCategories);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+    }
+
+    private void setCompanySpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.company);
+        ArrayAdapter<parentCompany> adapter =
+                new ArrayAdapter<parentCompany>(getApplicationContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        parentCompany);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
     }
 }
