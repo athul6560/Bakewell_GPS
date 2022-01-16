@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 
+import com.acb.bakewellgps.Tools.IntentConstants;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
@@ -205,8 +206,10 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
     @Override
     public void shopDetailsCallback(boolean status, shopDetails shopDetails) {
-        if (status)
+        if (status){
             setShopData(shopDetails);
+            IntentConstants.SHOP_DETAILS=shopDetails;
+        }
     }
 
     private void setShopData(shopDetails shopDetails) {

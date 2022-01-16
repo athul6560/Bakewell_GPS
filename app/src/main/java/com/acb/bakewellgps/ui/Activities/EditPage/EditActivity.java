@@ -11,12 +11,14 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
+import com.acb.bakewellgps.Tools.IntentConstants;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityEditBinding;
@@ -27,8 +29,8 @@ import com.acb.bakewellgps.modell.countryList;
 import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.sentShopUpdateDetails;
 import com.acb.bakewellgps.modell.shopCategories;
+import com.acb.bakewellgps.modell.shopDetails;
 import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddLogic;
-import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
 import com.acb.bakewellgps.ui.Activities.addNewShopPage.IAddLogic;
 
 import java.util.ArrayList;
@@ -55,6 +57,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         setContentView(view);
         initToolsbar();
         initComponents();
+        setExistingData(IntentConstants.SHOP_DETAILS);
         Dialogues.show(this);
         addLogic.getAllArea();
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
@@ -88,6 +91,25 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         });
     }
 
+    private void setExistingData(shopDetails shopDetails) {
+        binding.shopLogo.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_logo()));
+        binding.shopImage.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));
+        binding.organisationName.setText(shopDetails.getOrganisation_name());
+        binding.taxNumber.setText(shopDetails.getTax_number());
+        binding.addressOne.setText(shopDetails.getAddress_line1());
+        binding.addressTwo.setText(shopDetails.getAddress_line2());
+        binding.postBoxNumber.setText(shopDetails.getPost_box_number());
+        binding.website.setText(shopDetails.getWebsite());
+        binding.telNumber.setText(shopDetails.getPhone_no());
+        binding.mobileNumber.setText(shopDetails.getMobile_no1());
+        binding.whatsappNumber.setText(shopDetails.getWhatsapp_no());
+        binding.email.setText(shopDetails.getEmail());
+        binding.secondNumber.setText(shopDetails.getMobile_no2());
+        binding.ownerName.setText(shopDetails.getOwner_name());
+        binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
+
+    }
+
     private sentShopUpdateDetails getUpdateData() {
         sentShopUpdateDetails shopUpdateDetails = new sentShopUpdateDetails();
         shopUpdateDetails.setId(getShopId());
@@ -97,7 +119,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         shopUpdateDetails.setTax_number(binding.taxNumber.getText().toString());
         shopUpdateDetails.setParent_id(getparentId(binding.company.getSelectedItem().toString()));
         shopUpdateDetails.setProvince_id(getProvinceId(binding.area.getSelectedItem().toString()));
-        shopUpdateDetails.setAddress_line1(  binding.addressOne.getText().toString());
+        shopUpdateDetails.setAddress_line1(binding.addressOne.getText().toString());
         shopUpdateDetails.setAddress_line2(binding.addressTwo.getText().toString());
         shopUpdateDetails.setPost_box_number(binding.postBoxNumber.getText().toString());
         shopUpdateDetails.setWebsite(binding.website.getText().toString());
@@ -108,11 +130,12 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         shopUpdateDetails.setMobile_no2(binding.secondNumber.getText().toString());
         shopUpdateDetails.setOwner_name(binding.ownerName.getText().toString());
         shopUpdateDetails.setOwner_mobile_no(binding.ownerName.getText().toString());
-        shopUpdateDetails.setShop_category_id( getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
+        shopUpdateDetails.setShop_category_id(getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
 
 
         return shopUpdateDetails;
     }
+
     private int getShopCategoryId(String categoryName) {
         for (int i = 0; i < shopCategories.size(); i++) {
             if (shopCategories.get(i).getCategory_name().equals(categoryName)) {
@@ -121,6 +144,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         }
         return 0;
     }
+
     private int getProvinceId(String provinceName) {
         for (int i = 0; i < areaLists.size(); i++) {
             if (areaLists.get(i).getArea_name().equals(provinceName)) {
@@ -249,6 +273,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
             setAreaSpinner();
             setShopCategorySpinner();
             setCompanySpinner();
+
             Dialogues.dismiss();
 
         } else {
@@ -257,6 +282,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
             Dialogues.dismiss();
         }
     }
+
+
 
     private void setAreaSpinner() {
 
@@ -267,6 +294,24 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
+        spin.setSelection(getAreaIndex());
+
+    }
+
+    private int getAreaIndex() {
+
+        int result=0;
+        int data = IntentConstants.SHOP_DETAILS.getProvince_id();
+
+        for(int i=0;i<areaLists.size();i++){
+
+
+            if(areaLists.get(i).getProvince_id()==data){
+
+                result=i-1;
+            }
+        }
+        return result;
     }
 
     private void setShopCategorySpinner() {
@@ -277,6 +322,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
+
+        spin.setSelection(getShopCategoryId(IntentConstants.SHOP_DETAILS.shop_category_name));
     }
 
     private void setCompanySpinner() {
@@ -289,5 +336,22 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
+
+        spin.setSelection(getparentIndex());
+    }
+
+    private int getparentIndex() {
+        int result=0;
+        int data = IntentConstants.SHOP_DETAILS.getParent_id()-1;
+
+        for(int i=0;i<parentCompany.size();i++){
+
+            Log.e("Debuggg", data+"");
+            if(parentCompany.get(i).getParent_id()==data){
+
+                result=i-1;
+            }
+        }
+        return result;
     }
 }

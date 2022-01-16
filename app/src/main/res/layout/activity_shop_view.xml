@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_smlarge"
+
         android:clickable="true"
         android:tint="@android:color/white"
         app:fabSize="normal"
@@ -51,10 +52,10 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/image_shop"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:scaleType="centerCrop"
-                    android:id="@+id/image_shop"
                     android:src="@drawable/image_33" />
 
                 <View
