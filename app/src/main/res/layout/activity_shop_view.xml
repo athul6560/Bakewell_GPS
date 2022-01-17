@@ -263,12 +263,10 @@
 
 
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_middle"
-                        android:visibility="gone"
                         android:orientation="horizontal">
 
 
@@ -285,14 +283,14 @@
                                 android:id="@+id/contact_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Michelle"
+                                android:text="Laura Michelle"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/grey_90" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Manager"
+                                android:text="Point of Contact"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/grey_40" />
 
@@ -304,13 +302,7 @@
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/grey_40" />
 
-                            <TextView
-                                android:id="@+id/contact_mail"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="+91 9526920286"
-                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                                android:textColor="@color/grey_40" />
+
 
                         </LinearLayout>
 
@@ -326,6 +318,8 @@
 
 
                     </LinearLayout>
+
+
                 </LinearLayout>
 
             </LinearLayout>

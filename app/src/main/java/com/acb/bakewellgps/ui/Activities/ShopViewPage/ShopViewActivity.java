@@ -221,7 +221,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
         binding.ownerEmail.setText(shopDetails.getOwner_email_id());
         binding.contactName.setText(shopDetails.getShop_contact_name());
-        binding.contactMail.setText(shopDetails.getShop_contact_email_id());
+
         binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
         if(shopDetails.getShop_image()!=null)
         binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));

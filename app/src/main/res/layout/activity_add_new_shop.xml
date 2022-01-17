@@ -71,7 +71,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Add Logo"
+                            android:text="Shelf \nImage"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_40" />
 
@@ -105,7 +105,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Add Image"
+                            android:text="Shop \nImage"
                             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                             android:textColor="@color/grey_40" />
 
