@@ -20,6 +20,7 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
@@ -247,6 +248,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private responseSimple validation() {
+        Log.e("Debugggg",binding.shopCategoryId.getSelectedItem().toString() );
         responseSimple responseSimple = new responseSimple();
 
 
@@ -275,12 +277,13 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Tax Reg Number");
             return responseSimple;
         }
-        if (binding.country.getSelectedItem().toString().equals("Please Select Parent Company")) {
+
+        if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Parent Company");
             return responseSimple;
         }
-        if (binding.area.getSelectedItem().equals("Please Select Area")) {
+        if (binding.area.getSelectedItem().equals("Select Area")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Area");
             return responseSimple;
@@ -305,7 +308,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Contact Number");
             return responseSimple;
         }
-        if (binding.shopCategoryId.getSelectedItem().equals("Please Select Shop Category")) {
+        if (binding.shopCategoryId.getSelectedItem().equals("Select Shop Category")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Shop Category");
             return responseSimple;
