@@ -491,7 +491,6 @@
                     />
                 <Spinner
                     android:id="@+id/shop_category_id"
-
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
