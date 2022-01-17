@@ -313,7 +313,7 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Country"
+                    android:hint="Parent Company"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle" />
 

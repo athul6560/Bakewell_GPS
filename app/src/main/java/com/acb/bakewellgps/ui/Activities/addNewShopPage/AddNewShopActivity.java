@@ -260,16 +260,61 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Trade License Number");
             return responseSimple;
         }
-        if (binding.email.getText().toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
+       /* if (binding.email.getText().toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please valid Email ID");
+            responseSimple.setMessage("Please Enter Valid Email ID");
+            return responseSimple;
+        }*/
+        if (binding.tlExpiryDate.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter TL Expiry Date");
             return responseSimple;
         }
-        if (binding.website.getText().toString().equals("") ||  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+        if (binding.taxNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Tax Reg Number");
+            return responseSimple;
+        }
+        if (binding.country.getSelectedItem().toString().equals("Please Select Parent Company")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Parent Company");
+            return responseSimple;
+        }
+        if (binding.area.getSelectedItem().equals("Please Select Area")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Area");
+            return responseSimple;
+        }
+        if (binding.addressOne.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Address Line 1");
+            return responseSimple;
+        }
+        if (binding.mobileNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Mobile Number");
+            return responseSimple;
+        }
+        if (binding.contactName.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Contact Name");
+            return responseSimple;
+        }
+        if (binding.contactNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Contact Number");
+            return responseSimple;
+        }
+        if (binding.shopCategoryId.getSelectedItem().equals("Please Select Shop Category")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Shop Category");
+            return responseSimple;
+        }
+      /*  if (binding.website.getText().toString().equals("") ||  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
-        }
+        }*/
 
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
