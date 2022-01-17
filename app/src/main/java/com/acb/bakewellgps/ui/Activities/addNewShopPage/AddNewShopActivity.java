@@ -1,9 +1,11 @@
 package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 
 import android.Manifest;
 import android.app.Activity;
@@ -15,7 +17,10 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -24,6 +29,7 @@ import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.SharedPref.SharedData;
+import com.acb.bakewellgps.Tools.IntentConstants;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityAddNewShopBinding;
@@ -31,14 +37,20 @@ import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
 import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
+import com.acb.bakewellgps.ui.Fragments.DatePickerFragment;
+import com.acb.bakewellgps.ui.Fragments.TimePickerFragment;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,17 +58,21 @@ import java.util.List;
 public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.view {
     private ActivityAddNewShopBinding binding;
     private static final int CAMERA_REQUEST = 1888;
+    private static final int CAMERA_REQUEST_LOGO = 108;
     private AddLogic logic;
     private static final int MY_CAMERA_PERMISSION_CODE = 100;
     private Bitmap ImageBitmap;
+    private Bitmap LogoBitmap;
     List<countryList> countryList = new ArrayList<>();
     List<allCurrencies> allCurrencies = new ArrayList<>();
     List<areaList> areaLists = new ArrayList<>();
+    List<parentCompany> parentCompany = new ArrayList<>();
     List<categoryName> shopCategories;
     private LocationRequest locationRequest;
     private double globallong, globalLang;
     String[] transactionTypes = {"Cash", "Credit",
             "Cheque", "Transfer"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +83,53 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         initToolsbar();
         initComponents();
         Dialogues.show(this);
-        logic.getAllCountries();
+        logic.getAllArea();
         getCurrentLocation();
 
         setLocation();
+        binding.mobileNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                binding.whatsappNumber.setText(editable.toString());
+            }
+        });
         binding.reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getCurrentLocation();
 
                 setLocation();
+            }
+        });
+        binding.tlExpiryDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DialogFragment newFragment = new DatePickerFragment(binding.tlExpiryDate);
+                newFragment.show(getSupportFragmentManager(), "datePicker");
+            }
+        });
+        binding.barcodeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ScanOptions options = new ScanOptions();
+                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+                options.setPrompt("Scan a barcode");
+                options.setCameraId(0);  // Use a specific camera of the device
+                options.setBeepEnabled(false);
+                options.setBarcodeImageEnabled(true);
+
+                barcodeLauncher.launch(options);
             }
         });
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
@@ -90,13 +143,28 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 }
             }
         });
+        binding.addlogoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_PERMISSION_CODE);
+                } else {
+                    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(cameraIntent, CAMERA_REQUEST_LOGO);
+                }
+            }
+        });
         binding.btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
                 if (validation().isStatus())
-                    logic.addNewShop(getnewShopDetails());
+                    if (Tools.isNetworkConnected(AddNewShopActivity.this))
+                        logic.addNewShop(getnewShopDetails());
+                    else
+                        Toast.makeText(AddNewShopActivity.this, "No Network", Toast.LENGTH_SHORT).show();
+
                 else
                     Toast.makeText(AddNewShopActivity.this, "" + validation().getMessage(), Toast.LENGTH_SHORT).show();
 
@@ -180,24 +248,26 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     private responseSimple validation() {
         responseSimple responseSimple = new responseSimple();
-        if (binding.shortName.getText().toString().equals("")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Short Name");
-            return responseSimple;
-        }
+
+
         if (binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Organisation Name");
+            responseSimple.setMessage("Please Enter Customer  Name");
             return responseSimple;
         }
-        if (binding.taxNumber.getText().toString().equals("")) {
+        if (binding.tradeLicenseNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Tax Number");
+            responseSimple.setMessage("Please Enter Trade License Number");
             return responseSimple;
         }
-        if ( binding.postBoxNumber.getText().toString().equals("")) {
+        if (binding.email.getText().toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
             responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Enter Post Box Number");
+            responseSimple.setMessage("Please valid Email ID");
+            return responseSimple;
+        }
+        if (binding.website.getText().toString().equals("") ||  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
         }
 
@@ -265,6 +335,18 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         spin.setAdapter(adapter);
     }
 
+    private void setCompanySpinner() {
+
+        Spinner spin = (Spinner) findViewById(R.id.company);
+        ArrayAdapter<parentCompany> adapter =
+                new ArrayAdapter<parentCompany>(getApplicationContext(),
+                        android.R.layout.simple_spinner_dropdown_item,
+                        parentCompany);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+    }
+
     private void setAreaSpinner() {
 
         Spinner spin = (Spinner) findViewById(R.id.area);
@@ -288,14 +370,14 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     private sentShopAddDetails getnewShopDetails() {
 
-            int creditDays = Integer.parseInt(binding.creditDays.getText().toString());
-            int year = Integer.parseInt(binding.establishedYear.getText().toString());
+        int creditDays = 0;
+        int year = 0;
 
         sentShopAddDetails addDetails = new sentShopAddDetails(
                 binding.shortName.getText().toString(),
                 binding.organisationName.getText().toString(),
                 binding.taxNumber.getText().toString(),
-                getProvinceId(binding.area.getSelectedItem().toString() ),
+                getProvinceId(binding.area.getSelectedItem().toString()),
                 binding.postBoxNumber.getText().toString(),
                 binding.addressOne.getText().toString(),
                 binding.addressTwo.getText().toString(),
@@ -307,8 +389,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.whatsappNumber.getText().toString(),
                 binding.telNumber.getText().toString(),
                 getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()),
-                binding.transactionType.getSelectedItem().toString(),
-                binding.licenseNumber.getText().toString(),
+                "",
+                binding.tradeLicenseNumber.getText().toString(),
                 binding.ownerName.getText().toString(),
                 binding.ownerNumber.getText().toString(),
                 binding.ownerEmail.getText().toString(),
@@ -317,23 +399,34 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.contactEmail.getText().toString(),
                 creditDays,
 
-                globalLang+"",
-                globallong+"",
-                Tools.getStringfromBitmap(ImageBitmap),
+                globalLang + "",
+                globallong + "",
+                Tools.getStringfromBitmap(LogoBitmap),
                 Tools.getStringfromBitmap(ImageBitmap),
                 year,
                 binding.landMark.getText().toString(),
                 SharedData.getId(AddNewShopActivity.this),
-                SharedData.getRouteId(AddNewShopActivity.this)
+                SharedData.getRouteId(AddNewShopActivity.this),
+                IntentConstants.TL_EXPIRY_EPOCH,
+                getparentId(binding.company.getSelectedItem().toString())
 
 
         );
         return addDetails;
     }
 
+    private int getparentId(String toString) {
+        for (int i = 0; i < parentCompany.size(); i++) {
+            if (parentCompany.get(i).getShort_name().equals(toString)) {
+                return parentCompany.get(i).getId();
+            }
+        }
+        return 0;
+    }
+
     private int getShopCategoryId(String categoryName) {
-        for(int i=0;i<shopCategories.size();i++){
-            if (shopCategories.get(i).getCategory_name().equals(categoryName)){
+        for (int i = 0; i < shopCategories.size(); i++) {
+            if (shopCategories.get(i).getCategory_name().equals(categoryName)) {
                 return shopCategories.get(i).getId();
             }
         }
@@ -341,8 +434,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private int getProvinceId(String provinceName) {
-        for(int i=0;i<areaLists.size();i++){
-            if (areaLists.get(i).getArea_name().equals(provinceName)){
+        for (int i = 0; i < areaLists.size(); i++) {
+            if (areaLists.get(i).getArea_name().equals(provinceName)) {
                 return areaLists.get(i).getProvince_id();
             }
         }
@@ -379,6 +472,10 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             ImageBitmap = photo;
             binding.shopImage.setImageBitmap(photo);
+        } else if (requestCode == CAMERA_REQUEST_LOGO && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            LogoBitmap = photo;
+            binding.shopLogo.setImageBitmap(photo);
         }
     }
 
@@ -394,7 +491,13 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void addSuccessCallback(Boolean status, String Message) {
+        if (status) {
+            Toast.makeText(AddNewShopActivity.this, Message, Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(AddNewShopActivity.this, Message, Toast.LENGTH_SHORT).show();
 
+        }
     }
 
     @Override
@@ -411,7 +514,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
         if (status) {
             this.areaLists = areaLists;
-            logic.getAllCurrencies();
+            this.areaLists.add(0, new areaList(0, "Select Area"));
+            logic.getShopCategory();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
         }
@@ -431,14 +535,42 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
         if (status) {
             this.shopCategories = shopCategories.getData();
-            setCountrySpinner();
-            setAreaSpinner();
-            setShopCategorySpinner();
-            setTransactionTypeSpinner();
-            Dialogues.dismiss();
+            this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
+            logic.getallParentCompanies();
+
         } else {
+
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
             Dialogues.dismiss();
         }
     }
+
+    @Override
+    public void parentCompanyCallBack(Boolean status, String Message, List<com.acb.bakewellgps.modell.parentCompany.parentCompany> parentCompany) {
+        if (status) {
+            this.parentCompany = parentCompany;
+            this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
+            setAreaSpinner();
+            setShopCategorySpinner();
+            setCompanySpinner();
+            Dialogues.dismiss();
+
+        } else {
+
+            Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
+            Dialogues.dismiss();
+        }
+
+    }
+
+
+    private final ActivityResultLauncher<ScanOptions> barcodeLauncher = registerForActivityResult(new ScanContract(),
+            result -> {
+                if (result.getContents() == null) {
+                    Toast.makeText(AddNewShopActivity.this, "Please Enter Manually", Toast.LENGTH_LONG).show();
+                } else {
+                    binding.tradeLicenseNumber.setText(result.getContents() + "");
+                    Toast.makeText(AddNewShopActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                }
+            });
 }

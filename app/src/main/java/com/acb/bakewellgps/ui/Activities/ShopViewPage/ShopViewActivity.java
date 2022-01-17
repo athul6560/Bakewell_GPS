@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 
+import com.acb.bakewellgps.Tools.IntentConstants;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
@@ -205,13 +206,15 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
     @Override
     public void shopDetailsCallback(boolean status, shopDetails shopDetails) {
-        if (status)
+        if (status){
             setShopData(shopDetails);
+            IntentConstants.SHOP_DETAILS=shopDetails;
+        }
     }
 
     private void setShopData(shopDetails shopDetails) {
         binding.shopName.setText(shopDetails.getOrganisation_name());
-        binding.subTitle.setText(shopDetails.getShop_category_name() + " | " + shopDetails.getTransaction_type());
+        binding.subTitle.setText(shopDetails.getShop_category_name() );
         binding.address.setText(shopDetails.getAddress_line1() + "\n" + shopDetails.getAddress_line2() + " " + shopDetails.getAddress_line3() + " " + shopDetails.getProvince_name());
         binding.taxId.setText("Tax : "+shopDetails.getTax_number());
         binding.ownerName.setText(shopDetails.getOwner_name());

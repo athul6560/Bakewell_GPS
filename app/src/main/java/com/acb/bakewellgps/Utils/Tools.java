@@ -1,7 +1,9 @@
 package com.acb.bakewellgps.Utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -21,5 +23,10 @@ public class Tools {
             String encoded = Base64.encodeToString(byteArray, Base64.DEFAULT);
             return encoded;
         } else return null;
+    }
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

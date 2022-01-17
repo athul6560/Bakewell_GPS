@@ -8,18 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
-import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityShopListBinding;
 import com.acb.bakewellgps.modell.RoutesData;
 import com.acb.bakewellgps.modell.Shop;
-import com.acb.bakewellgps.ui.Activities.DashboardPage.Dashboard;
-import com.acb.bakewellgps.ui.Activities.DashboardPage.DashboardLogic;
-import com.acb.bakewellgps.ui.Activities.DashboardPage.RoutesAdapter;
 import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
-import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
 import com.google.gson.Gson;
 
 import java.util.List;

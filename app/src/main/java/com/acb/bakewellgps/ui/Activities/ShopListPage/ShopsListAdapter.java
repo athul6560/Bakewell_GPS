@@ -11,9 +11,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.acb.bakewellgps.R;
-import com.acb.bakewellgps.modell.RoutesData;
 import com.acb.bakewellgps.modell.Shop;
-import com.acb.bakewellgps.ui.Activities.DashboardPage.RoutesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
