@@ -350,13 +350,26 @@
                     android:singleLine="true" />
 
                 <EditText
-                    android:id="@+id/second_number"
+                    android:id="@+id/contact_person"
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Contact Person"
+                    android:inputType="phone"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle"
+
+                    android:singleLine="true" />
+                <EditText
+                    android:id="@+id/contact_number"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:hint="Contact Number"
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
@@ -452,21 +465,9 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
-                    android:visibility="gone" />
+                 />
 
-                <EditText
-                    android:id="@+id/contact_number"
-                    style="@style/EditText.Flat.Grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Contact Number"
-                    android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle"
-                    android:singleLine="true"
-                    android:visibility="gone" />
+
 
                 <EditText
                     android:id="@+id/contact_email"

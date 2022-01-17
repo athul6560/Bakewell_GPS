@@ -385,7 +385,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.email.getText().toString(),
                 binding.website.getText().toString(),
                 binding.mobileNumber.getText().toString(),
-                binding.secondNumber.getText().toString(),
+               "",
                 binding.whatsappNumber.getText().toString(),
                 binding.telNumber.getText().toString(),
                 getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()),
