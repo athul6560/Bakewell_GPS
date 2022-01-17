@@ -10,9 +10,13 @@ import java.io.ByteArrayOutputStream;
 
 public class Tools {
     public static Bitmap getImageBitmapFromBase(String shop_image) {
-        byte[] decodedString = Base64.decode(shop_image, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedByte;
+        try {
+            byte[] decodedString = Base64.decode(shop_image, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            return decodedByte;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public static String getStringfromBitmap(Bitmap imageBitmap) {
@@ -24,6 +28,7 @@ public class Tools {
             return encoded;
         } else return null;
     }
+
     public static boolean isNetworkConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
