@@ -274,35 +274,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
         return responseSimple;
-             /*   ,
-               ,
-                23,
-               ,
-                binding.addressOne.getText().toString(),
-                binding.addressTwo.getText().toString(),
-                binding.addressThree.getText().toString(),
-                binding.email.getText().toString(),
-                binding.website.getText().toString(),
-                binding.mobileNumber.getText().toString(),
-                binding.secondNumber.getText().toString(),
-                binding.whatsappNumber.getText().toString(),
-                binding.telNumber.getText().toString(),
-                34,
-                "cash",
-                binding.licenseNumber.getText().toString(),
-                binding.ownerName.getText().toString(),
-                binding.ownerNumber.getText().toString(),
-                binding.ownerEmail.getText().toString(),
-                binding.contactName.getText().toString(),
-                binding.contactNumber.getText().toString(),
-                binding.contactEmail.getText().toString(),
-                4,
-                "",
-                "",
-                Tools.getStringfromBitmap(ImageBitmap),
-                Tools.getStringfromBitmap(ImageBitmap),
-                1997,
-                binding.landMark.getText().toString()*/
+
     }
 
     private void setTransactionTypeSpinner() {
