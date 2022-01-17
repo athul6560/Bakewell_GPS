@@ -126,13 +126,29 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customer Name"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Customer Name"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
+
 
                 <EditText
                     android:id="@+id/organisation_name"
@@ -147,13 +163,28 @@
 
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Trade License Number"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trade License Number"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,13 +214,28 @@
                         android:layout_weight="20"
                         android:src="@drawable/ic_baseline_qr_code_24" />
                 </LinearLayout>
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TL Expiry Date"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TL Expiry Date"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/tl_expiry_date"
@@ -205,13 +251,28 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tax Reg Number"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tax Reg Number"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/tax_number"
                     style="@style/EditText.Flat.Grey"
@@ -224,13 +285,28 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Country"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Parent Company"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <Spinner
                     android:id="@+id/company"
                     android:layout_width="match_parent"
@@ -251,13 +327,28 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:visibility="gone" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Area"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Area"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <Spinner
                     android:id="@+id/area"
 
@@ -268,13 +359,28 @@
                     android:hint="Area"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address Line 1"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Address Line 1"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/address_one"
@@ -377,13 +483,28 @@
                     android:paddingRight="@dimen/spacing_middle"
 
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mobile Number"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mobile Number"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/mobile_number"
                     style="@style/EditText.Flat.Grey"
@@ -434,33 +555,63 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contact Person"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Name"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <EditText
-                    android:id="@+id/contact_person"
+                    android:id="@+id/contact_name"
                     style="@style/EditText.Flat.Grey"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Contact Person"
-                    android:inputType="phone"
+                    android:hint="Contact Name"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-
-                    android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contact Number"
                     android:singleLine="true"
-                    android:layout_marginTop="10dp"
                     />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Contact Number"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/contact_number"
                     style="@style/EditText.Flat.Grey"
@@ -512,13 +663,28 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shop Category"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shop Category"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
                 <Spinner
                     android:id="@+id/shop_category_id"
 
@@ -570,25 +736,6 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Contact Name"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
-                <EditText
-                    android:id="@+id/contact_name"
-                    style="@style/EditText.Flat.Grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Contact Name"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle"
-                    android:singleLine="true"
-                 />
 
 
 
