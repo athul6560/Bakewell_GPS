@@ -356,7 +356,7 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Secondary Phone"
+                    android:hint="Contact Person"
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"

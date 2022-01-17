@@ -33,7 +33,8 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
-        tlExpiryDate.setText(day+"/"+month+1+"/"+year);
-        IntentConstants.TL_EXPIRY_EPOCH= EpochConverters.humanReadabletoEpoch(day,month+1,year);
+        tlExpiryDate.setText(day+"/"+(month+1)+"/"+year);
+
+        IntentConstants.TL_EXPIRY_EPOCH= EpochConverters.humanReadabletoEpoch(day,(month+1),year);
     }
 }
