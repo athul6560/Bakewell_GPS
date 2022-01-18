@@ -361,19 +361,19 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
-        //  spin.setSelection(getparentIndex());
+          spin.setSelection(getparentIndex());
     }
 
     private int getparentIndex() {
         int result = 0;
-        int data = IntentConstants.SHOP_DETAILS.getParent_id() - 1;
+        int data = IntentConstants.SHOP_DETAILS.getParent_id();
 
         for (int i = 0; i < parentCompany.size(); i++) {
 
-            Log.e("Debuggg", data + "");
-            if (parentCompany.get(i).getParent_id() == data) {
 
-                result = i - 1;
+            if (parentCompany.get(i).getId() == data) {
+
+                result = i+1;
             }
         }
         return result;
