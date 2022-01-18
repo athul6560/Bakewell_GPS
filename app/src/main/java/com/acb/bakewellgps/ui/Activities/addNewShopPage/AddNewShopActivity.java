@@ -250,7 +250,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     }
 
     private responseSimple validation() {
-        Log.e("Debugggg",binding.shopCategoryId.getSelectedItem().toString() );
+
         responseSimple responseSimple = new responseSimple();
 
 

@@ -132,7 +132,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         shopUpdateDetails.setEmail(binding.email.getText().toString());
         shopUpdateDetails.setMobile_no2(binding.secondNumber.getText().toString());
         shopUpdateDetails.setOwner_name(binding.ownerName.getText().toString());
-        shopUpdateDetails.setOwner_mobile_no(binding.ownerName.getText().toString());
+        shopUpdateDetails.setOwner_mobile_no(binding.ownerNumber.getText().toString());
         shopUpdateDetails.setShop_category_id(getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
 
 
@@ -243,7 +243,9 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.areaLists = areaLists;
             this.areaLists.add(0, new areaList(0, "Select Area"));
-            addLogic.getShopCategory();
+            setAreaSpinner();
+            Dialogues.dismiss();
+            // addLogic.getShopCategory();
         } else {
             Toast.makeText(EditActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
         }
@@ -259,7 +261,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.shopCategories = shopCategories.getData();
             this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
-            // addLogic.getallParentCompanies();
+            addLogic.getallParentCompanies();
             setShopCategorySpinner();
 
         } else {
@@ -274,14 +276,14 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.parentCompany = parentCompany;
             this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
-            setAreaSpinner();
-            setShopCategorySpinner();
+            //    setAreaSpinner();
+            //  setShopCategorySpinner();
             setCompanySpinner();
+            addLogic.getAllArea();
 
-            Dialogues.dismiss();
 
         } else {
-
+            addLogic.getAllArea();
             Toast.makeText(EditActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
             Dialogues.dismiss();
         }
@@ -302,7 +304,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
-        spin.setSelection(getAreaIndex());
+        //    spin.setSelection(getAreaIndex());
 
     }
 
@@ -359,7 +361,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
-        spin.setSelection(getparentIndex());
+        //  spin.setSelection(getparentIndex());
     }
 
     private int getparentIndex() {
