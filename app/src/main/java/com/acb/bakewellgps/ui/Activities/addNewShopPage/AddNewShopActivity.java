@@ -469,7 +469,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private int getProvinceId(String provinceName) {
         for (int i = 0; i < areaLists.size(); i++) {
             if (areaLists.get(i).getArea_name().equals(provinceName)) {
-                return areaLists.get(i).getProvince_id();
+                return areaLists.get(i).getId();
             }
         }
         return 0;

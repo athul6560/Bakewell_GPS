@@ -35,6 +35,16 @@ public class sentShopUpdateDetails {
     public String landmark;
     public int salesman_id;
     public int route_id;
+    public int customer_group_id;
+    public int province_area_id;
+
+    public void setCustomer_group_id(int customer_group_id) {
+        this.customer_group_id = customer_group_id;
+    }
+
+    public void setProvince_area_id(int province_area_id) {
+        this.province_area_id = province_area_id;
+    }
 
     public void setId(int id) {
         this.id = id;

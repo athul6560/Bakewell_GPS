@@ -137,9 +137,19 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         shopUpdateDetails.setOwner_name(binding.ownerName.getText().toString());
         shopUpdateDetails.setOwner_mobile_no(binding.ownerNumber.getText().toString());
         shopUpdateDetails.setShop_category_id(getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
-
+        shopUpdateDetails.setProvince_area_id(getProvinceId(binding.area.getSelectedItem().toString()));
+        shopUpdateDetails.setCustomer_group_id(getCustomerGroupId(binding.customerGroup.getSelectedItem().toString()));
 
         return shopUpdateDetails;
+    }
+
+    private int getCustomerGroupId(String toString) {
+        for (int i = 0; i < customerGroup.size(); i++) {
+            if (customerGroup.get(i).getGroup_name().equals(toString)) {
+                return customerGroup.get(i).getId();
+            }
+        }
+        return 0;
     }
 
     private int getShopCategoryId(String categoryName) {
@@ -154,7 +164,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     private int getProvinceId(String provinceName) {
         for (int i = 0; i < areaLists.size(); i++) {
             if (areaLists.get(i).getArea_name().equals(provinceName)) {
-                return areaLists.get(i).getProvince_id();
+                return areaLists.get(i).getId();
             }
         }
         return 0;
@@ -317,7 +327,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
-         spin.setSelection(getCustomerGroupIndex());
+        spin.setSelection(getCustomerGroupIndex());
     }
 
     private int getCustomerGroupIndex() {
