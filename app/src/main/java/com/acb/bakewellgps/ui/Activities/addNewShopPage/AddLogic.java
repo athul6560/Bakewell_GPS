@@ -6,9 +6,11 @@ import android.widget.Toast;
 import com.acb.bakewellgps.API.APIClient;
 import com.acb.bakewellgps.API.APIInterface;
 import com.acb.bakewellgps.Utils.Dialogues;
+import com.acb.bakewellgps.modell.RootList;
 import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.customerGroup;
 import com.acb.bakewellgps.modell.parentCompany.basePArent;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
@@ -174,7 +176,7 @@ public class AddLogic implements IAddLogic.logic {
             public void onResponse(Call<basePArent> call, Response<basePArent> response) {
                 Dialogues.dismiss();
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body().isStatus()) {
                     view.parentCompanyCallBack(true, "Sucess", response.body().getData());
                 } else {
                     view.parentCompanyCallBack(false, "Server Error", null);
@@ -186,6 +188,32 @@ public class AddLogic implements IAddLogic.logic {
             public void onFailure(Call<basePArent> call, Throwable t) {
 
                 view.parentCompanyCallBack(false, "No Network", null);
+
+            }
+        });
+    }
+
+    @Override
+    public void getCustomerGroup() {
+        APIInterface service = APIClient.getClient().create(APIInterface.class);
+        Call<RootList<customerGroup>> call = service.getCustomerGroup();
+        call.enqueue(new Callback<RootList<customerGroup>>() {
+            @Override
+            public void onResponse(Call<RootList<customerGroup>> call, Response<RootList<customerGroup>> response) {
+                Dialogues.dismiss();
+
+                if (response.isSuccessful()) {
+                    view.customerGroupCallback(true, "Sucess", response.body().getData());
+                } else {
+                    view.customerGroupCallback(false, "Server Error", null);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<RootList<customerGroup>> call, Throwable t) {
+
+                view.customerGroupCallback(false, "No Network", null);
 
             }
         });

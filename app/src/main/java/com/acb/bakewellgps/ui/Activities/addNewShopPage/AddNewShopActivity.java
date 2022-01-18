@@ -38,6 +38,7 @@ import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.customerGroup;
 import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
@@ -73,6 +74,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private double globallong, globalLang;
     String[] transactionTypes = {"Cash", "Credit",
             "Cheque", "Transfer"};
+    private List<customerGroup> customerGroups= new ArrayList<>();
 
 
     @Override
@@ -532,7 +534,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
-        if (status) {
+        if (status && areaLists!=null) {
             this.areaLists = areaLists;
             this.areaLists.add(0, new areaList(0, "Select Area"));
             logic.getShopCategory();
@@ -553,7 +555,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
-        if (status) {
+        if (status && shopCategories!=null) {
             this.shopCategories = shopCategories.getData();
             this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
             logic.getallParentCompanies();
@@ -567,13 +569,11 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void parentCompanyCallBack(Boolean status, String Message, List<com.acb.bakewellgps.modell.parentCompany.parentCompany> parentCompany) {
-        if (status) {
+        if (status && parentCompany!=null) {
             this.parentCompany = parentCompany;
             this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
-            setAreaSpinner();
-            setShopCategorySpinner();
-            setCompanySpinner();
-            Dialogues.dismiss();
+            logic.getCustomerGroup();
+
 
         } else {
 
@@ -581,6 +581,28 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             Dialogues.dismiss();
         }
 
+    }
+
+    @Override
+    public void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups) {
+        this.customerGroups = customerGroups;
+        this.customerGroups.add(0, new customerGroup(0, "Select Parent Company"));
+        this.customerGroups.add(0, new customerGroup(4, "Shop Individuals"));
+        setAreaSpinner();
+        setShopCategorySpinner();
+        setCompanySpinner();
+        setCustomerGroupSpinner();
+        Dialogues.dismiss();
+    }
+
+    private void setCustomerGroupSpinner() {
+        Spinner spin = (Spinner) findViewById(R.id.customer_group);
+        ArrayAdapter<customerGroup> adapter =
+                new ArrayAdapter<customerGroup>(getApplicationContext(),
+                        android.R.layout.simple_spinner_dropdown_item, customerGroups);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
     }
 
 

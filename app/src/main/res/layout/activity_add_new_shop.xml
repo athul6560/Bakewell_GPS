@@ -316,6 +316,37 @@
                     android:hint="Parent Company"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Customer Group"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+                        android:singleLine="true"
+                        android:layout_marginTop="10dp"
+
+                        />
+                </LinearLayout>
+                <Spinner
+                    android:id="@+id/customer_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:hint="Parent Company"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle" />
 
                 <Spinner
                     android:id="@+id/country"

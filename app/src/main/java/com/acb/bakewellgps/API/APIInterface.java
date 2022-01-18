@@ -9,6 +9,7 @@ import com.acb.bakewellgps.modell.allCustomerModel.allCustomerResponse;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.baseResponse;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.customerGroup;
 import com.acb.bakewellgps.modell.parentCompany.basePArent;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
@@ -67,4 +68,9 @@ public interface APIInterface {
 
     @GET("shop/parentCompanies")
     Call<basePArent> getParentCompanies();
+
+
+
+    @GET("Shop/getAllCustomerGroups")
+    Call<RootList<customerGroup>> getCustomerGroup();
 }

@@ -3,6 +3,7 @@ package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.customerGroup;
 import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.sentShopUpdateDetails;
@@ -18,6 +19,7 @@ public interface IAddLogic {
         void currencyCallback(Boolean status, String Message, List<allCurrencies> allCurrencies);
         void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories);
         void parentCompanyCallBack(Boolean status, String Message, List<parentCompany> parentCompany);
+        void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups);
     }
     interface logic{
         void addNewShop(sentShopAddDetails sentShopAddDetails);
@@ -26,5 +28,6 @@ public interface IAddLogic {
         void getAllCurrencies();
         void getShopCategory();
         void getallParentCompanies();
+        void getCustomerGroup();
     }
 }

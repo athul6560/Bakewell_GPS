@@ -26,6 +26,7 @@ import com.acb.bakewellgps.modell.allCurrencies;
 import com.acb.bakewellgps.modell.areaList;
 import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
+import com.acb.bakewellgps.modell.customerGroup;
 import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.sentShopUpdateDetails;
 import com.acb.bakewellgps.modell.shopCategories;
@@ -283,6 +284,10 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         }
     }
 
+    @Override
+    public void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups) {
+
+    }
 
 
     private void setAreaSpinner() {
