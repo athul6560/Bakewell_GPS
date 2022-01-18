@@ -430,11 +430,22 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 SharedData.getId(AddNewShopActivity.this),
                 SharedData.getRouteId(AddNewShopActivity.this),
                 IntentConstants.TL_EXPIRY_EPOCH,
-                getparentId(binding.company.getSelectedItem().toString())
+                getparentId(binding.company.getSelectedItem().toString()),
+                getCustomerGroupId(binding.customerGroup.getSelectedItem().toString()),
+                getProvinceId(binding.area.getSelectedItem().toString())
 
 
         );
         return addDetails;
+    }
+
+    private int getCustomerGroupId(String toString) {
+        for (int i = 0; i < customerGroups.size(); i++) {
+            if (customerGroups.get(i).getGroup_name().equals(toString)) {
+                return customerGroups.get(i).getId();
+            }
+        }
+        return 0;
     }
 
     private int getparentId(String toString) {

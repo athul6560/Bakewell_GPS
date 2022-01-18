@@ -36,6 +36,8 @@ public class sentShopAddDetails {
     public int route_id;
     public long tl_expiry_date;
     public int parent_id;
+    public int customer_group_id;
+    public int province_area_id;
 
 
 
@@ -72,7 +74,9 @@ public class sentShopAddDetails {
                               int salesman_id,
                               int route_id,
                               long tl_expiry_date,
-                              int parent_id) {
+                              int parent_id,
+                              int customer_group_id,
+                              int province_area_id) {
         this.short_name = short_name;
         this.organisation_name = organisation_name;
         this.tax_number = tax_number;
@@ -107,5 +111,7 @@ public class sentShopAddDetails {
         this.route_id = route_id;
         this.tl_expiry_date = tl_expiry_date;
         this.parent_id = parent_id;
+        this.customer_group_id = customer_group_id;
+        this.province_area_id = province_area_id;
     }
 }
