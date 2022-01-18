@@ -307,7 +307,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.customerGroup = customerGroups;
 
-
+            this.customerGroup.add(0, new customerGroup(4, "Shop Individuals"));
             setCustomerGroupSpinner();
             addLogic.getAllArea();
 
