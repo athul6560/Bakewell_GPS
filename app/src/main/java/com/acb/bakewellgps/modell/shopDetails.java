@@ -49,6 +49,15 @@ public class shopDetails {
     public int route_id;
     public boolean is_approved;
     public int tl_expiry_date;
+    public int customer_group_id;
+
+    public int getCustomer_group_id() {
+        return customer_group_id;
+    }
+
+    public void setCustomer_group_id(int customer_group_id) {
+        this.customer_group_id = customer_group_id;
+    }
 
     public int getId() {
         return id;

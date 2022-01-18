@@ -49,6 +49,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     List<parentCompany> parentCompany = new ArrayList<>();
     List<categoryName> shopCategories;
     private Bitmap LogoBitmap;
+    private List<com.acb.bakewellgps.modell.customerGroup> customerGroup = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +61,10 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         initComponents();
         setExistingData(IntentConstants.SHOP_DETAILS);
         Dialogues.show(this);
-        //  addLogic.getAllArea();
+        addLogic.getAllArea();
         addLogic.getShopCategory();
+        addLogic.getallParentCompanies();
+        addLogic.getCustomerGroup();
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -261,7 +264,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.shopCategories = shopCategories.getData();
             this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
-            addLogic.getallParentCompanies();
+            //   addLogic.getallParentCompanies();
             setShopCategorySpinner();
 
         } else {
@@ -275,11 +278,11 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     public void parentCompanyCallBack(Boolean status, String Message, List<parentCompany> parentCompany) {
         if (status) {
             this.parentCompany = parentCompany;
-            this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
+
             //    setAreaSpinner();
             //  setShopCategorySpinner();
             setCompanySpinner();
-            addLogic.getAllArea();
+            //  addLogic.getAllArea();
 
 
         } else {
@@ -291,7 +294,49 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
     @Override
     public void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups) {
+        if (status) {
+            this.customerGroup = customerGroups;
 
+
+            setCustomerGroupSpinner();
+            addLogic.getAllArea();
+
+
+        } else {
+            addLogic.getAllArea();
+            Toast.makeText(EditActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
+            Dialogues.dismiss();
+        }
+    }
+
+    private void setCustomerGroupSpinner() {
+        Spinner spin = (Spinner) findViewById(R.id.customer_group);
+        ArrayAdapter<customerGroup> adapter =
+                new ArrayAdapter<customerGroup>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, customerGroup);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spin.setAdapter(adapter);
+
+         spin.setSelection(getCustomerGroupIndex());
+    }
+
+    private int getCustomerGroupIndex() {
+        int result = 0;
+        int data = IntentConstants.SHOP_DETAILS.getCustomer_group_id();
+        try {
+            for (int i = 0; i < customerGroup.size(); i++) {
+
+
+                if (customerGroup.get(i).getId() == data) {
+
+                    result = i;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+
+        return result;
     }
 
 
@@ -304,22 +349,22 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
-        //    spin.setSelection(getAreaIndex());
+        spin.setSelection(getAreaIndex());
 
     }
 
     private int getAreaIndex() {
 
         int result = 0;
-        int data = IntentConstants.SHOP_DETAILS.getProvince_id();
+        String area = IntentConstants.SHOP_DETAILS.getProvince_area_name();
 
         for (int i = 0; i < areaLists.size(); i++) {
 
+            if (areaLists.get(i).getArea_name() != null)
+                if (areaLists.get(i).getArea_name().equals(area)) {
 
-            if (areaLists.get(i).getProvince_id() == data) {
-
-                result = i - 1;
-            }
+                    result = i;
+                }
         }
         return result;
     }
@@ -367,15 +412,19 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     private int getparentIndex() {
         int result = 0;
         int data = IntentConstants.SHOP_DETAILS.getParent_id();
+        try {
+            for (int i = 0; i < parentCompany.size(); i++) {
 
-        for (int i = 0; i < parentCompany.size(); i++) {
 
+                if (parentCompany.get(i).getId() == data) {
 
-            if (parentCompany.get(i).getId() == data) {
-
-                result = i + 1;
+                    result = i;
+                }
             }
+        } catch (Exception e) {
         }
+
+
         return result;
     }
 }
