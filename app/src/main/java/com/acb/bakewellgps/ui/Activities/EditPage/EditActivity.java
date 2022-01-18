@@ -361,7 +361,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
         spin.setAdapter(adapter);
 
-          spin.setSelection(getparentIndex());
+        spin.setSelection(getparentIndex());
     }
 
     private int getparentIndex() {
@@ -373,7 +373,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
             if (parentCompany.get(i).getId() == data) {
 
-                result = i+1;
+                result = i + 1;
             }
         }
         return result;

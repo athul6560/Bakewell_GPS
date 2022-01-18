@@ -1,12 +1,14 @@
 package com.acb.bakewellgps.ui.Activities.ShopViewPage;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -23,12 +25,14 @@ import android.widget.Toast;
 
 import com.acb.bakewellgps.R;
 
+import com.acb.bakewellgps.SharedPref.SharedData;
 import com.acb.bakewellgps.Tools.IntentConstants;
 import com.acb.bakewellgps.Utils.Dialogues;
 import com.acb.bakewellgps.Utils.Tools;
 import com.acb.bakewellgps.databinding.ActivityDashboardBinding;
 import com.acb.bakewellgps.databinding.ActivityShopViewBinding;
 import com.acb.bakewellgps.modell.shopDetails;
+import com.acb.bakewellgps.ui.Activities.DashboardPage.Dashboard;
 import com.acb.bakewellgps.ui.Activities.EditPage.EditActivity;
 import com.acb.bakewellgps.ui.Activities.ShopListPage.ShopListActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -79,8 +83,25 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.updateGps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                shopViewLogic.updateGpsApi(globallong, globalLang, getShopId());
+                                break;
 
-                shopViewLogic.updateGpsApi(globallong, globalLang, getShopId());
+                            case DialogInterface.BUTTON_NEGATIVE:
+
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ShopViewActivity.this);
+                builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
 
             }
         });
@@ -132,7 +153,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         globalLang = lang;
         globallong = longitude;
         //  binding.address.setText(address.getFeatureName() + "\n" + "Pin: " + address.getPostalCode() + ", " + address.getLocality() + ", " + address.getCountryName());
-        binding.location.setText(lang + "," + longitude);
+        //  binding.location.setText(lang + "," + longitude);
     }
 
     private void getCurrentLocation() {
@@ -221,7 +242,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
         binding.ownerEmail.setText(shopDetails.getOwner_email_id());
         binding.contactName.setText(shopDetails.getShop_contact_name());
-
+        binding.location.setText(shopDetails.getLatitude() + "," + shopDetails.getLongitude());
         binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
         if (shopDetails.getShop_image() != null)
             binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));

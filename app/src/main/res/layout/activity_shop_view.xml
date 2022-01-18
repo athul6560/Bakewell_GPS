@@ -158,11 +158,11 @@
                             android:id="@+id/location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableLeft="@drawable/ic_baseline_location_on_24"
-                            android:drawableTint="@color/green_600"
                             android:text="0,0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_40" />
+                            android:textColor="@color/grey_40"
+                            app:drawableTint="@color/green_600"
+                            app:drawableLeftCompat="@drawable/ic_baseline_location_on_24" />
 
                         <TextView
                             android:id="@+id/update_gps"
