@@ -109,6 +109,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         binding.ownerName.setText(shopDetails.getOwner_name());
         binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
 
+
     }
 
     private sentShopUpdateDetails getUpdateData() {

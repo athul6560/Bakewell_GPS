@@ -586,8 +586,9 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     @Override
     public void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups) {
         this.customerGroups = customerGroups;
-        this.customerGroups.add(0, new customerGroup(0, "Select Parent Company"));
         this.customerGroups.add(0, new customerGroup(4, "Shop Individuals"));
+        this.customerGroups.add(0, new customerGroup(0, "Select Customer Group Company"));
+
         setAreaSpinner();
         setShopCategorySpinner();
         setCompanySpinner();

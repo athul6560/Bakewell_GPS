@@ -9,7 +9,10 @@ public class customerGroup {
         this.id = id;
         this.group_name = group_name;
     }
-
+    @Override
+    public String toString() {
+        return group_name;
+    }
     public int getId() {
         return id;
     }

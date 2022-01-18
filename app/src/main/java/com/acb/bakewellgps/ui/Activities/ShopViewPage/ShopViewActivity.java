@@ -71,7 +71,7 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
                 Intent i = new Intent(ShopViewActivity.this, EditActivity.class);
 
 
-                i.putExtra("shopId",getShopId());
+                i.putExtra("shopId", getShopId());
                 startActivity(i);
 
             }
@@ -206,25 +206,28 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
 
     @Override
     public void shopDetailsCallback(boolean status, shopDetails shopDetails) {
-        if (status){
+        if (status) {
             setShopData(shopDetails);
-            IntentConstants.SHOP_DETAILS=shopDetails;
+            IntentConstants.SHOP_DETAILS = shopDetails;
         }
     }
 
     private void setShopData(shopDetails shopDetails) {
         binding.shopName.setText(shopDetails.getOrganisation_name());
-        binding.subTitle.setText(shopDetails.getShop_category_name() );
+        binding.subTitle.setText(shopDetails.getShop_category_name());
         binding.address.setText(shopDetails.getAddress_line1() + "\n" + shopDetails.getAddress_line2() + " " + shopDetails.getAddress_line3() + " " + shopDetails.getProvince_name());
-        binding.taxId.setText("Tax : "+shopDetails.getTax_number());
+        binding.taxId.setText("Tax : " + shopDetails.getTax_number());
         binding.ownerName.setText(shopDetails.getOwner_name());
         binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
         binding.ownerEmail.setText(shopDetails.getOwner_email_id());
         binding.contactName.setText(shopDetails.getShop_contact_name());
 
         binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
-        if(shopDetails.getShop_image()!=null)
-        binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));
+        if (shopDetails.getShop_image() != null)
+            binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));
+        if (shopDetails.is_approved) {
+            binding.editBtn.setVisibility(View.GONE);
+        }
 
     }
 }
