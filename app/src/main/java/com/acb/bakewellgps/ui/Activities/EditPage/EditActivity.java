@@ -60,7 +60,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         initComponents();
         setExistingData(IntentConstants.SHOP_DETAILS);
         Dialogues.show(this);
-        addLogic.getAllArea();
+        //  addLogic.getAllArea();
+        addLogic.getShopCategory();
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -258,7 +259,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.shopCategories = shopCategories.getData();
             this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
-            addLogic.getallParentCompanies();
+            // addLogic.getallParentCompanies();
+            setShopCategorySpinner();
 
         } else {
 
@@ -306,15 +308,15 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
 
     private int getAreaIndex() {
 
-        int result=0;
+        int result = 0;
         int data = IntentConstants.SHOP_DETAILS.getProvince_id();
 
-        for(int i=0;i<areaLists.size();i++){
+        for (int i = 0; i < areaLists.size(); i++) {
 
 
-            if(areaLists.get(i).getProvince_id()==data){
+            if (areaLists.get(i).getProvince_id() == data) {
 
-                result=i-1;
+                result = i - 1;
             }
         }
         return result;
@@ -328,8 +330,22 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
+        spin.setSelection(getShopCategoryIndex(IntentConstants.SHOP_DETAILS.shop_category_name));
+    }
 
-        spin.setSelection(getShopCategoryId(IntentConstants.SHOP_DETAILS.shop_category_name));
+    private int getShopCategoryIndex(String shop_category_name) {
+        int result = 0;
+
+
+        for (int i = 0; i < shopCategories.size(); i++) {
+
+            if (shopCategories.get(i).getCategory_name() != null)
+                if (shopCategories.get(i).getCategory_name().equals(shop_category_name)) {
+
+                    result = i;
+                }
+        }
+        return result;
     }
 
     private void setCompanySpinner() {
@@ -347,15 +363,15 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     }
 
     private int getparentIndex() {
-        int result=0;
-        int data = IntentConstants.SHOP_DETAILS.getParent_id()-1;
+        int result = 0;
+        int data = IntentConstants.SHOP_DETAILS.getParent_id() - 1;
 
-        for(int i=0;i<parentCompany.size();i++){
+        for (int i = 0; i < parentCompany.size(); i++) {
 
-            Log.e("Debuggg", data+"");
-            if(parentCompany.get(i).getParent_id()==data){
+            Log.e("Debuggg", data + "");
+            if (parentCompany.get(i).getParent_id() == data) {
 
-                result=i-1;
+                result = i - 1;
             }
         }
         return result;
