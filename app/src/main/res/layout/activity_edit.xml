@@ -440,13 +440,7 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Secondary Phone"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+
                 <EditText
                     android:id="@+id/second_number"
                     style="@style/EditText.Flat.Grey"
@@ -457,6 +451,7 @@
                     android:hint="Secondary Phone"
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
+                    android:visibility="gone"
                     android:paddingRight="@dimen/spacing_middle"
 
                     android:singleLine="true" />
