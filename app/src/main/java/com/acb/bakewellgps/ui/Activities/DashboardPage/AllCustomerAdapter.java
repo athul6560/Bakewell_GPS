@@ -39,7 +39,7 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name, subtitle, routeId;
+        public TextView name, subtitle, routeId, shopType, Area;
         public View lyt_parent;
 
         public OriginalViewHolder(View v) {
@@ -47,6 +47,8 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             name = (TextView) v.findViewById(R.id.name);
             subtitle = (TextView) v.findViewById(R.id.subtitle);
             routeId = (TextView) v.findViewById(R.id.route_id);
+            shopType = (TextView) v.findViewById(R.id.shop_type);
+            Area = (TextView) v.findViewById(R.id.area);
 
             lyt_parent = (View) v.findViewById(R.id.lyt_parent);
         }
@@ -70,6 +72,8 @@ public class AllCustomerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             allCustomers p = items.get(position);
             view.routeId.setText(p.getId() + "");
             view.name.setText(p.getName());
+            view.Area.setText(p.getArea());
+            view.shopType.setText(p.getShop_type());
           //  view.subtitle.setText("" + p.getEmail() + " | " + p.getAddress_line1());
 
           //  view.name.setText(p.getOwner_name());

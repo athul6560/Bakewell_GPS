@@ -246,6 +246,8 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
         binding.website.setText(shopDetails.getWebsite()+"");
         binding.parentCompany.setText("Parent Company : " + shopDetails.getParent_name());
+        binding.tradeLicenseNumber.setText("Trade License Number : "+shopDetails.getLicence_no());
+        binding.customerGroup.setText("Customer Group : "+shopDetails.getCustomer_group_name());
         if (shopDetails.getShop_image() != null)
             binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));
         if (shopDetails.is_approved) {
