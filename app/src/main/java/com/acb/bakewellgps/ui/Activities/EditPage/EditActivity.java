@@ -112,6 +112,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         binding.secondNumber.setText(shopDetails.getMobile_no2());
         binding.ownerName.setText(shopDetails.getOwner_name());
         binding.ownerNumber.setText(shopDetails.getOwner_mobile_no());
+        binding.contactName.setText(shopDetails.getShop_contact_name());
+        binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
 
 
     }
@@ -136,6 +138,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         shopUpdateDetails.setMobile_no2(binding.secondNumber.getText().toString());
         shopUpdateDetails.setOwner_name(binding.ownerName.getText().toString());
         shopUpdateDetails.setOwner_mobile_no(binding.ownerNumber.getText().toString());
+        shopUpdateDetails.setShop_contact_name(binding.contactName.getText().toString());
+        shopUpdateDetails.setShop_contact_mobile_no(binding.contactNumber.getText().toString());
         shopUpdateDetails.setShop_category_id(getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
         shopUpdateDetails.setProvince_area_id(getProvinceId(binding.area.getSelectedItem().toString()));
         shopUpdateDetails.setCustomer_group_id(getCustomerGroupId(binding.customerGroup.getSelectedItem().toString()));

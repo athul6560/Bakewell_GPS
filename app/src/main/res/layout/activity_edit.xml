@@ -126,13 +126,102 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
-
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Customer Name"
-                    android:singleLine="true"
-                     />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Shop Category"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
+
+                <Spinner
+                    android:id="@+id/shop_category_id"
+                    android:popupBackground="@color/red_50"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:hint="Shop Category"
+                    android:theme="@style/MatchSpinnerTheme"
+
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Customer Group"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
+
+                <Spinner
+                    android:id="@+id/customer_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:theme="@style/MatchSpinnerTheme"
+                    android:popupBackground="@color/red_50" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Customer Name"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/organisation_name"
@@ -146,6 +235,43 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Area"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
+
+                <Spinner
+                    android:id="@+id/area"
+                    android:popupBackground="@color/red_50"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:hint="Area"
+                    android:theme="@style/MatchSpinnerTheme"
+
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -194,13 +320,30 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tax Reg Number"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Tax Reg Number"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/tax_number"
                     style="@style/EditText.Flat.Grey"
@@ -213,45 +356,9 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Parent Company"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
-                <Spinner
-                    android:id="@+id/company"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Parent Company"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Customer Group"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
-                <Spinner
-                    android:id="@+id/customer_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Parent Company"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Area"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+
+
+
                 <Spinner
                     android:id="@+id/country"
                     android:layout_width="match_parent"
@@ -263,24 +370,33 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:visibility="gone" />
 
-                <Spinner
-                    android:id="@+id/area"
 
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Area"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
 
-                <TextView
-                    android:layout_width="match_parent"
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address Line 1"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Address Line 1"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
                 <EditText
                     android:id="@+id/address_one"
                     style="@style/EditText.Flat.Grey"
@@ -342,6 +458,81 @@
                     android:paddingLeft="@dimen/spacing_middle"
 
                     android:paddingRight="@dimen/spacing_middle"
+                    android:singleLine="true" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Contact Name"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/contact_name"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:hint="Contact Name"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:singleLine="true" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Contact Number"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/contact_number"
+                    style="@style/EditText.Flat.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:background="@drawable/edit_text_round_bg_white"
+                    android:hint="Contact Number"
+                    android:inputType="phone"
+                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingRight="@dimen/spacing_middle"
+
                     android:singleLine="true" />
                 <TextView
                     android:layout_width="match_parent"
@@ -493,22 +684,44 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shop Category"
-                    android:singleLine="true"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text="Parent Company"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:singleLine="true"
+                        android:text=" *"
+                        android:textColor="@color/red_900"
+
+                        />
+                </LinearLayout>
+
                 <Spinner
-                    android:id="@+id/shop_category_id"
+                    android:id="@+id/company"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Shop Category"
+                    android:hint="Parent Company"
+                    android:popupBackground="@color/red_50"
                     android:paddingLeft="@dimen/spacing_middle"
+                    android:theme="@style/MatchSpinnerTheme"
+
                     android:paddingRight="@dimen/spacing_middle" />
+
 
 
                 <Spinner
@@ -551,32 +764,9 @@
                     android:singleLine="true"
                     android:visibility="gone" />
 
-                <EditText
-                    android:id="@+id/contact_name"
-                    style="@style/EditText.Flat.Grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Contact Name"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle"
-                    android:singleLine="true"
-                    android:visibility="gone" />
 
-                <EditText
-                    android:id="@+id/contact_number"
-                    style="@style/EditText.Flat.Grey"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Contact Number"
-                    android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle"
-                    android:singleLine="true"
-                    android:visibility="gone" />
+
+
 
                 <EditText
                     android:id="@+id/contact_email"
