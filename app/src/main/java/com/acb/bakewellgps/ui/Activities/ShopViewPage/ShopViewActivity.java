@@ -244,6 +244,8 @@ public class ShopViewActivity extends AppCompatActivity implements IShopViewLogi
         binding.contactName.setText(shopDetails.getShop_contact_name());
         binding.location.setText(shopDetails.getLatitude() + "," + shopDetails.getLongitude());
         binding.contactNumber.setText(shopDetails.getShop_contact_mobile_no());
+        binding.website.setText(shopDetails.getWebsite()+"");
+        binding.parentCompany.setText("Parent Company : " + shopDetails.getParent_name());
         if (shopDetails.getShop_image() != null)
             binding.imageShop.setImageBitmap(Tools.getImageBitmapFromBase(shopDetails.getShop_image()));
         if (shopDetails.is_approved) {

@@ -161,8 +161,8 @@
                             android:text="0,0"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_40"
-                            app:drawableTint="@color/green_600"
-                            app:drawableLeftCompat="@drawable/ic_baseline_location_on_24" />
+                            app:drawableLeftCompat="@drawable/ic_baseline_location_on_24"
+                            app:drawableTint="@color/green_600" />
 
                         <TextView
                             android:id="@+id/update_gps"
@@ -181,6 +181,43 @@
                         android:layout_height="wrap_content"
 
                         android:text="Tax ID"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_40"
+                        app:fontFamily="sans-serif-medium" />
+
+                    <TextView
+                        android:id="@+id/trade_license_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Trade Number"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_40"
+                        app:fontFamily="sans-serif-medium" />
+                    <TextView
+                        android:id="@+id/customer_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Customer Group"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_40"
+                        app:fontFamily="sans-serif-medium" />
+                    <TextView
+                        android:id="@+id/parent_company"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Parent"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textColor="@color/grey_40"
+                        app:fontFamily="sans-serif-medium" />
+                    <TextView
+                        android:id="@+id/website"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/grey_40"
                         app:fontFamily="sans-serif-medium" />
@@ -263,6 +300,7 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -301,7 +339,6 @@
                                 android:text="+91 9526920286"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                                 android:textColor="@color/grey_40" />
-
 
 
                         </LinearLayout>
