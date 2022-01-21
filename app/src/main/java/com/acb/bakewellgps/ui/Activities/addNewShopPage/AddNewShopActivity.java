@@ -2,6 +2,7 @@ package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -10,6 +11,7 @@ import androidx.fragment.app.DialogFragment;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -87,7 +89,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         initComponents();
         Dialogues.show(this);
         logic.getAllArea();
-        getCurrentLocation();
+       // getCurrentLocation();
 
         setLocation();
         binding.mobileNumber.addTextChangedListener(new TextWatcher() {
@@ -109,9 +111,27 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         binding.reload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getCurrentLocation();
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                getCurrentLocation();
 
-                setLocation();
+                                setLocation();
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddNewShopActivity.this);
+                builder.setMessage("Are you at the store?").setPositiveButton("Yes", dialogClickListener)
+                        .setNegativeButton("No", dialogClickListener).show();
+
             }
         });
         binding.tlExpiryDate.setOnClickListener(new View.OnClickListener() {
@@ -373,7 +393,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
         Spinner spin = (Spinner) findViewById(R.id.area);
         ArrayAdapter<areaList> adapter =
-                new ArrayAdapter<areaList>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, areaLists);
+                new ArrayAdapter<areaList>(getApplicationContext(), android.R.layout.simple_spinner_item, areaLists);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
