@@ -126,6 +126,7 @@
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,16 +154,17 @@
 
                 <Spinner
                     android:id="@+id/shop_category_id"
-                    android:popupBackground="@color/red_50"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Shop Category"
-                    android:theme="@style/MatchSpinnerTheme"
-
                     android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
+                    android:paddingRight="@dimen/spacing_middle"
+
+                    android:popupBackground="@color/red_50"
+                    android:theme="@style/MatchSpinnerTheme" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,8 +198,9 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-                    android:theme="@style/MatchSpinnerTheme"
-                    android:popupBackground="@color/red_50" />
+                    android:popupBackground="@color/red_50"
+                    android:theme="@style/MatchSpinnerTheme" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -232,9 +235,10 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Customer Name"
                     android:minHeight="45dp"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -262,16 +266,16 @@
 
                 <Spinner
                     android:id="@+id/area"
-                    android:popupBackground="@color/red_50"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Area"
-                    android:theme="@style/MatchSpinnerTheme"
-
                     android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
+                    android:paddingRight="@dimen/spacing_middle"
+
+                    android:popupBackground="@color/red_50"
+                    android:theme="@style/MatchSpinnerTheme" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -290,7 +294,7 @@
                         android:background="@drawable/edit_text_round_bg_white"
                         android:hint="Trade License Number"
                         android:inputType="number"
-                        android:paddingLeft="@dimen/spacing_middle"
+                        android:paddingLeft="@dimen/spacing_smlarge"
                         android:paddingRight="@dimen/spacing_middle"
                         android:singleLine="true" />
 
@@ -316,10 +320,11 @@
                     android:hint="TL Expiry Date"
                     android:inputType="number"
                     android:longClickable="false"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -344,6 +349,7 @@
 
                         />
                 </LinearLayout>
+
                 <EditText
                     android:id="@+id/tax_number"
                     style="@style/EditText.Flat.Grey"
@@ -353,10 +359,9 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Tax Reg Number"
                     android:inputType="number"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
-
 
 
                 <Spinner
@@ -369,8 +374,6 @@
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:visibility="gone" />
-
-
 
 
                 <LinearLayout
@@ -397,6 +400,7 @@
 
                         />
                 </LinearLayout>
+
                 <EditText
                     android:id="@+id/address_one"
                     style="@style/EditText.Flat.Grey"
@@ -405,16 +409,17 @@
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Address Line 1"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Address Line 2"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Address Line 2" />
+
                 <EditText
                     android:id="@+id/address_two"
                     style="@style/EditText.Flat.Grey"
@@ -423,7 +428,7 @@
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Address Line 2"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
@@ -435,17 +440,18 @@
                     android:layout_marginTop="@dimen/spacing_large"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Address Line 3"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Post Box Number"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Post Box Number" />
+
                 <EditText
                     android:id="@+id/post_box_number"
                     style="@style/EditText.Flat.Grey"
@@ -455,10 +461,11 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Post Box Number"
                     android:inputType="number"
-                    android:paddingLeft="@dimen/spacing_middle"
-android:maxLength="6"
+                    android:maxLength="6"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -492,7 +499,7 @@ android:maxLength="6"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Contact Name"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
@@ -530,17 +537,18 @@ android:maxLength="6"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Contact Number"
                     android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:maxLength="12"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
-android:maxLength="12"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Website"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Website" />
+
                 <EditText
                     android:id="@+id/website"
                     style="@style/EditText.Flat.Grey"
@@ -550,16 +558,16 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Website"
                     android:inputType="textWebEmailAddress"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Telephone Number"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Telephone Number" />
 
                 <EditText
                     android:id="@+id/tel_number"
@@ -570,17 +578,18 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Telephone Number"
                     android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle"
                     android:maxLength="12"
+                    android:paddingLeft="@dimen/spacing_smlarge"
+                    android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mobile Number"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Mobile Number" />
+
                 <EditText
                     android:id="@+id/mobile_number"
                     style="@style/EditText.Flat.Grey"
@@ -589,18 +598,19 @@ android:maxLength="12"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Mobile Number"
-                    android:maxLength="12"
                     android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:maxLength="12"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Whatsapp Number"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Whatsapp Number" />
+
                 <EditText
                     android:id="@+id/whatsapp_number"
                     style="@style/EditText.Flat.Grey"
@@ -609,18 +619,19 @@ android:maxLength="12"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Whatsapp Number"
-                    android:maxLength="12"
                     android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:maxLength="12"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Shop Email"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Shop Email" />
+
                 <EditText
                     android:id="@+id/email"
                     style="@style/EditText.Flat.Grey"
@@ -630,7 +641,7 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Shop Email"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
@@ -643,18 +654,19 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Secondary Phone"
                     android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:visibility="gone"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
+                    android:singleLine="true"
 
-                    android:singleLine="true" />
+                    android:visibility="gone" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Owner Name"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Owner Name" />
+
                 <EditText
                     android:id="@+id/owner_name"
                     style="@style/EditText.Flat.Grey"
@@ -663,16 +675,17 @@ android:maxLength="12"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Owner Name"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Owner Number"
-                    android:singleLine="true"
                     android:layout_marginTop="10dp"
-                    />
+                    android:singleLine="true"
+                    android:text="Owner Number" />
+
                 <EditText
                     android:id="@+id/owner_number"
                     style="@style/EditText.Flat.Grey"
@@ -681,9 +694,9 @@ android:maxLength="12"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Owner Number"
-                    android:maxLength="12"
                     android:inputType="phone"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:maxLength="12"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
@@ -719,12 +732,11 @@ android:maxLength="12"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Parent Company"
-                    android:popupBackground="@color/red_50"
                     android:paddingLeft="@dimen/spacing_middle"
-                    android:theme="@style/MatchSpinnerTheme"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:popupBackground="@color/red_50"
 
-                    android:paddingRight="@dimen/spacing_middle" />
-
+                    android:theme="@style/MatchSpinnerTheme" />
 
 
                 <Spinner
@@ -747,7 +759,7 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Licence Number"
                     android:inputType="number"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
@@ -762,13 +774,10 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Owner Email"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
-
-
-
 
 
                 <EditText
@@ -780,7 +789,7 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Contact Email"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
@@ -794,7 +803,7 @@ android:maxLength="12"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Credit Days"
                     android:inputType="number"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
@@ -810,7 +819,7 @@ android:maxLength="12"
                     android:hint="Establisted Year"
                     android:inputType="number"
                     android:maxLength="4"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true"
                     android:visibility="gone" />
@@ -823,7 +832,7 @@ android:maxLength="12"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Land Mark"
-                    android:paddingLeft="@dimen/spacing_middle"
+                    android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:visibility="gone" />
 
