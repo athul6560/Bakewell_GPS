@@ -293,7 +293,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Customer  Name");
             return responseSimple;
         }
-        if (!binding.organisationName.getText().toString().matches("^[A-Za-z]+$")) {
+        if (!binding.organisationName.getText().toString().matches("^[a-zA-Z\\s]*$")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Customer Name");
             return responseSimple;
