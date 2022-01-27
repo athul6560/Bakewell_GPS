@@ -154,16 +154,16 @@
 
                 <Spinner
                     android:id="@+id/shop_category_id"
-                    android:popupBackground="@color/red_50"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Shop Category"
-                    android:theme="@style/MatchSpinnerTheme"
-
                     android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
+                    android:paddingRight="@dimen/spacing_middle"
+
+                    android:popupBackground="@color/red_50"
+                    android:theme="@style/MatchSpinnerTheme" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -198,8 +198,8 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-                    android:theme="@style/MatchSpinnerTheme"
-                    android:popupBackground="@color/red_50" />
+                    android:popupBackground="@color/red_50"
+                    android:theme="@style/MatchSpinnerTheme" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -268,16 +268,16 @@
 
                 <Spinner
                     android:id="@+id/area"
-                    android:popupBackground="@color/red_50"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Area"
-                    android:theme="@style/MatchSpinnerTheme"
-
                     android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle" />
+                    android:paddingRight="@dimen/spacing_middle"
+
+                    android:popupBackground="@color/red_50"
+                    android:theme="@style/MatchSpinnerTheme" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -509,8 +509,8 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Post Box Number"
                     android:inputType="number"
+                    android:maxLength="6"
                     android:paddingLeft="@dimen/spacing_middle"
-
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
 
@@ -548,6 +548,7 @@
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Mobile Number"
                     android:inputType="phone"
+                    android:maxLength="12"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
@@ -625,7 +626,7 @@
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-
+                    android:maxLength="12"
                     android:singleLine="true" />
 
                 <TextView
@@ -666,7 +667,7 @@
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-
+                    android:maxLength="12"
                     android:singleLine="true" />
 
                 <TextView
@@ -746,6 +747,7 @@
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
+                    android:maxLength="12"
                     android:singleLine="true" />
 
                 <LinearLayout
@@ -780,11 +782,11 @@
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Parent Company"
-                    android:popupBackground="@color/red_50"
                     android:paddingLeft="@dimen/spacing_middle"
-                    android:theme="@style/MatchSpinnerTheme"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:popupBackground="@color/red_50"
 
-                    android:paddingRight="@dimen/spacing_middle" />
+                    android:theme="@style/MatchSpinnerTheme" />
 
 
                 <Spinner

@@ -456,7 +456,7 @@
                     android:hint="Post Box Number"
                     android:inputType="number"
                     android:paddingLeft="@dimen/spacing_middle"
-
+android:maxLength="6"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
                 <LinearLayout
@@ -532,7 +532,7 @@
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-
+android:maxLength="12"
                     android:singleLine="true" />
                 <TextView
                     android:layout_width="match_parent"
@@ -572,7 +572,7 @@
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-
+                    android:maxLength="12"
                     android:singleLine="true" />
                 <TextView
                     android:layout_width="match_parent"
@@ -589,6 +589,7 @@
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Mobile Number"
+                    android:maxLength="12"
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
@@ -608,6 +609,7 @@
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Whatsapp Number"
+                    android:maxLength="12"
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
@@ -679,6 +681,7 @@
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
                     android:hint="Owner Number"
+                    android:maxLength="12"
                     android:inputType="phone"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"

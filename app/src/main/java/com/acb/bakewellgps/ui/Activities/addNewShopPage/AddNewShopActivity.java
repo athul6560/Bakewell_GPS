@@ -272,23 +272,42 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private responseSimple validation() {
 
         responseSimple responseSimple = new responseSimple();
-
-
+        if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Parent Company");
+            return responseSimple;
+        }
+        if (binding.area.getSelectedItem().toString().equals("Select Area")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Area");
+            return responseSimple;
+        }
+        if (binding.shopCategoryId.getSelectedItem().equals("Select Shop Category")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Shop Category");
+            return responseSimple;
+        }
         if (binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Customer  Name");
             return responseSimple;
         }
+        if (!binding.organisationName.getText().toString().matches("^[A-Za-z]+$")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Valid Customer Name");
+            return responseSimple;
+        }
+
         if (binding.tradeLicenseNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Trade License Number");
             return responseSimple;
         }
-       /* if (binding.email.getText().toString().equals("") || !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
+        if (!binding.email.getText().toString().equals("") && !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Email ID");
             return responseSimple;
-        }*/
+        }
         if (binding.tlExpiryDate.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter TL Expiry Date");
@@ -300,11 +319,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             return responseSimple;
         }
 
-        if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Select Parent Company");
-            return responseSimple;
-        }
+
         if (binding.area.getSelectedItem().equals("Select Area")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Area");
@@ -330,16 +345,12 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Contact Number");
             return responseSimple;
         }
-        if (binding.shopCategoryId.getSelectedItem().equals("Select Shop Category")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Select Shop Category");
-            return responseSimple;
-        }
-      /*  if (binding.website.getText().toString().equals("") ||  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+
+        if (!binding.website.getText().toString().equals("") &&  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
-        }*/
+        }
 
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");

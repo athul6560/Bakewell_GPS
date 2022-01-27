@@ -65,7 +65,7 @@ public class Dialogues {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                context.finish();
+
             }
         });
 
