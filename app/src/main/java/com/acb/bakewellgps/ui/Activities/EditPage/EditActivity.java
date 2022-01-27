@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -30,10 +31,12 @@ import com.acb.bakewellgps.modell.categoryName;
 import com.acb.bakewellgps.modell.countryList;
 import com.acb.bakewellgps.modell.customerGroup;
 import com.acb.bakewellgps.modell.parentCompany.parentCompany;
+import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopUpdateDetails;
 import com.acb.bakewellgps.modell.shopCategories;
 import com.acb.bakewellgps.modell.shopDetails;
 import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddLogic;
+import com.acb.bakewellgps.ui.Activities.addNewShopPage.AddNewShopActivity;
 import com.acb.bakewellgps.ui.Activities.addNewShopPage.IAddLogic;
 
 import java.util.ArrayList;
@@ -108,10 +111,97 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         binding.btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editLogic.updateShopDetails(getUpdateData());
+                if (validation().isStatus())
+                    if (Tools.isNetworkConnected(EditActivity.this))
+                        editLogic.updateShopDetails(getUpdateData());
+                    else
+                        Toast.makeText(EditActivity.this, "No Network", Toast.LENGTH_SHORT).show();
+
+                else
+                    Toast.makeText(EditActivity.this, "" + validation().getMessage(), Toast.LENGTH_SHORT).show();
+
 
             }
         });
+    }
+
+    private responseSimple validation() {
+        responseSimple responseSimple = new responseSimple();
+        if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Parent Company");
+            return responseSimple;
+        }
+        if (binding.area.getSelectedItem().toString().equals("Select Area")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Area");
+            return responseSimple;
+        }
+        if (binding.shopCategoryId.getSelectedItem().equals("Select Shop Category")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Shop Category");
+            return responseSimple;
+        }
+        if (binding.organisationName.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Customer  Name");
+            return responseSimple;
+        }
+        if (!binding.organisationName.getText().toString().matches("^[A-Za-z]+$")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Valid Customer Name");
+            return responseSimple;
+        }
+
+
+        if (!binding.email.getText().toString().equals("") && !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Valid Email ID");
+            return responseSimple;
+        }
+
+        if (binding.taxNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Tax Reg Number");
+            return responseSimple;
+        }
+
+
+        if (binding.area.getSelectedItem().equals("Select Area")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Area");
+            return responseSimple;
+        }
+        if (binding.addressOne.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Address Line 1");
+            return responseSimple;
+        }
+        if (binding.mobileNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Mobile Number");
+            return responseSimple;
+        }
+        if (binding.contactName.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Contact Name");
+            return responseSimple;
+        }
+        if (binding.contactNumber.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Contact Number");
+            return responseSimple;
+        }
+
+        if (!binding.website.getText().toString().equals("") &&  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Valid Website");
+            return responseSimple;
+        }
+
+        responseSimple.setStatus(true);
+        responseSimple.setMessage("Success");
+        return responseSimple;
     }
 
     private void setExistingData(shopDetails shopDetails) {
