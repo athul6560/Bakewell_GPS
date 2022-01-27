@@ -272,6 +272,11 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private responseSimple validation() {
 
         responseSimple responseSimple = new responseSimple();
+        if (binding.shopCategoryId.getSelectedItem().toString().trim().equals("Select Shop Category")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Select Shop Category");
+            return responseSimple;
+        }
         if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Parent Company");
@@ -282,11 +287,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Select Area");
             return responseSimple;
         }
-        if (binding.shopCategoryId.getSelectedItem().equals("Select Shop Category")) {
-            responseSimple.setStatus(false);
-            responseSimple.setMessage("Please Select Shop Category");
-            return responseSimple;
-        }
+
         if (binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Customer  Name");
