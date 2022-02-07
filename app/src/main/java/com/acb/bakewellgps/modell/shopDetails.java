@@ -51,6 +51,11 @@ public class shopDetails {
     public int tl_expiry_date;
     public int customer_group_id;
     public String customer_group_name;
+    public String area_name;
+
+    public String getArea_name() {
+        return area_name;
+    }
 
     public int getId() {
         return id;

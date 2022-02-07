@@ -93,7 +93,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         binding.area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (areaLists.get(i).getArea_name().equals("Other")) {
+                if (areaLists.get(i).getArea_name().equals("Others")) {
                     binding.areaText.setVisibility(View.VISIBLE);
                     binding.customArea.setVisibility(View.VISIBLE);
                 }else{
@@ -369,7 +369,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
         }
-        if (binding.area.getSelectedItem().equals("Other") && binding.customArea.getText().toString().equals("")) {
+        if (binding.area.getSelectedItem().equals("Others") && binding.customArea.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Area");
             return responseSimple;
@@ -602,7 +602,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         if (status && areaLists != null) {
             this.areaLists = areaLists;
             this.areaLists.add(0, new areaList(0, "Select Area"));
-            this.areaLists.add(areaLists.size(), new areaList(-1, "Other"));
+         //   this.areaLists.add(areaLists.size(), new areaList(-1, "Other"));
             logic.getShopCategory();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();

@@ -74,10 +74,10 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         binding.area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (areaLists.get(i).getArea_name().equals("Other")) {
+                if (areaLists.get(i).getArea_name().equals("Others")) {
                     binding.areaText.setVisibility(View.VISIBLE);
                     binding.customArea.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     binding.areaText.setVisibility(View.GONE);
                     binding.customArea.setVisibility(View.GONE);
                 }
@@ -212,12 +212,12 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
             return responseSimple;
         }
 
-        if (!binding.website.getText().toString().equals("") &&  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+        if (!binding.website.getText().toString().equals("") && !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
         }
-        if (binding.area.getSelectedItem().equals("Other") && binding.customArea.getText().toString().equals("")) {
+        if (binding.area.getSelectedItem().equals("Others") && binding.customArea.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Area");
             return responseSimple;
@@ -393,7 +393,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.areaLists = areaLists;
             //this.areaLists.add(0, new areaList(0, "Select Area"));
-            this.areaLists.add(areaLists.size(), new areaList(-1, "Other"));
+            // this.areaLists.add(areaLists.size(), new areaList(-1, "Other"));
             setAreaSpinner();
             Dialogues.dismiss();
             // addLogic.getShopCategory();
@@ -509,8 +509,10 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         for (int i = 0; i < areaLists.size(); i++) {
 
             if (areaLists.get(i).getId() != 0)
-                if (areaLists.get(i).getId()==area) {
-
+                if (areaLists.get(i).getId() == area) {
+                    if (area == -1) {
+                        binding.customArea.setText(IntentConstants.SHOP_DETAILS.getArea_name());
+                    }
                     result = i;
                 }
         }
