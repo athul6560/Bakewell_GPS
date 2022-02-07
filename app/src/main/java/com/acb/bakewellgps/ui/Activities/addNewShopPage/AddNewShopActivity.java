@@ -76,7 +76,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     private double globallong, globalLang;
     String[] transactionTypes = {"Cash", "Credit",
             "Cheque", "Transfer"};
-    private List<customerGroup> customerGroups= new ArrayList<>();
+    private List<customerGroup> customerGroups = new ArrayList<>();
 
 
     @Override
@@ -89,8 +89,25 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
         initComponents();
         Dialogues.show(this);
         logic.getAllArea();
-       // getCurrentLocation();
+        // getCurrentLocation();
+        binding.area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (areaLists.get(i).getArea_name().equals("Other")) {
+                    binding.areaText.setVisibility(View.VISIBLE);
+                    binding.customArea.setVisibility(View.VISIBLE);
+                }else{
+                    binding.areaText.setVisibility(View.GONE);
+                    binding.customArea.setVisibility(View.GONE);
+                }
 
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         setLocation();
         binding.mobileNumber.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,7 +131,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
+                        switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
                                 getCurrentLocation();
 
@@ -347,12 +364,16 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             return responseSimple;
         }
 
-        if (!binding.website.getText().toString().equals("") &&  !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
+        if (!binding.website.getText().toString().equals("") && !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
         }
-
+        if (binding.area.getSelectedItem().equals("Other") && binding.customArea.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Area");
+            return responseSimple;
+        }
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
         return responseSimple;
@@ -439,7 +460,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.email.getText().toString(),
                 binding.website.getText().toString(),
                 binding.mobileNumber.getText().toString(),
-               "",
+                "",
                 binding.whatsappNumber.getText().toString(),
                 binding.telNumber.getText().toString(),
                 getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()),
@@ -464,7 +485,8 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 IntentConstants.TL_EXPIRY_EPOCH,
                 getparentId(binding.company.getSelectedItem().toString()),
                 getCustomerGroupId(binding.customerGroup.getSelectedItem().toString()),
-                getProvinceId(binding.area.getSelectedItem().toString())
+                getProvinceId(binding.area.getSelectedItem().toString()),
+                binding.customArea.getText().toString()
 
 
         );
@@ -577,9 +599,10 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
-        if (status && areaLists!=null) {
+        if (status && areaLists != null) {
             this.areaLists = areaLists;
             this.areaLists.add(0, new areaList(0, "Select Area"));
+            this.areaLists.add(areaLists.size(), new areaList(-1, "Other"));
             logic.getShopCategory();
         } else {
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
@@ -598,7 +621,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void shopCategoryCallBack(Boolean status, String Message, shopCategories shopCategories) {
-        if (status && shopCategories!=null) {
+        if (status && shopCategories != null) {
             this.shopCategories = shopCategories.getData();
             this.shopCategories.add(0, new categoryName(0, "Select Shop Category"));
             logic.getallParentCompanies();
@@ -612,7 +635,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void parentCompanyCallBack(Boolean status, String Message, List<com.acb.bakewellgps.modell.parentCompany.parentCompany> parentCompany) {
-        if (status && parentCompany!=null) {
+        if (status && parentCompany != null) {
             this.parentCompany = parentCompany;
             this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
             logic.getCustomerGroup();

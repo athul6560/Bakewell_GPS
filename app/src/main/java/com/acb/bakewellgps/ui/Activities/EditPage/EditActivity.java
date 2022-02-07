@@ -16,6 +16,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -70,6 +71,24 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         addLogic.getShopCategory();
         addLogic.getallParentCompanies();
         addLogic.getCustomerGroup();
+        binding.area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (areaLists.get(i).getArea_name().equals("Other")) {
+                    binding.areaText.setVisibility(View.VISIBLE);
+                    binding.customArea.setVisibility(View.VISIBLE);
+                }else{
+                    binding.areaText.setVisibility(View.GONE);
+                    binding.customArea.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,6 +217,11 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
             responseSimple.setMessage("Please Enter Valid Website");
             return responseSimple;
         }
+        if (binding.area.getSelectedItem().equals("Other") && binding.customArea.getText().toString().equals("")) {
+            responseSimple.setStatus(false);
+            responseSimple.setMessage("Please Enter Area");
+            return responseSimple;
+        }
 
         responseSimple.setStatus(true);
         responseSimple.setMessage("Success");
@@ -251,6 +275,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         shopUpdateDetails.setShop_category_id(getShopCategoryId(binding.shopCategoryId.getSelectedItem().toString()));
         shopUpdateDetails.setProvince_area_id(getProvinceId(binding.area.getSelectedItem().toString()));
         shopUpdateDetails.setCustomer_group_id(getCustomerGroupId(binding.customerGroup.getSelectedItem().toString()));
+        shopUpdateDetails.setArea_name(binding.customArea.getText().toString());
 
         return shopUpdateDetails;
     }
@@ -367,7 +392,8 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     public void areaCallback(Boolean status, String Message, List<areaList> areaLists) {
         if (status) {
             this.areaLists = areaLists;
-            this.areaLists.add(0, new areaList(0, "Select Area"));
+            //this.areaLists.add(0, new areaList(0, "Select Area"));
+            this.areaLists.add(areaLists.size(), new areaList(-1, "Other"));
             setAreaSpinner();
             Dialogues.dismiss();
             // addLogic.getShopCategory();
@@ -478,12 +504,12 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
     private int getAreaIndex() {
 
         int result = 0;
-        String area = IntentConstants.SHOP_DETAILS.getProvince_area_name();
+        int area = IntentConstants.SHOP_DETAILS.getProvince_area_id();
 
         for (int i = 0; i < areaLists.size(); i++) {
 
-            if (areaLists.get(i).getArea_name() != null)
-                if (areaLists.get(i).getArea_name().equals(area)) {
+            if (areaLists.get(i).getId() != 0)
+                if (areaLists.get(i).getId()==area) {
 
                     result = i;
                 }

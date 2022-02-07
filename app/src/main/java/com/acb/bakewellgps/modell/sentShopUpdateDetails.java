@@ -37,6 +37,11 @@ public class sentShopUpdateDetails {
     public int route_id;
     public int customer_group_id;
     public int province_area_id;
+    public String area_name;
+
+    public void setArea_name(String area_name) {
+        this.area_name = area_name;
+    }
 
     public void setCustomer_group_id(int customer_group_id) {
         this.customer_group_id = customer_group_id;

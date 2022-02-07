@@ -38,6 +38,7 @@ public class sentShopAddDetails {
     public int parent_id;
     public int customer_group_id;
     public int province_area_id;
+    public String area_name;
 
 
 
@@ -76,7 +77,8 @@ public class sentShopAddDetails {
                               long tl_expiry_date,
                               int parent_id,
                               int customer_group_id,
-                              int province_area_id) {
+                              int province_area_id,
+                              String area_name) {
         this.short_name = short_name;
         this.organisation_name = organisation_name;
         this.tax_number = tax_number;
@@ -113,5 +115,6 @@ public class sentShopAddDetails {
         this.parent_id = parent_id;
         this.customer_group_id = customer_group_id;
         this.province_area_id = province_area_id;
+        this.area_name = area_name;
     }
 }
