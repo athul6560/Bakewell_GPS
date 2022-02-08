@@ -97,6 +97,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                     binding.areaText.setVisibility(View.VISIBLE);
                     binding.customArea.setVisibility(View.VISIBLE);
                 }else{
+                    binding.customArea.setText("");
                     binding.areaText.setVisibility(View.GONE);
                     binding.customArea.setVisibility(View.GONE);
                 }
@@ -652,7 +653,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
     @Override
     public void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups) {
         this.customerGroups = customerGroups;
-        this.customerGroups.add(0, new customerGroup(4, "Shop Individuals"));
+      //  this.customerGroups.add(0, new customerGroup(4, "Shop Individuals"));
         this.customerGroups.add(0, new customerGroup(0, "Select Customer Group"));
 
         setAreaSpinner();

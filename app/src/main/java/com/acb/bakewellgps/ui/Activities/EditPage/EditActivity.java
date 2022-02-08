@@ -78,6 +78,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
                     binding.areaText.setVisibility(View.VISIBLE);
                     binding.customArea.setVisibility(View.VISIBLE);
                 } else {
+                    binding.customArea.setText("");
                     binding.areaText.setVisibility(View.GONE);
                     binding.customArea.setVisibility(View.GONE);
                 }
@@ -445,7 +446,7 @@ public class EditActivity extends AppCompatActivity implements IEditLogic.view, 
         if (status) {
             this.customerGroup = customerGroups;
 
-            this.customerGroup.add(0, new customerGroup(4, "Shop Individuals"));
+          //  this.customerGroup.add(0, new customerGroup(4, "Shop Individuals"));
             setCustomerGroupSpinner();
             addLogic.getAllArea();
 
