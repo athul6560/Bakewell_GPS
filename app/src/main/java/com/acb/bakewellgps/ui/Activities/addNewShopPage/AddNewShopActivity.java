@@ -317,26 +317,26 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             return responseSimple;
         }
 
-        if (binding.tradeLicenseNumber.getText().toString().equals("")) {
+    /*    if (binding.tradeLicenseNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Trade License Number");
             return responseSimple;
-        }
+        }*/
         if (!binding.email.getText().toString().equals("") && !Patterns.EMAIL_ADDRESS.matcher(binding.email.getText().toString()).matches()) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Email ID");
             return responseSimple;
         }
-        if (binding.tlExpiryDate.getText().toString().equals("")) {
+   /*     if (binding.tlExpiryDate.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter TL Expiry Date");
             return responseSimple;
-        }
-        if (binding.taxNumber.getText().toString().equals("")) {
+        }*/
+     /*   if (binding.taxNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Tax Reg Number");
             return responseSimple;
-        }
+        }*/
 
 
         if (binding.area.getSelectedItem().equals("Select Area")) {

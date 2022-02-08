@@ -386,6 +386,7 @@
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
                         android:text=" *"
+                        android:visibility="gone"
                         android:textColor="@color/red_900"
 
                         />
