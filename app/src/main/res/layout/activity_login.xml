@@ -165,6 +165,12 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/spacing_xlarge" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:gravity="center"
+                android:text="@string/version" />
         </LinearLayout>
 
     </RelativeLayout>
