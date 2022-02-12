@@ -295,11 +295,11 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Select Shop Category");
             return responseSimple;
         }
-        if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
+   /*     if (binding.company.getSelectedItem().toString().equals("Select Parent Company")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Parent Company");
             return responseSimple;
-        }
+        }*/
         if (binding.area.getSelectedItem().toString().equals("Select Area")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Select Area");
@@ -311,7 +311,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Enter Customer  Name");
             return responseSimple;
         }
-        if (!binding.organisationName.getText().toString().matches("^[a-zA-Z\\s]*$")) {
+        if (!binding.organisationName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Valid Customer Name");
             return responseSimple;
@@ -344,26 +344,26 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             responseSimple.setMessage("Please Select Area");
             return responseSimple;
         }
-        if (binding.addressOne.getText().toString().equals("")) {
+      /*  if (binding.addressOne.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Address Line 1");
             return responseSimple;
-        }
-        if (binding.mobileNumber.getText().toString().equals("")) {
+        }*/
+    /*    if (binding.mobileNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Mobile Number");
             return responseSimple;
-        }
-        if (binding.contactName.getText().toString().equals("")) {
+        }*/
+     /*   if (binding.contactName.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Contact Name");
             return responseSimple;
-        }
-        if (binding.contactNumber.getText().toString().equals("")) {
+        }*/
+       /* if (binding.contactNumber.getText().toString().equals("")) {
             responseSimple.setStatus(false);
             responseSimple.setMessage("Please Enter Contact Number");
             return responseSimple;
-        }
+        }*/
 
         if (!binding.website.getText().toString().equals("") && !Patterns.WEB_URL.matcher(binding.website.getText().toString()).matches()) {
             responseSimple.setStatus(false);

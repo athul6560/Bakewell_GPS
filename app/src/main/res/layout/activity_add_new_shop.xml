@@ -478,7 +478,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
-                        android:text="Address Line 1"
+                        android:text="Address"
 
                         />
 
@@ -488,6 +488,7 @@
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
                         android:text=" *"
+                        android:visibility="gone"
                         android:textColor="@color/red_900"
 
                         />
@@ -500,7 +501,7 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Address Line 1"
+                    android:hint="Address"
                     android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
@@ -510,7 +511,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:singleLine="true"
-                    android:text="Address Line 2" />
+                    android:text="Landmark" />
 
                 <EditText
                     android:id="@+id/address_two"
@@ -519,7 +520,7 @@
                     android:layout_height="45dp"
                     android:layout_marginTop="@dimen/spacing_middle"
                     android:background="@drawable/edit_text_round_bg_white"
-                    android:hint="Address Line 2"
+                    android:hint="Landmark"
                     android:paddingLeft="@dimen/spacing_smlarge"
                     android:paddingRight="@dimen/spacing_middle"
                     android:singleLine="true" />
@@ -578,6 +579,7 @@
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
                         android:text=" *"
+                        android:visibility="gone"
                         android:textColor="@color/red_900"
 
                         />
@@ -617,6 +619,7 @@
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
                         android:text=" *"
+                        android:visibility="gone"
                         android:textColor="@color/red_900"
 
                         />
@@ -654,6 +657,7 @@
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
                         android:text=" *"
+                        android:visibility="gone"
                         android:textColor="@color/red_900"
 
                         />
@@ -814,6 +818,7 @@
                         android:layout_marginTop="10dp"
                         android:singleLine="true"
                         android:text=" *"
+                        android:visibility="gone"
                         android:textColor="@color/red_900"
 
                         />
