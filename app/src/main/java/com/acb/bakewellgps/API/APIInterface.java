@@ -48,7 +48,6 @@ public interface APIInterface {
     @POST("SaveUpdate/create_shop")
     Call<responseSimple> createShop(@Body sentShopAddDetails dataList);
 
-
     @POST("generalviews/getAllCountries")
     Call<List<countryList>> getAllCountries();
 
@@ -64,12 +63,8 @@ public interface APIInterface {
     @GET("Shop/get_all_shops")
     Call<allCustomerResponse> getAllCustomers(@Query("salesman_id") int EmployeeId);
 
-
-
     @GET("shop/parentCompanies")
     Call<basePArent> getParentCompanies();
-
-
 
     @GET("Shop/getAllCustomerGroups")
     Call<RootList<customerGroup>> getCustomerGroup();

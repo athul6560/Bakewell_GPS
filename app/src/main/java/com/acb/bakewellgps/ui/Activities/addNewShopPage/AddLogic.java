@@ -1,7 +1,6 @@
 package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.acb.bakewellgps.API.APIClient;
 import com.acb.bakewellgps.API.APIInterface;
@@ -15,7 +14,6 @@ import com.acb.bakewellgps.modell.parentCompany.basePArent;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
-import com.acb.bakewellgps.ui.Activities.EditPage.IEditLogic;
 
 import java.util.List;
 
@@ -69,7 +67,7 @@ public class AddLogic implements IAddLogic.logic {
 
 
                 if (response.isSuccessful()) {
-                    view.countryCallback(true, "Sucess", response.body());
+                    view.countryCallback(true, "Success", response.body());
                 } else {
                     view.countryCallback(false, "Server Error", null);
                 }
@@ -96,7 +94,7 @@ public class AddLogic implements IAddLogic.logic {
 
 
                 if (response.isSuccessful()) {
-                    view.areaCallback(true, "Sucess", response.body());
+                    view.areaCallback(true, "Success", response.body());
                 } else {
                     view.areaCallback(false, "Server Error", null);
                 }
@@ -124,7 +122,7 @@ public class AddLogic implements IAddLogic.logic {
                 Dialogues.dismiss();
 
                 if (response.isSuccessful()) {
-                    view.currencyCallback(true, "Sucess", response.body());
+                    view.currencyCallback(true, "Success", response.body());
                 } else {
                     view.currencyCallback(false, "Server Error", null);
                 }
@@ -148,11 +146,15 @@ public class AddLogic implements IAddLogic.logic {
         call.enqueue(new Callback<shopCategories>() {
             @Override
             public void onResponse(Call<shopCategories> call, Response<shopCategories> response) {
-                Dialogues.dismiss();
-
-                if (response.isSuccessful()) {
-                    view.shopCategoryCallBack(true, "Sucess", response.body());
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isStatus())
+                        view.shopCategoryCallBack(true, "Success", response.body());
+                    else {
+                        view.shopCategoryCallBack(true, "Failed", null);
+                        Dialogues.dismiss();
+                    }
                 } else {
+                    Dialogues.dismiss();
                     view.shopCategoryCallBack(false, "Server Error", null);
                 }
 
@@ -174,10 +176,8 @@ public class AddLogic implements IAddLogic.logic {
         call.enqueue(new Callback<basePArent>() {
             @Override
             public void onResponse(Call<basePArent> call, Response<basePArent> response) {
-                Dialogues.dismiss();
-
                 if (response.isSuccessful() && response.body().isStatus()) {
-                    view.parentCompanyCallBack(true, "Sucess", response.body().getData());
+                    view.parentCompanyCallBack(true, "Success", response.body().getData());
                 } else {
                     view.parentCompanyCallBack(false, "Server Error", null);
                 }
@@ -200,21 +200,22 @@ public class AddLogic implements IAddLogic.logic {
         call.enqueue(new Callback<RootList<customerGroup>>() {
             @Override
             public void onResponse(Call<RootList<customerGroup>> call, Response<RootList<customerGroup>> response) {
-                Dialogues.dismiss();
-
-                if (response.isSuccessful()) {
-                    view.customerGroupCallback(true, "Sucess", response.body().getData());
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().status) {
+                        view.customerGroupCallback(true, "Success", response.body().getData());
+                    } else {
+                        view.customerGroupCallback(true, "Failed to fetch customer group", null);
+                    }
                 } else {
                     view.customerGroupCallback(false, "Server Error", null);
                 }
-
+                Dialogues.dismiss();
             }
 
             @Override
             public void onFailure(Call<RootList<customerGroup>> call, Throwable t) {
-
+                Dialogues.dismiss();
                 view.customerGroupCallback(false, "No Network", null);
-
             }
         });
     }

@@ -1,13 +1,5 @@
 package com.acb.bakewellgps.ui.Activities.addNewShopPage;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.DialogFragment;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -22,13 +14,20 @@ import android.os.Looper;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
 
 import com.acb.bakewellgps.R;
 import com.acb.bakewellgps.SharedPref.SharedData;
@@ -45,14 +44,11 @@ import com.acb.bakewellgps.modell.parentCompany.parentCompany;
 import com.acb.bakewellgps.modell.responseSimple;
 import com.acb.bakewellgps.modell.sentShopAddDetails;
 import com.acb.bakewellgps.modell.shopCategories;
-import com.acb.bakewellgps.ui.Activities.ShopViewPage.ShopViewActivity;
 import com.acb.bakewellgps.ui.Fragments.DatePickerFragment;
-import com.acb.bakewellgps.ui.Fragments.TimePickerFragment;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -126,52 +122,38 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                 binding.whatsappNumber.setText(editable.toString());
             }
         });
-        binding.reload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case DialogInterface.BUTTON_POSITIVE:
-                                getCurrentLocation();
+        binding.reload.setOnClickListener(view1 -> {
+            DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        getCurrentLocation();
+                        setLocation();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            };
 
-                                setLocation();
-                                break;
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddNewShopActivity.this);
+            builder.setMessage("Are you at the store?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
 
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                //No button clicked
-                                break;
-                        }
-                    }
-                };
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddNewShopActivity.this);
-                builder.setMessage("Are you at the store?").setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
-
-            }
         });
-        binding.tlExpiryDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.tlExpiryDate.setOnClickListener(view12 -> {
 
-                DialogFragment newFragment = new DatePickerFragment(binding.tlExpiryDate);
-                newFragment.show(getSupportFragmentManager(), "datePicker");
-            }
+            DialogFragment newFragment = new DatePickerFragment(binding.tlExpiryDate);
+            newFragment.show(getSupportFragmentManager(), "datePicker");
         });
-        binding.barcodeImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ScanOptions options = new ScanOptions();
-                options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
-                options.setPrompt("Scan a barcode");
-                options.setCameraId(0);  // Use a specific camera of the device
-                options.setBeepEnabled(false);
-                options.setBarcodeImageEnabled(true);
+        binding.barcodeImage.setOnClickListener(view13 -> {
+            ScanOptions options = new ScanOptions();
+            options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES);
+            options.setPrompt("Scan a barcode");
+            options.setCameraId(0);  // Use a specific camera of the device
+            options.setBeepEnabled(false);
+            options.setBarcodeImageEnabled(true);
 
-                barcodeLauncher.launch(options);
-            }
+            barcodeLauncher.launch(options);
         });
         binding.addimageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -427,7 +409,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
         Spinner spin = (Spinner) findViewById(R.id.area);
         ArrayAdapter<areaList> adapter =
-                new ArrayAdapter<areaList>(getApplicationContext(), android.R.layout.simple_spinner_item, areaLists);
+                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, areaLists);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spin.setAdapter(adapter);
@@ -640,10 +622,7 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
             this.parentCompany = parentCompany;
             this.parentCompany.add(0, new parentCompany(0, "Select Parent Company"));
             logic.getCustomerGroup();
-
-
         } else {
-
             Toast.makeText(AddNewShopActivity.this, "" + Message, Toast.LENGTH_SHORT).show();
             Dialogues.dismiss();
         }
@@ -652,21 +631,29 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
 
     @Override
     public void customerGroupCallback(Boolean status, String Message, List<customerGroup> customerGroups) {
-        this.customerGroups = customerGroups;
-      //  this.customerGroups.add(0, new customerGroup(4, "Shop Individuals"));
-        this.customerGroups.add(0, new customerGroup(0, "Select Customer Group"));
+        if (status && customerGroups != null) {
+            this.customerGroups = customerGroups;
 
+        } else {
+            Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
+            Dialogues.showWarning(this, "Failed to load", Message);
+        }
+        if (this.customerGroups == null)
+            this.customerGroups = new ArrayList<>();
+//        this.customerGroups.add(0, new customerGroup(4, "Shop Individuals"));
+        this.customerGroups.add(0, new customerGroup(0, "Select Customer Group"));
         setAreaSpinner();
         setShopCategorySpinner();
         setCompanySpinner();
         setCustomerGroupSpinner();
+
         Dialogues.dismiss();
     }
 
     private void setCustomerGroupSpinner() {
         Spinner spin = (Spinner) findViewById(R.id.customer_group);
         ArrayAdapter<customerGroup> adapter =
-                new ArrayAdapter<customerGroup>(getApplicationContext(),
+                new ArrayAdapter<>(getApplicationContext(),
                         android.R.layout.simple_spinner_dropdown_item, customerGroups);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -683,4 +670,9 @@ public class AddNewShopActivity extends AppCompatActivity implements IAddLogic.v
                     Toast.makeText(AddNewShopActivity.this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 }
             });
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
